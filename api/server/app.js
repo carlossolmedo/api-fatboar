@@ -2,12 +2,15 @@ import express from 'express';
 import { join } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
 import { db } from './config/config';
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 
-// console.log(db.uri);
+mongoose.connect(db.uri)
+    .then(() => console.log('MongoDB connected…'))
+    .catch(err => console.log(err));
 
 const app = express();
 
