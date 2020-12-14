@@ -8,11 +8,11 @@
     "clean": "rimraf dist",
     "build": "npm-run-all clean transpile",
     "server": "node ./dist/bin/www",
-    "dev": "NODE_ENV=development npm-run-all build server",
-    "prod": "NODE_ENV=production npm-run-all build server",
+    "dev": "NODE_ENV=dev npm-run-all build server",
+    "prod": "NODE_ENV=prod npm-run-all build server",
     "start": "npm run prod",
     "test": "jest server/__test__/*.test.js",
-    "watch:dev": "nodemon --exec babel-node --presets=@babel/preset-env server/bin/www"
+    "watch:dev": "NODE_ENV=dev nodemon --exec babel-node --presets=@babel/preset-env server/bin/www"
   },
   "nodemonConfig": {
     "exec": "npm run dev",

@@ -8,6 +8,7 @@ api/lerna-debug.log*
 
 # Directories
 api/dist
+api/.env.*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 api/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
