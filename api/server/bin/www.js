@@ -7,6 +7,7 @@
 import app from '../app';
 import http from 'http';
 import debugLib from 'debug';
+import { nodeEnv, portEnv } from '../config/config';
 
 const debug = debugLib('api:server');
 
@@ -14,11 +15,11 @@ const debug = debugLib('api:server');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(portEnv || '3000');
 app.set('port', port);
 
 // show in console
-console.log(`ENV: ${process.env.NODE_ENV} | running in port: ${port}\n`);
+console.log(`\nENV: ${nodeEnv} | running in port: ${port}`);
 /**
  * Create HTTP server.
  */
