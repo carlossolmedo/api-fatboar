@@ -5,18 +5,18 @@ import User from '../models/User';
 exports.getUsers = async(req, reply) => {
     try {
         const users = await User.find();
-        return users;
+        reply.send(users);
     } catch (error) {
         throw Boom.boomify(error);
     }
 };
 
 // Get single user by ID
-exports.getSingleUser = async(req, reply) => {
+exports.getUserById = async(req, reply) => {
     try {
         const id = req.params.id;
         const user = await User.findById(id);
-        return user;
+        reply.send(user);
     } catch (error) {
         throw Boom.boomify(error);
     }
@@ -26,7 +26,8 @@ exports.getSingleUser = async(req, reply) => {
 exports.addNewUser = async(req, reply) => {
     try {
         const user = new User(req.body);
-        return user.save();
+        const result = user.save();
+        reply.send(result);
     } catch (error) {
         throw Boom.boomify(error);
     }
@@ -39,7 +40,12 @@ exports.updateUser = async(req, reply) => {
         const user = req.body;
         const { ...updateData } = user;
         const update = await User.findByIdAndUpdate(id, updateData, {new: true});
-        return update;
+
+        if (!update) {
+            throw createError(404, 'User does not exist.');
+        }
+
+        reply.send(update);
     } catch (error) {
         throw Boom.boomify(error);
     }
@@ -50,7 +56,12 @@ exports.deleteUser = async(req, reply) => {
     try {
         const id = req.params.id;
         const userDeleted = await User.findByIdAndRemove(id);
-        return userDeleted;
+
+        if (!userDeleted) {
+            throw createError(404, 'User does not exist.');
+        }
+
+        reply.send(userDeleted);
     } catch (error) {
         throw Boom.boomify(error);
     }

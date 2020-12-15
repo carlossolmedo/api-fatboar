@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import userController from '../controllers/userController';
+
 const router = Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get(`/users`, userController.getUsers);
+router.get(`/users/:id`, userController.getUserById);
+router.post(`/users`, userController.addNewUser);
+router.put(`/users/:id`, userController.updateUser);
+router.delete(`/users/:id`, userController.deleteUser);
 
-export default router;
+module.exports = router;
