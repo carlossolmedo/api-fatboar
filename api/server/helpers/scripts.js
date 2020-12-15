@@ -1,1 +1,1 @@
-console.log("Launch the functions from here");
+console.log('Launch the functions from here');

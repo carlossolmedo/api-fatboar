@@ -2,7 +2,7 @@ import Boom from '@hapi/boom';
 import User from '../models/User';
 
 // Get all users
-exports.getUsers = async(req, reply) => {
+exports.getUsers = async (req, reply) => {
     try {
         const users = await User.find();
         reply.send(users);
@@ -12,7 +12,7 @@ exports.getUsers = async(req, reply) => {
 };
 
 // Get single user by ID
-exports.getUserById = async(req, reply) => {
+exports.getUserById = async (req, reply) => {
     try {
         const id = req.params.id;
         const user = await User.findById(id);
@@ -23,7 +23,7 @@ exports.getUserById = async(req, reply) => {
 };
 
 // Add a new user
-exports.addNewUser = async(req, reply) => {
+exports.addNewUser = async (req, reply) => {
     try {
         const user = new User(req.body);
         const result = user.save();
@@ -34,12 +34,14 @@ exports.addNewUser = async(req, reply) => {
 };
 
 // Update user
-exports.updateUser = async(req, reply) => {
+exports.updateUser = async (req, reply) => {
     try {
         const id = req.params.id;
         const user = req.body;
         const { ...updateData } = user;
-        const update = await User.findByIdAndUpdate(id, updateData, {new: true});
+        const update = await User.findByIdAndUpdate(id, updateData, {
+            new: true,
+        });
 
         if (!update) {
             throw createError(404, 'User does not exist.');
@@ -52,7 +54,7 @@ exports.updateUser = async(req, reply) => {
 };
 
 // Delete user
-exports.deleteUser = async(req, reply) => {
+exports.deleteUser = async (req, reply) => {
     try {
         const id = req.params.id;
         const userDeleted = await User.findByIdAndRemove(id);

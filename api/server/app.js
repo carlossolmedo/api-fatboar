@@ -12,12 +12,13 @@ const app = express();
 const version = apiVersion || 'v1';
 const optionsDB = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 };
 
-mongoose.connect(db.uri, optionsDB)
+mongoose
+    .connect(db.uri, optionsDB)
     .then(() => console.log(`MongoDB connected in: ${db.name}\n`))
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 
 app.use(logger('dev'));
 app.use(express.json());
