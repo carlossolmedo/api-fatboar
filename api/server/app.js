@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import { db, apiVersion } from './config/config';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOptions from './config/swaggerDoc.json';
 
 // Declare routes
 import UserRoutes from './routes/users';
@@ -15,6 +17,7 @@ const optionsDB = {
     useUnifiedTopology: true,
 };
 
+
 mongoose
     .connect(db.uri, optionsDB)
     .then(() => console.log(`MongoDB connected in: ${db.name}\n`))
@@ -25,6 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, '../public')));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOptions));
 
 // Load routes
 app.use(`/api/${version}`, UserRoutes);
