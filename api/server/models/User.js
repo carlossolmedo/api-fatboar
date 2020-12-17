@@ -4,10 +4,15 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
     name: String,
     password: String,
-    birthday: Date,
+    birthdate: Date,
     email: String,
-    postalCode: String,
+    postal_code: String,
     country: String,
+    role: String,
+    active: Boolean,
+    last_connection: Date,
+    date_created: { type: Date, default: Date.now },
+    date_updated: Date
 });
 
 module.exports = mongoose.model('User', userSchema);
