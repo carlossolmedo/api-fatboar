@@ -1,70 +1,102 @@
-import Boom from '@hapi/boom';
 import User from '../models/User';
 
 // Get all users
-exports.getUsers = async (req, reply) => {
+exports.getUsers = async (req, res) => {
     try {
         const users = await User.find();
-        reply.send(users);
+
+        if (users) {
+            res.json(users);
+        }
     } catch (error) {
-        throw Boom.boomify(error);
+        res.status(400).json({message: error.message});
     }
 };
 
 // Get single user by ID
-exports.getUserById = async (req, reply) => {
+exports.getUserById = async (req, res) => {
     try {
         const id = req.params.id;
-        const user = await User.findById(id);
-        reply.send(user);
+        const userFound = await User.findById(id);
+
+        if (userFound) {
+            res.json(userFound);
+        }
     } catch (error) {
-        throw Boom.boomify(error);
+        res.status(400).json({message: error.message});
+    }
+};
+
+// Get user by email
+exports.getUserByEmail = async (req, res) => {
+    try {
+        const email = req.body.email;
+        const user = await User.findOne({ email });
+
+        if (user) {
+            res.json(user);
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
 
 // Add a new user
-exports.addNewUser = async (req, reply) => {
+exports.addUser = async (req, res) => {
     try {
         const user = new User(req.body);
-        const result = user.save();
-        reply.send(result);
+        const result = await user.save();
+
+        if (result) {
+            res.status(201).json({ message: `New user ${user.name} created with success` });
+        }
+
     } catch (error) {
-        throw Boom.boomify(error);
+        res.status(400).json({message: error.message});
     }
 };
 
 // Update user
-exports.updateUser = async (req, reply) => {
+exports.updateUser = async (req, res) => {
     try {
         const id = req.params.id;
-        const user = req.body;
-        const { ...updateData } = user;
-        const update = await User.findByIdAndUpdate(id, updateData, {
-            new: true,
-        });
+        const userFound = await User.findById(id).exec();
 
-        if (!update) {
-            throw createError(404, 'User does not exist.');
+        if (!userFound) {
+            return res.status(400).json({ message: `User ${id} not found` });
         }
 
-        reply.send(update);
+        const updateData = req.body;
+        updateData.date_updated = new Date();
+
+        const update = await User.updateOne({ _id: id }, updateData);
+
+        if (update) {
+            res.json({ message: `User ${id} updated with success` });
+        }
+
     } catch (error) {
-        throw Boom.boomify(error);
+        res.status(400).json({message: error.message});
     }
 };
 
 // Delete user
-exports.deleteUser = async (req, reply) => {
+exports.deleteUser = async (req, res) => {
     try {
         const id = req.params.id;
-        const userDeleted = await User.findByIdAndRemove(id);
+        const userFound = await User.findById(id).exec();
 
-        if (!userDeleted) {
-            throw createError(404, 'User does not exist.');
+        if (!userFound) {
+            return res.status(400).json({ message: `User ${id} not found` });
         }
 
-        reply.send(userDeleted);
+        const userDeleted = await User.deleteOne({ _id: id });
+
+        if (userDeleted) {
+            res.json({ message: `User ${id} has been deleted with success` });
+        }
+
     } catch (error) {
-        throw Boom.boomify(error);
+        res.status(400).json({message: error.message});
     }
 };
