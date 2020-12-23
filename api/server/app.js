@@ -8,7 +8,7 @@ import YAML from 'yamljs';
 import swaggerUi from 'swagger-ui-express';
 
 // Instantiation routes
-import UserRoutes from './routes/users';
+import UserRoutes from './routes/user.routes';
 
 const app = express();
 const version = apiVersion || 'v1';
