@@ -4,14 +4,16 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import { db, apiVersion } from './config/config';
+import YAML from 'yamljs';
 import swaggerUi from 'swagger-ui-express';
-import swaggerOptions from './config/swaggerDoc.json';
 
 // Instantiation routes
 import UserRoutes from './routes/users';
 
 const app = express();
 const version = apiVersion || 'v1';
+const swaggerOptions = YAML.load(`${__dirname}/config/swagger/swaggerDoc.yml`);
+
 
 mongoose
     .connect(db.uri, { useNewUrlParser: true, useUnifiedTopology: true,})
@@ -25,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, '../public')));
 
 // API Documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOptions));
+app.use(`/api/${version}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerOptions, { explorer: false }));
 
 // Load routes
 app.use(`/api/${version}`, UserRoutes);

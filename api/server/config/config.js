@@ -4,8 +4,17 @@ import dotenv from 'dotenv';
 
 // load config
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+var mongoUri = '';
 
-const mongoUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.rrk6u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+switch (process.env.NODE_ENV) {
+    case 'prod':
+        mongoUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.rrk6u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+        break;
+
+    default:
+        mongoUri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/${process.env.DB_NAME}?authSource=admin`;
+        break;
+}
 
 module.exports = {
     nodeEnv: process.env.NODE_ENV,
