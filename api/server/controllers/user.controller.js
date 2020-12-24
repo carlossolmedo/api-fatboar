@@ -63,7 +63,7 @@ exports.updateUser = async (req, res) => {
         const userFound = await User.findById(id).exec();
 
         if (!userFound) {
-            return res.status(400).json({ message: `User ${id} not found` });
+            return res.status(404).json({ message: `User ${id} not found` });
         }
 
         const updateData = req.body;
@@ -87,7 +87,7 @@ exports.deleteUser = async (req, res) => {
         const userFound = await User.findById(id).exec();
 
         if (!userFound) {
-            return res.status(400).json({ message: `User ${id} not found` });
+            return res.status(404).json({ message: `User ${id} not found` });
         }
 
         const userDeleted = await User.deleteOne({ _id: id });

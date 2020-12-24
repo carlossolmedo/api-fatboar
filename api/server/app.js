@@ -9,6 +9,7 @@ import swaggerUi from 'swagger-ui-express';
 
 // Instantiation routes
 import UserRoutes from './routes/user.routes';
+import AuthRoutes from './routes/auth.routes';
 
 const app = express();
 const version = apiVersion || 'v1';
@@ -31,5 +32,6 @@ app.use(`/api/${version}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerOptions,
 
 // Load routes
 app.use(`/api/${version}`, UserRoutes);
+app.use(`/api/${version}`, AuthRoutes);
 
 export default app;
