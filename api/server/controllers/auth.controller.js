@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { tokenSecret } from '../config/config';
 import User from '../models/user.model';
 import auth from '../helpers/auth.helper';
 
@@ -9,7 +11,7 @@ exports.signup = async (req, res) => {
         const user = new User({
             gender: req.body.gender,
             username: req.body.username,
-            password: bcrypt.hashSync(req.body.password, 8),
+            password: bcrypt.hashSync(req.body.password, 10),
             email: req.body.email,
             birthdate: req.body.birthdate,
             postal_code: req.body.postal_code,
@@ -42,13 +44,16 @@ exports.login = async (req, res) => {
         }
 
         if (!passwordIsValid) {
-            return res.status(401).json({accessToken: null, message: 'Invalid password !'});
+            return res.status(401).json({ accessToken: null, message: 'Invalid password !' });
         }
+
+        // if everything is valid
+        const token = jwt.sign({ userId: userFound._id }, tokenSecret, { expiresIn: 86400 }); // expire in 24 hours
 
         userFound.last_connection = Date.now();
         userFound.save();
 
-        res.status(200).json({ message: 'Connection with success'});
+        res.status(200).json({ accessToken: token, message: 'Connection with success' });
 
     } catch (error) {
         res.status(400).json({ message: error.message });
