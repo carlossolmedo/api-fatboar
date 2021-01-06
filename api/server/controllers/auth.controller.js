@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { tokenSecret } from '../config/config';
 import User from '../models/user.model';
-import auth from '../helpers/auth.helper';
 
 /* ----------------------------- Authentication ----------------------------- */
 
