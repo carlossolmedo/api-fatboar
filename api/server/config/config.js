@@ -4,6 +4,13 @@ import dotenv from 'dotenv';
 
 // load config
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
+const apiVersion = process.env.API_VERSION || 'v1';
+const urlAPI = `/api/${apiVersion}`;
+const routeWithoutAuth = {
+    home: `${urlAPI}/`,
+    login: `${urlAPI}/auth/login`
+};
 var mongoUri = '';
 
 switch (process.env.NODE_ENV) {
@@ -19,9 +26,15 @@ switch (process.env.NODE_ENV) {
 module.exports = {
     nodeEnv: process.env.NODE_ENV,
     portEnv: process.env.PORT,
-    apiVersion: process.env.API_VERSION,
+    tokenSecret: process.env.TOKEN_SECRET,
+    apiVersion: apiVersion,
     db: {
         uri: mongoUri,
         name: process.env.DB_NAME,
     },
+    urlAPI: urlAPI,
+    routeWithoutAuth: {
+        home: routeWithoutAuth.home,
+        login: routeWithoutAuth.login
+    }
 };
