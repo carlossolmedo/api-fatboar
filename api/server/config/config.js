@@ -2,39 +2,53 @@
 
 import dotenv from 'dotenv';
 
-// load config
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+const NODE_ENV = process.env.NODE_ENV;
 
-const apiVersion = process.env.API_VERSION || 'v1';
-const urlAPI = `/api/${apiVersion}`;
+// Load environment
+dotenv.config({ path: `.env.${NODE_ENV}` });
+
+// Database
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_CLUSTER = process.env.DB_CLUSTER;
+const DB_NAME = process.env.DB_NAME;
+
+// API
+const PORT = process.env.PORT;
+const API_VERSION = process.env.API_VERSION || 'v1';
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
+const URL_API = `/api/${API_VERSION}`;
 const routeWithoutAuth = {
-    home: `${urlAPI}/`,
-    login: `${urlAPI}/auth/login`
+    home: `${URL_API}/`,
+    signup: `${URL_API}/auth/signup`,
+    login: `${URL_API}/auth/login`,
 };
-var mongoUri = '';
 
-switch (process.env.NODE_ENV) {
+let MONGO_URI = '';
+
+switch (NODE_ENV) {
     case 'prod':
-        mongoUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.rrk6u.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+        MONGO_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER}.rrk6u.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
         break;
 
     default:
-        mongoUri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/${process.env.DB_NAME}?authSource=admin`;
+        MONGO_URI = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/${DB_NAME}?authSource=admin`;
         break;
 }
 
 module.exports = {
-    nodeEnv: process.env.NODE_ENV,
-    portEnv: process.env.PORT,
-    tokenSecret: process.env.TOKEN_SECRET,
-    apiVersion: apiVersion,
+    nodeEnv: NODE_ENV,
+    portEnv: PORT,
+    tokenSecret: TOKEN_SECRET,
+    apiVersion: API_VERSION,
     db: {
-        uri: mongoUri,
-        name: process.env.DB_NAME,
+        uri: MONGO_URI,
+        name: DB_NAME,
     },
-    urlAPI: urlAPI,
+    urlAPI: URL_API,
     routeWithoutAuth: {
         home: routeWithoutAuth.home,
-        login: routeWithoutAuth.login
-    }
+        signup: routeWithoutAuth.signup,
+        login: routeWithoutAuth.login,
+    },
 };

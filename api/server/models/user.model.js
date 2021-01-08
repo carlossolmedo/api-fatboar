@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     active: { type: Boolean, required: true, default: true },
     last_connection: Date,
     date_updated: Date,
-    date_created: { type: Date, default: Date.now }
+    date_created: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('User', userSchema);

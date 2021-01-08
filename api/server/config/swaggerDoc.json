@@ -12,37 +12,31 @@
     "servers": {
         "url": "http://localhost:3002/api/v1"
     },
-    "tags": [{
-        "name": "Users",
-        "description": "API for users in the system"
-    }],
-    "schemes": [
-        "http"
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
     ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "paths": {
         "/addUser": {
             "post": {
-                "tags": [
-                    "Users"
-                ],
+                "tags": ["Users"],
                 "description": "Create new user in system",
-                "parameters": [{
-                    "name": "user",
-                    "in": "body",
-                    "description": "User that we want to create",
-                    "schema": {
-                        "$ref": "#/definitions/User"
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     }
-                }],
-                "produces": [
-                    "application/json"
                 ],
+                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "New user is created",
@@ -55,9 +49,7 @@
         },
         "/users": {
             "get": {
-                "tags": [
-                    "Users"
-                ],
+                "tags": ["Users"],
                 "summary": "Get all users in system",
                 "responses": {
                     "200": {
@@ -70,18 +62,18 @@
             }
         },
         "/user/{id}": {
-            "parameters": [{
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "description": "ID of user that we want to find",
-                "type": "integer"
-            }],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "integer"
+                }
+            ],
             "delete": {
                 "summary": "Delete user with given ID",
-                "tags": [
-                    "Users"
-                ],
+                "tags": ["Users"],
                 "responses": {
                     "200": {
                         "description": "User is deleted",
@@ -93,17 +85,17 @@
             },
             "put": {
                 "summary": "Update user with give ID",
-                "tags": [
-                    "Users"
-                ],
-                "parameters": [{
-                    "name": "user",
-                    "in": "body",
-                    "description": "User with new values of properties",
-                    "schema": {
-                        "$ref": "#/definitions/updateUser"
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "User is updated",
@@ -117,11 +109,7 @@
     },
     "definitions": {
         "User": {
-            "required": [
-                "name",
-                "_id",
-                "companies"
-            ],
+            "required": ["name", "_id", "companies"],
             "properties": {
                 "_id": {
                     "type": "integer",
@@ -146,23 +134,17 @@
                             }
                         }
                     }
-
                 },
                 "companies": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
-
                 }
-
             }
         },
         "updateUser": {
-            "required": [
-                "name",
-                "companies"
-            ],
+            "required": ["name", "companies"],
             "properties": {
                 "isPublic": {
                     "type": "boolean"
@@ -183,16 +165,13 @@
                             }
                         }
                     }
-
                 },
                 "companies": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
-
                 }
-
             }
         },
         "Users": {

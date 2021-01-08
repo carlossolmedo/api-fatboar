@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
             country: req.body.country,
             role: req.body.role || 'customer',
             last_connection: '',
-            date_updated: ''
+            date_updated: '',
         });
 
         const result = await user.save();
@@ -25,7 +25,6 @@ exports.signup = async (req, res) => {
         if (result) {
             res.status(201).json({ message: `Account created with success` });
         }
-
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -36,24 +35,33 @@ exports.login = async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         const userFound = await User.findOne({ email: email }).exec();
-        const passwordIsValid = bcrypt.compareSync(password, userFound.password);
+        const passwordIsValid = bcrypt.compareSync(
+            password,
+            userFound.password
+        );
 
         if (!userFound) {
             return res.status(404).json({ message: `User ${email} not found` });
         }
 
         if (!passwordIsValid) {
-            return res.status(401).json({ accessToken: null, message: 'Invalid password !' });
+            return res
+                .status(401)
+                .json({ accessToken: null, message: 'Invalid password !' });
         }
 
         // if everything is valid
-        const token = jwt.sign({ userId: userFound._id }, tokenSecret, { expiresIn: 86400 }); // expire in 24 hours
+        const token = jwt.sign({ userId: userFound._id }, tokenSecret, {
+            expiresIn: 86400,
+        }); // expire in 24 hours
 
         userFound.last_connection = Date.now();
         userFound.save();
 
-        res.status(200).json({ accessToken: token, message: 'Connection with success' });
-
+        res.status(200).json({
+            accessToken: token,
+            message: 'Connection with success',
+        });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

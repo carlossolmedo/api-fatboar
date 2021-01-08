@@ -9,7 +9,7 @@ exports.getUsers = async (req, res) => {
             res.json(users);
         }
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -23,7 +23,7 @@ exports.getUserById = async (req, res) => {
             res.json(userFound);
         }
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -48,11 +48,12 @@ exports.addUser = async (req, res) => {
         const result = await user.save();
 
         if (result) {
-            res.status(201).json({ message: `New user ${user.name} created with success` });
+            res.status(201).json({
+                message: `New user ${user.name} created with success`,
+            });
         }
-
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -74,9 +75,8 @@ exports.updateUser = async (req, res) => {
         if (update) {
             res.json({ message: `User ${id} updated with success` });
         }
-
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -95,8 +95,7 @@ exports.deleteUser = async (req, res) => {
         if (userDeleted) {
             res.json({ message: `User ${id} has been deleted with success` });
         }
-
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 };

@@ -1,0 +1,10 @@
+import { assert } from 'chai';
+import sum from './sum';
+
+describe('Function', () => {
+    describe('#sum()', () => {
+        it('Should return the sum of 2 values', () => {
+            assert.strictEqual(sum(2, 2), 4);
+        });
+    });
+});
