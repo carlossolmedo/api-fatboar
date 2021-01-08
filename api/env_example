@@ -1,0 +1,17 @@
+/*
+* Don't forget the extension of files will be use to launch the environment
+* example : .env.dev or .env.prod
+*/
+
+# Node
+PORT=PORT
+
+# Database
+DB_USERNAME=DB_USERNAME
+DB_PASSWORD=DB_PASSWORD
+DB_CLUSTER=DB_CLUSTER
+DB_NAME=DB_NAME
+
+# API
+API_VERSION=v1
+TOKEN_SECRET=TOKEN_SECRET
