@@ -19,7 +19,7 @@ const userTest = {
     country: 'Other',
     role: 'customer',
     last_connection: new Date(),
-    date_updated: new Date()
+    date_updated: new Date(),
 };
 
 before(() => {
