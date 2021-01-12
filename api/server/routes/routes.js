@@ -17,3 +17,7 @@ export const authRoute = {
     google: `${urlAPI}/auth/google`,
     facebook: `${urlAPI}/auth/facebook`,
 };
+
+export const ticketRoute = {
+    storeWinningTickets: `${urlAPI}/tickets/store-winning-tickets`
+};

@@ -22,6 +22,7 @@ const routeWithoutAuth = {
     home: `${URL_API}/`,
     signup: `${URL_API}/auth/signup`,
     login: `${URL_API}/auth/login`,
+    test: `${URL_API}/tickets/store-winning-tickets`
 };
 
 let MONGO_URI = '';
