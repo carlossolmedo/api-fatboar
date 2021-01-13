@@ -7,7 +7,6 @@ import swaggerUi from 'swagger-ui-express';
 import { urlAPI, nodeEnv } from './config/config';
 import DB from './helpers/db.helper';
 import authMiddleware from './helpers/auth.helper';
-import Ticket from './controllers/ticket.controller';
 
 // Instantiation routes
 import UserRoutes from './routes/user.routes';
@@ -17,19 +16,15 @@ import TicketRoutes from './routes/ticket.routes';
 const app = express();
 const swaggerOptions = YAML.load(`${__dirname}/config/swagger/swaggerDoc.yml`);
 const dbAPI = new DB();
-const tickets = new Ticket();
 
 // Connection Database by mongoose
 if (nodeEnv !== 'test') {
     dbAPI.connection();
 }
 
-// console.log('TICKETS: ', tickets.createTickets(50));
-
-
 // if (nodeEnv === 'test') {
-//     db.connection();
-//     db.removeOneCollection('users');
+//     dbAPI.connection();
+//     dbAPI.removeOneCollection('winning_tickets');
 // }
 
 app.use(logger('dev'));

@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { ticketRoute } from './routes';
-import Ticket from '../controllers/ticket.controller';
+import ticketController from '../controllers/ticket.controller';
 
 const router = Router();
-const tickets = new Ticket();
 
-router.post(ticketRoute.storeWinningTickets, tickets.testRoute);
+router.get(
+    ticketRoute.generateWinningTickets,
+    ticketController.generateWinningTickets
+);
 
 module.exports = router;

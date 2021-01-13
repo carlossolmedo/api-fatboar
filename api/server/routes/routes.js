@@ -19,5 +19,5 @@ export const authRoute = {
 };
 
 export const ticketRoute = {
-    storeWinningTickets: `${urlAPI}/tickets/store-winning-tickets`
+    generateWinningTickets: `${urlAPI}/tickets/winning-tickets/generate/:quantity`,
 };

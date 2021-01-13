@@ -6,4 +6,8 @@ const winningTicketSchema = new mongoose.Schema({
     date_created: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('WinningTicketModel', winningTicketSchema);
+module.exports = mongoose.model(
+    'WinningTicketModel',
+    winningTicketSchema,
+    'winning_tickets'
+);
