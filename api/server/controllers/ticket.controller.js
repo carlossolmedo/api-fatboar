@@ -52,4 +52,20 @@ const generateWinningTickets = (req, res) => {
     }
 };
 
+const getTicket = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const randomTicket = await tickets.getRandomTicket();
+
+        if (!randomTicket) {
+            throw new Error('Cannot get winning ticket');
+        }
+
+        res.status(200).json(randomTicket);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 exports.generateWinningTickets = generateWinningTickets;
+exports.getTicket = getTicket;

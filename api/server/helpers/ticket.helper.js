@@ -80,6 +80,7 @@ class Ticket {
             ticketModeled.push({
                 ticket_number: typeOfTicket[i],
                 type: keyOfTicket,
+                validated: false,
                 date_created: new Date(),
             });
         }
@@ -91,6 +92,20 @@ class Ticket {
             }
         );
         return true;
+    }
+
+    async getRandomTicket() {
+        const randomTicket = await WinningTicketModel.aggregate([
+            { $sample: { size: 1 } },
+        ]);
+
+        if (randomTicket[0].validated === true) {
+            randomTicket = await WinningTicketModel.aggregate([
+                { $sample: { size: 1 } },
+            ]);
+        }
+
+        return randomTicket;
     }
 }
 

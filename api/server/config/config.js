@@ -51,6 +51,6 @@ module.exports = {
         home: routeWithoutAuth.home,
         signup: routeWithoutAuth.signup,
         login: routeWithoutAuth.login,
-        test: routeWithoutAuth.test
+        test: routeWithoutAuth.test,
     },
 };
