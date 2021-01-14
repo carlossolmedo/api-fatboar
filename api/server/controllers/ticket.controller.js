@@ -67,5 +67,29 @@ const getTicket = async (req, res) => {
     }
 };
 
+const verifyTicket = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const regex = /\d{10}/g;
+        const ticketUser = req.body.ticket_number;
+
+        if(!regex.test(ticketUser)) {
+            return res.status(400).json({ message: 'format ticket not valid'});
+        }
+
+        const ticketVerified = await tickets.findTicket(ticketUser);
+
+        if (!ticketVerified) {
+            return res.status(404).json({message: `ticket number: ${ticketUser} not found`});
+        }
+
+        res.status(200).json(ticketVerified);
+
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+};
+
 exports.generateWinningTickets = generateWinningTickets;
 exports.getTicket = getTicket;
+exports.verifyTicket = verifyTicket;

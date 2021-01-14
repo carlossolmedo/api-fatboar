@@ -95,8 +95,8 @@ class Ticket {
     }
 
     async getRandomTicket() {
-        const randomTicket = await WinningTicketModel.aggregate([
-            { $sample: { size: 1 } },
+        let randomTicket = await WinningTicketModel.aggregate([
+            { $sample: { size: 1 } }
         ]);
 
         if (randomTicket[0].validated === true) {
@@ -106,6 +106,13 @@ class Ticket {
         }
 
         return randomTicket;
+    }
+
+    async findTicket(ticket) {
+        const ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket });
+        if (!ticketFounded) return false;
+
+        return ticketFounded;
     }
 }
 

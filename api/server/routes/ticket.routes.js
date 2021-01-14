@@ -9,5 +9,6 @@ router.get(
     ticketController.generateWinningTickets
 );
 router.get(ticketRoute.getTicket, ticketController.getTicket);
+router.post(ticketRoute.verifyTicket, ticketController.verifyTicket);
 
 module.exports = router;
