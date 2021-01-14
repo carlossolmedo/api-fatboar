@@ -109,10 +109,14 @@ class Ticket {
     }
 
     async findTicket(ticket) {
-        const ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket });
-        if (!ticketFounded) return false;
-
-        return ticketFounded;
+        let ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket });
+        if (ticketFounded) {
+            ticketFounded.validated = true;
+            await ticketFounded.save();
+            return ticketFounded;
+        } else {
+            return false;
+        }
     }
 }
 
