@@ -14,7 +14,7 @@
         "test": "NODE_ENV=test mocha --exit",
         "watch:dev": "NODE_ENV=dev nodemon --exec babel-node --presets=@babel/preset-env server/bin/www",
         "watch:test": "NODE_ENV=test nodemon --exec babel-node --presets=@babel/preset-env server/bin/www",
-        "pretty": "prettier -w server/* test/*.js"
+        "pretty": "prettier -w server/*"
     },
     "nodemonConfig": {
         "exec": "npm run dev",

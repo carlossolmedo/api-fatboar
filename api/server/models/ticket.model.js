@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const ticketSchema = new mongoose.Schema({
     user_id: String,
-    number_ticket: Number,
+    ticket_number: Number,
     amount: String,
     date_created: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Ticket', ticketSchema);
+module.exports = mongoose.model('TicketModel', ticketSchema);

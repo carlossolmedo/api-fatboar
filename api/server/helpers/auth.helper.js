@@ -20,7 +20,8 @@ exports.protectWithJwt = (req, res, next) => {
     if (
         req.path == routeWithoutAuth.home ||
         req.path == routeWithoutAuth.signup ||
-        req.path == routeWithoutAuth.login
+        req.path == routeWithoutAuth.login ||
+        req.path == routeWithoutAuth.test
     ) {
         // allow the connection to those paths
         return next();
