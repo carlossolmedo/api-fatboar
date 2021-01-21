@@ -12,7 +12,7 @@
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" rel="noopener noreferrer" class="button--grey">
           GitHub
         </a>
-        <a href="#" class="my-class">Testing scss</a>
+        <a href="#" class="">Testing scss</a>
       </div>
     </div>
   </div>
