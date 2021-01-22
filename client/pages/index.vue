@@ -1,19 +1,9 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        Fatboar
-      </h1>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" rel="noopener noreferrer" class="button--green">
-          Documentations
-        </a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" rel="noopener noreferrer" class="button--grey">
-          GitHub
-        </a>
-        <a href="#" class="">Testing scss</a>
-      </div>
+    <div class="links">
+      <a href="#play" rel="noopener noreferrer" class="button--green">
+        Jouer
+      </a>
     </div>
   </div>
 </template>
@@ -24,10 +14,14 @@
 </script>
 
 <style>
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
 
   .container {
     margin: 0 auto;
-    min-height: 100vh;
+    min-height: calc(100vh - 30vh);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,4 +57,5 @@
   .links {
     padding-top: 15px;
   }
+
 </style>
