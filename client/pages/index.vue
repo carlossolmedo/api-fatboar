@@ -17,6 +17,10 @@
   html {
     height: 100%;
     overflow: hidden;
+    background: rgb(2,0,36);
+    background: linear-gradient(142deg, rgba(2,0,36,1) 0%, rgba(9,93,121,1) 48%, rgba(0,212,255,1) 100%);
+    /* background: url("https://picsum.photos/id/1002/1600/980") center no-repeat;
+    background-size: cover; */
   }
 
   .container {
