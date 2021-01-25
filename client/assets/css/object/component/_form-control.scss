@@ -59,3 +59,16 @@ Form control component
     background-color: _var-lighter-color-gray();
   }
 }
+
+// Custom
+
+.#{$_prefix}c-form-control-input {
+  @extend .#{$_prefix}c-form-control;
+  display: block;
+  width: 100%;
+
+  &::placeholder {
+    color: #6a737d;
+    opacity: 1;
+  }
+}

@@ -1,15 +1,22 @@
 <template>
   <div class="container">
     <div class="links">
-      <a href="#play" rel="noopener noreferrer" class="button--green">
+      <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="button--green">
         Jouer
       </a>
     </div>
+    <ModalAuth ref="connectionModal" />
   </div>
 </template>
 
 <script>
-  export default {}
+  import ModalAuth from '~/components/Auth/ModalAuth';
+
+  export default {
+    components: {
+      ModalAuth
+    }
+  }
 
 </script>
 
@@ -17,8 +24,8 @@
   html {
     height: 100%;
     overflow: hidden;
-    background: rgb(2,0,36);
-    background: linear-gradient(142deg, rgba(2,0,36,1) 0%, rgba(9,93,121,1) 48%, rgba(0,212,255,1) 100%);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(142deg, rgba(2, 0, 36, 1) 0%, rgba(9, 93, 121, 1) 48%, rgba(0, 212, 255, 1) 100%);
     /* background: url("https://picsum.photos/id/1002/1600/980") center no-repeat;
     background-size: cover; */
   }
@@ -60,6 +67,10 @@
 
   .links {
     padding-top: 15px;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
   }
 
 </style>

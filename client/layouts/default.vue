@@ -32,6 +32,7 @@ export default {
 .button--green:hover {
   color: #fff;
   background-color: #3b8070;
+  cursor: pointer;
 }
 
 .button--grey {
