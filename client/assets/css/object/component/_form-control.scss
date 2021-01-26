@@ -66,9 +66,16 @@ Form control component
   @extend .#{$_prefix}c-form-control;
   display: block;
   width: 100%;
+}
 
-  &::placeholder {
-    color: #6a737d;
-    opacity: 1;
+form {
+  & > dl.required {
+    & label {
+      &::after {
+        padding-left: 5px;
+        color: $color-danger;
+        content: "*";
+      }
+    }
   }
 }

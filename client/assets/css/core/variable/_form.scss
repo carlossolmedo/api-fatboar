@@ -49,4 +49,8 @@ Form Control border color when focus
 $_form-control-border-color-focus: #85B7D9;
 ```
 */
-$_form-control-border-color-focus: #85b7d9 !default;
+// $_form-control-border-color-focus: #85b7d9 !default;
+
+// Custom
+
+$_form-control-border-color-focus: $color-primary !default;

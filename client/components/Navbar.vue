@@ -30,10 +30,9 @@
 
     a {
       transition: background-color 0.1s ease-out, color 0.1s ease-out;
-      color: #c5cbcf;
 
       &:hover {
-        color: #fff;
+        color: inherit;
       }
     }
   }

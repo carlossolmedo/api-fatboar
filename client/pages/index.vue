@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import ModalAuth from '~/components/Auth/ModalAuth';
+  import ModalAuth from '~/components/auth/ModalAuth';
 
   export default {
     components: {

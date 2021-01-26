@@ -14,23 +14,22 @@
         <div class="modal__body">
           <div class="c-fluid-container connection-title">
             <div class="c-row">
-              <button class="btn btn-signup">S'INSCRIRE</button>
-              <button class="btn btn-login">SE CONNECTER</button>
+              <button id="btn-signUpForm" @click="showForm('signUpForm')" class="btn btn-signUp active" type="button">s'inscrire</button>
+              <button id="btn-loginForm" @click="showForm('loginForm')" class="btn btn-login" type="button">connection</button>
             </div>
           </div>
           <!-- Sign Up -->
-          <div id="signupForm" class="signup__block">
+          <div id="signUpForm" class="form-block signUp__block show">
             <div class="c-fluid-container">
               <SignUp />
             </div>
           </div>
           <!-- Login -->
-          <div id="loginForm" class="login__block">
+          <div id="loginForm" class="form-block login__block">
             <div class="c-fluid-container">
               <Login />
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -38,8 +37,8 @@
 </template>
 
 <script>
-  import SignUp from '../Auth/SignUp';
-  import Login from '../Auth/Login';
+  import SignUp from '../auth/SignUp';
+  import Login from '../auth/Login';
 
   export default {
     name: "ModalAuth",
@@ -60,6 +59,19 @@
       openModal() {
         this.show = true;
         document.querySelector("body").classList.add("overflow-hidden");
+      },
+      showForm(idForm) {
+        let buttons = document.getElementsByClassName('btn');
+        let form = document.getElementsByClassName('form-block');
+        let btnToActive = document.getElementById(`btn-${idForm}`);
+        let formToOpen = document.getElementById(`${idForm}`);
+
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].className = buttons[i].className.replace(' active', '');
+          form[i].className = form[i].className.replace(' show', '');
+        }
+        btnToActive.classList.add('active');
+        formToOpen.classList.add('show');
       }
     }
   };
@@ -145,20 +157,49 @@
 // Form styles
 
   .connection-title {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 
     .btn {
       width: calc(100%/2);
+      padding: 1rem;
+      font-weight: bold;
+      letter-spacing: .15rem;
+      text-transform: uppercase;
+      cursor: pointer;
 
-      &-signup {
-        background-color: black;
-        color: white;
+      &:hover {
+        background-color: #111;
+        color: #ffffff;
+        transition: all .3s ease;
+      }
+
+      &-signUp {
+        background-color: transparent;
+        color: #111;
+        border-color: transparent transparent #1c374d;
+        border-right: none;
+        // border-color: #1c374d #1c374d transparent;
       }
       &-login {
-        background-color: blue;
-        color: white;
+        background-color: transparent;
+        color: #111;
+        border-color: transparent transparent #1c374d;
+        border-left: none;
       }
     }
+    .active {
+      background-color: #111;
+      color: #ffffff;
+      border: none;
+    }
+  }
+
+  .show {
+    display: block !important;
+  }
+
+  .signUp__block {
+    display: none;
   }
 
   .login__block {
@@ -168,17 +209,22 @@
   form.connection {
     width: 100%;
 
-    & > dt {
+    & > dl {
       text-align: left;
       margin-bottom: 1rem;
 
-      & > label {
+      & > dt {
         display: block;
         margin-bottom: .5rem;
       }
     }
     .btn-block {
-      padding: 1.5rem;
+      margin: 1.5rem 0 1.5rem 0;
     }
+  }
+
+  .third-connection-block {
+    width: 100%;
+    margin: 1.5rem 0 1.5rem 0;
   }
 </style>
