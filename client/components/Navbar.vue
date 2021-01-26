@@ -1,10 +1,10 @@
 <template>
   <nav class="u-pull-right" role="navigation">
     <ul class="c-navbar c-navbar--right">
-      <li class="c-navbar__item"><a href="#blog">Blog</a></li>
-      <li class="c-navbar__item"><a href="#menu">Menu</a></li>
+      <li class="c-navbar__item"><a class="navbar__link" href="#blog">Blog</a></li>
+      <li class="c-navbar__item"><a class="navbar__link" href="#menu">Menu</a></li>
       <li class="c-navbar__item">
-        <a href="#user">User <span class="c-ic-angle-down" aria-hidden="true"></span></a>
+        <a href="#user" class="navbar__link">User <span class="c-ic-angle-down" aria-hidden="true"></span></a>
         <ul class="c-menu__submenu" aria-hidden="true">
           <li class="c-menu__subitem" aria-haspopup="true">
             <a href="#">Settings</a>
@@ -25,18 +25,7 @@
 
 </script>
 
-<style lang="scss">
-  .c-navbar__item {
-
-    a {
-      transition: background-color 0.1s ease-out, color 0.1s ease-out;
-
-      &:hover {
-        color: inherit;
-      }
-    }
-  }
-
+<style lang="scss" scoped>
   .c-navbar__item:hover > .c-menu__submenu {
     visibility: visible;
     opacity: 1;

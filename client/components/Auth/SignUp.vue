@@ -29,7 +29,7 @@
         <dt>
           <label for="cdg">
             <input type="checkbox" id="cdg" autofocus="autofocus" class="c-form-control" required> J'accepte les <a
-              href="#cdg">Conditions Génerales</a>
+              href="#cdg">conditions génerales</a>
           </label>
         </dt>
       </dl>

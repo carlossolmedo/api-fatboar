@@ -269,4 +269,27 @@ Navbar component
       transform: translateY(0);
     }
   }
+
+  // Custom
+  a.navbar__link {
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
+    color: $color-navbar-link;
+    opacity: 0.3;
+
+    &:hover {
+      color: $color-navbar-link;
+      opacity: 1;
+    }
+  }
+
+  a.footer__link {
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
+    color: $color-footer-link;
+    opacity: 0.3;
+
+    &:hover {
+      color: $color-footer-link;
+      opacity: 1;
+    }
+  }
 }
