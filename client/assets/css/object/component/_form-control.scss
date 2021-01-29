@@ -69,7 +69,7 @@ Form control component
 }
 
 form {
-  & > dl.required {
+  & dl.required {
     & label {
       &::after {
         padding-left: 5px;
@@ -77,5 +77,13 @@ form {
         content: "*";
       }
     }
+  }
+}
+
+.input-error {
+  border-color: $color-danger !important;
+  &:hover, &:active, &:focus, &:focus-within,
+  &[aria-selected="true"] {
+    border-color: $color-danger !important;
   }
 }

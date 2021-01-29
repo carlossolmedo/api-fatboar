@@ -34,6 +34,13 @@ Button component
     background-color: $color-main;
   }
 
+  &[disabled], &[disabled]:hover {
+    background-color: _lighter($_color-gray); // For IE11
+    background-color: _var-lighter-color-gray();
+    cursor: not-allowed;
+    color: #ccc;
+    border: 2px solid #ccc;
+  }
   // &--ghost {
   //   border-color: #fff;
   //   color: #fff;
@@ -44,7 +51,7 @@ Button component
     color: $color-primary;
 
     @include _hover() {
-      background-color: _light($color-primary);
+      background-color: $color-primary;
       color: $_color-white;
     }
   }

@@ -56,3 +56,28 @@ Content utility
 .#{$_prefix}u-content {
   @include _content();
 }
+
+// Custom
+
+.hyphen {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background-color: #333;
+  }
+
+  &::before {
+    margin-right: 20px;
+    left: 25%;
+    bottom: 11.2%;
+  }
+
+  &::after {
+    margin-left: 20px;
+    right: 25%;
+    bottom: 11.2%;
+  }
+}
