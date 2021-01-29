@@ -104,7 +104,7 @@
       text-align: left;
       margin-bottom: 1rem;
 
-      &>dt {
+      & > dt {
         display: block;
         margin-bottom: .5rem;
       }
@@ -113,10 +113,5 @@
     .btn-block {
       margin: 1.5rem 0 1.5rem 0;
     }
-  }
-
-  .third-connection-block {
-    width: 100%;
-    margin: 1rem 0 1.5rem 0;
   }
 </style>

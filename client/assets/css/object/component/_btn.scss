@@ -58,10 +58,22 @@ Button component
 
   &--success {
     border-color: $color-success;
+    background-color: $color-success;
+    color: $_color-white;
+
+    @include _hover() {
+      background-color: $color-success;
+      color: $_color-white;
+    }
+  }
+
+  &--success-outline {
+    border-color: $color-success;
     color: $color-success;
 
     @include _hover() {
-      background-color: _light($color-success);
+      background-color: $color-success;
+      color: $_color-white;
     }
   }
 

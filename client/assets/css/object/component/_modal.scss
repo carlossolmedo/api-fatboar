@@ -119,3 +119,29 @@
 .show {
   display: block !important;
 }
+
+.third {
+  &-connection-block {
+    width: 100%;
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  &-logo {
+    width: 50px;
+
+    @include _media-min(md) {
+      filter: grayscale(100%);
+
+      &:hover {
+        filter: grayscale(0%);
+        transition: all .5s ease;
+      }
+    }
+  }
+}
+
+.message--success {
+  margin: 1rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+}

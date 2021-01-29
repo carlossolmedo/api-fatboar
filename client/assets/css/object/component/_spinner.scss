@@ -18,6 +18,16 @@ Circle spinner component
   @include _circle-spinner();
 }
 
+// Custom
+.#{$_prefix}circle-spinner-white {
+  @include _circle-spinner((size: 20px,
+      color: $_color-white,
+      border-size: 3px,
+      delay: 0s,
+      duration: 2s,
+    ));
+}
+
 /*
 ---
 name: .c-dots-spinner

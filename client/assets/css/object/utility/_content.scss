@@ -62,22 +62,20 @@ Content utility
 .hyphen {
   &::before,
   &::after {
+    display: inline-block;
     content: '';
-    position: absolute;
+    position: relative;
     width: 100px;
     height: 2px;
+    vertical-align: middle;
     background-color: #333;
   }
 
   &::before {
-    margin-right: 20px;
-    left: 25%;
-    bottom: 11.2%;
+    right: 5%;
   }
 
   &::after {
-    margin-left: 20px;
-    right: 25%;
-    bottom: 11.2%;
+    left: 5%;
   }
 }

@@ -70,7 +70,7 @@
                 <span class="c-select__toggle"></span>
               </div>
               <div>
-                <small class="error" v-if="messageCountry">Jeu uniquement en France metropolitenne.</small>
+                <small class="error" v-if="messageCountry">Jeu uniquement en France métropolitaine.</small>
               </div>
             </dd>
           </dl>
@@ -96,20 +96,27 @@
         </dt>
       </dl>
       <div class="btn-block">
-        <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block c-btn--primary">
-          Je m'inscris
+        <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
+        :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
+          <span v-if="!loading">{{messageSubmit}}</span>
+          <div v-if="loading" class="circle-spinner-white"></div>
         </button>
-        <!-- <button type="submit" :disabled="submitStatus === 'PENDING'" class="c-btn c-btn--block c-btn--primary">Je m'inscris</button> -->
-        <p class="typo__p" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
-        <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-        <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
       </div>
+      <div class="message--success" v-if="submitStatus === 'OK'">Connectez-vous !</div>
     </form>
     <div class="third-connection-block">
       <h5><span class="hyphen">Ou</span></h5>
       <ul class="c-navbar c-navbar--center">
-        <li class="c-navbar__item"><a href="#google">Google</a></li>
-        <li class="c-navbar__item"><a href="#fb">Facebook</a></li>
+        <li class="c-navbar__item">
+          <a href="#google">
+            <img class="third-logo" src="~/assets/images/logo-google.svg" title="Google" alt="logo google">
+          </a>
+        </li>
+        <li class="c-navbar__item">
+          <a href="#fb">
+            <img class="third-logo" src="~/assets/images/logo-facebook.svg" title="Facebook" alt="logo facebook">
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -130,8 +137,9 @@
         password: '',
         postalCode: '',
         messageCountry: false,
+        messageSubmit: 'Je m\'inscris',
+        loading: false,
         submitStatus: null,
-        btnDisabled: ''
       }
     },
     validations: {
@@ -161,14 +169,16 @@
       },
       submit() {
         this.$v.$touch();
+        this.loading = true;
         if (this.$v.$invalid) {
           this.submitStatus = 'ERROR';
         } else {
           // do your submit logic here
           this.submitStatus = 'PENDING';
           setTimeout(() => {
+            this.loading = false;
+            this.messageSubmit = 'Inscription avec succès';
             this.submitStatus = 'OK';
-            this.btnDisabled = false;
           }, 500);
         }
       }
