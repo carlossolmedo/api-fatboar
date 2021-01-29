@@ -99,7 +99,7 @@
         <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
         :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
           <span v-if="!loading">{{messageSubmit}}</span>
-          <div v-if="loading" class="circle-spinner-white"></div>
+          <Loader :loading="loading" />
         </button>
       </div>
       <div class="message--success" v-if="submitStatus === 'OK'">Connectez-vous !</div>
@@ -123,12 +123,8 @@
 </template>
 
 <script>
-  import {
-    required,
-    minLength,
-    maxLength,
-    numeric
-  } from 'vuelidate/lib/validators';
+  import {required,minLength,maxLength,numeric} from 'vuelidate/lib/validators';
+  import Loader from '../Loader';
 
   export default {
     data() {
@@ -139,8 +135,11 @@
         messageCountry: false,
         messageSubmit: 'Je m\'inscris',
         loading: false,
-        submitStatus: null,
+        submitStatus: null
       }
+    },
+    components: {
+      Loader
     },
     validations: {
       name: {
@@ -170,16 +169,14 @@
       submit() {
         this.$v.$touch();
         this.loading = true;
-        if (this.$v.$invalid) {
-          this.submitStatus = 'ERROR';
-        } else {
+        if (!this.$v.$invalid) {
           // do your submit logic here
           this.submitStatus = 'PENDING';
           setTimeout(() => {
             this.loading = false;
             this.messageSubmit = 'Inscription avec succès';
             this.submitStatus = 'OK';
-          }, 500);
+          }, 2000);
         }
       }
     }
