@@ -4,7 +4,7 @@
       <div class="c-row c-row--middle">
         <div class="c-row_col c-row__col--auto">
           <div class="c-site-branding">
-              <a href="/" class="c-site-branding__title">Logo</a>
+              <NuxtLink to="/" class="c-site-branding__title">Logo</NuxtLink>
           </div>
         </div>
         <div class="c-row__col c-row__col--auto u-hidden-sm u-hidden-md">
