@@ -30,7 +30,9 @@
           <label for="email">Adresse mail</label>
         </dt>
         <dd>
-          <input type="email" name="email" id="email" autofocus="autofocus" class="c-form-control-input" required>
+          <input v-model.trim="$v.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+                class="c-form-control-input" :class="{'input-error': $v.email.$error}" required>
+          <small class="error" v-if="$v.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
       <div class="c-row c-row--between">
@@ -122,7 +124,7 @@
 </template>
 
 <script>
-  import {required,minLength,maxLength,numeric} from 'vuelidate/lib/validators';
+  import {required, minLength, maxLength, numeric, email} from 'vuelidate/lib/validators';
   import Loader from '../Loader';
 
   export default {
@@ -131,6 +133,7 @@
         name: '',
         password: '',
         postalCode: '',
+        email: '',
         messageCountry: false,
         messageSubmit: 'Je m\'inscris',
         loading: false,
@@ -145,9 +148,9 @@
         required,
         minLength: minLength(6)
       },
-      password: {
+      email: {
         required,
-        minLength: minLength(8)
+        email
       },
       postalCode: {
         required,
@@ -155,7 +158,11 @@
         minLength: minLength(5),
         maxLength: maxLength(5)
       },
-      validationGroup: ['name', 'password']
+      password: {
+        required,
+        minLength: minLength(8)
+      },
+      validationGroup: ['name', 'email', 'postalCode', 'password']
     },
     methods: {
       setCountry(value) {

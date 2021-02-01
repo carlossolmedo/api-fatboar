@@ -6,7 +6,9 @@
           <label for="email">Adresse mail</label>
         </dt>
         <dd>
-          <input type="email" id="email" autofocus="autofocus" class="c-form-control-input" required>
+          <input v-model.trim="$v.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.email.$error}" required>
+          <small class="error" v-if="$v.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
       <dl>
@@ -21,8 +23,8 @@
         </dd>
       </dl>
       <div class="btn-block">
-        <button type="submit" :disabled="$v.password.$invalid" class="c-btn c-btn--block"
-          :class="{'c-btn--primary': !$v.password.$invalid, 'c-btn--success': submitStatus === 'OK'}">
+        <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
+          :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
           <span v-if="!loading">{{messageSubmit}}</span>
           <Loader :loading="loading" />
         </button>
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-  import { required, minLength } from 'vuelidate/lib/validators';
+  import { required, minLength, email } from 'vuelidate/lib/validators';
   import Loader from '../Loader';
 
   export default {
@@ -64,10 +66,14 @@
       Loader
     },
     validations: {
+      email: {
+        email
+      },
       password: {
         required,
         minLength: minLength(8)
-      }
+      },
+      validationGroup: ['email', 'password']
     },
     methods: {
       submit() {
@@ -84,5 +90,4 @@
       }
     }
   }
-
 </script>
