@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="c-row__col c-row__col--auto u-hidden-sm u-hidden-md">
-          <Navbar />
+          <Navbar :connected="connected" />
         </div>
       </div>
     </div>
@@ -21,6 +21,11 @@
   export default {
     components: {
       Navbar
+    },
+    data() {
+      return {
+        connected: false
+      }
     }
   }
 

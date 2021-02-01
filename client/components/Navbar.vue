@@ -1,5 +1,5 @@
 <template>
-  <nav class="u-pull-right" role="navigation">
+  <nav v-if="connected" class="u-pull-right" role="navigation">
     <ul class="c-navbar c-navbar--right">
       <li class="c-navbar__item"><a class="navbar__link" href="#blog">Blog</a></li>
       <li class="c-navbar__item"><a class="navbar__link" href="#menu">Menu</a></li>
@@ -20,7 +20,9 @@
 
 <script>
   export default {
-
+    props: {
+      connected: { type: Boolean }
+    }
   }
 
 </script>
@@ -66,5 +68,4 @@
       transition: background-color 0.1s ease-out, color 0.1s ease-out;
     }
   }
-
 </style>
