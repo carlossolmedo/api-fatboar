@@ -16,13 +16,13 @@
       </dl>
       <dl class="required">
         <dt>
-          <label for="name">Nom</label>
+          <label for="name">Nom complet</label>
         </dt>
         <dd>
           <input v-model.trim="$v.name.$model" type="text" name="name" id="name" autofocus="autofocus"
             class="c-form-control-input" :class="{'input-error': $v.name.$error}" autocomplete="off" required>
-          <small class="error" v-if="!$v.name.minLength">Votre nom doit contenir {{$v.name.$params.minLength.min}}
-            lettres minimum.</small>
+          <small class="error" v-if="!$v.name.minLength">Votre nom doit contenir au moins {{$v.name.$params.minLength.min}}
+            lettres.</small>
         </dd>
       </dl>
       <dl class="required">
@@ -31,15 +31,6 @@
         </dt>
         <dd>
           <input type="email" name="email" id="email" autofocus="autofocus" class="c-form-control-input" required>
-        </dd>
-      </dl>
-      <dl class="required">
-        <dt>
-          <label for="birthdate">Date de naissance</label>
-        </dt>
-        <dd>
-          <input type="date" placeholder="jj-mm-aaaa" min="1997-01-01" max="2030-12-31" name="birthdate" id="birthdate"
-            class="c-form-control-input" required>
         </dd>
       </dl>
       <div class="c-row c-row--between">
@@ -87,11 +78,19 @@
             {{$v.password.$params.minLength.min}} characteres minimum.</small>
         </dd>
       </dl>
-      <dl>
+      <dl class="required">
         <dt>
           <label for="cdg">
-            <input type="checkbox" name="cdg" autofocus="autofocus" id="cdg" class="c-form-control" required>
-            J'accepte les <a href="#cdg">conditions générales</a>
+            <input type="checkbox" autofocus="autofocus" id="cdg" class="c-form-control" required>
+            J'accepte les <a href="#cdg">conditions générales</a> de participation.
+          </label>
+        </dt>
+      </dl>
+      <dl class="required">
+        <dt>
+          <label for="legalAge">
+            <input type="checkbox" autofocus="autofocus" id="legalAge" class="c-form-control" required>
+            Je certifie sur l'honneur avoir 18 ans ou plus.
           </label>
         </dt>
       </dl>

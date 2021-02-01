@@ -17,7 +17,7 @@
               <button id="btn-signUpForm" @click="showForm('signUpForm')" class="btn btn-signUp active"
                 type="button">s'inscrire</button>
               <button id="btn-loginForm" @click="showForm('loginForm')" class="btn btn-login"
-                type="button">connection</button>
+                type="button">connexion</button>
             </div>
           </div>
           <div id="signUpForm" class="form-block signUp__block show">

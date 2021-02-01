@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="submit" class="connection">
-      <dl class="required">
+      <dl>
         <dt>
           <label for="email">Adresse mail</label>
         </dt>
@@ -9,7 +9,7 @@
           <input type="email" id="email" autofocus="autofocus" class="c-form-control-input" required>
         </dd>
       </dl>
-      <dl class="required">
+      <dl>
         <dt>
           <label for="password">Password</label>
         </dt>
