@@ -1,9 +1,28 @@
 <template>
-  <div class="container">
-    <div class="links">
-      <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="button--green">
-        Jouer
-      </a>
+  <div>
+    <div class="c-container text-white">
+      <div class="index-style"></div>
+      <div class="c-row">
+        <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
+          <div>
+            <img src="~/assets/images/range-rover-evoque.png" alt="range rover evoque">
+          </div>
+        </div>
+        <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
+          <div class="u-text-center">
+            <h1>Gangez des prix !</h1>
+              <p>
+                Testez votre change avec votre ticket FatBoar<br />
+                et gangez de millier de prix !
+              </p>
+              <div class="links">
+                <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
+                  Jouer
+                </a>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
     <ModalAuth ref="connectionModal" />
   </div>
@@ -21,13 +40,20 @@
 </script>
 
 <style>
-  html {
+  .index-style {
+    position: absolute;
+    width: 100%;
     height: 100%;
     overflow: hidden;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(142deg, rgba(2, 0, 36, 1) 0%, rgba(9, 93, 121, 1) 48%, rgba(0, 212, 255, 1) 100%);
-    /* background: url("https://picsum.photos/id/1002/1600/980") center no-repeat;
-    background-size: cover; */
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(97, 66, 130);
+    background: radial-gradient(circle, rgba(97, 66, 130, 1) 0%, rgba(41, 6, 64, 1) 100%);
+    z-index: -1;
   }
 
   .container {
@@ -39,38 +65,8 @@
     text-align: center;
   }
 
-  .title {
-    font-family:
-      'Quicksand',
-      'Source Sans Pro',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      'Helvetica Neue',
-      Arial,
-      sans-serif;
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-
   .links {
-    padding-top: 15px;
-  }
-
-  .overflow-hidden {
-    overflow: hidden;
+    margin-top: 15px;
   }
 
 </style>

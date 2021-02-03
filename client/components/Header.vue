@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="c-row__col c-row__col--auto u-hidden-sm u-hidden-md">
-          <Navbar :connected="connected" />
+          <Navbar :logged="logged" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
     },
     data() {
       return {
-        connected: false
+        logged: false
       }
     }
   }

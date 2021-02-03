@@ -1,0 +1,30 @@
+/* -------------------------------------------------------------------------- */
+/*                                Custom styles                               */
+/* -------------------------------------------------------------------------- */
+
+// Body
+.text-white {
+  color: $_color-white;
+}
+
+// home
+.btn-play {
+  @include _btn();
+  @include _padding(.5, 1);
+  background-color: $color-yellow;
+  color: $_color-white;
+  width: 50%;
+  border-radius: 10px;
+  font-size: larger;
+  font-weight: bold;
+
+  &:hover {
+    background-color: _dark($color-yellow);
+  }
+}
+
+// Footer
+.text-copyright {
+  text-align: center;
+  color: $color-yellow;
+}
