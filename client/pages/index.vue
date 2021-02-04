@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="c-container text-white">
+    <div class="c-container text-container">
       <div class="index-style"></div>
       <div class="c-row">
         <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
@@ -11,15 +11,15 @@
         <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
           <div class="u-text-center">
             <h1>Gangez des prix !</h1>
-              <p>
-                Testez votre change avec votre ticket FatBoar<br />
-                et gangez de millier de prix !
-              </p>
-              <div class="links">
-                <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
-                  Jouer
-                </a>
-              </div>
+            <p>
+              Testez votre change avec votre ticket FatBoar<br />
+              et gangez de millier de prix !
+            </p>
+            <div class="links">
+              <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
+                Jouer
+              </a>
+            </div>
           </div>
         </div>
       </div>
