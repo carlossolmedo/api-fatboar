@@ -9,13 +9,13 @@
           </div>
         </div>
         <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
-          <div class="u-text-center">
+          <div class="c-message-prize">
             <h1>Gangez des prix !</h1>
             <p>
               Testez votre change avec votre ticket FatBoar<br />
-              et gangez de millier de prix !
+              et gangez de millier de prix&nbsp;!
             </p>
-            <div class="links">
+            <div class="c-btn-play">
               <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
                 Jouer
               </a>
@@ -36,10 +36,9 @@
       ModalAuth
     }
   }
-
 </script>
 
-<style>
+<style scoped>
   .index-style {
     position: absolute;
     width: 100%;
@@ -63,10 +62,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
-
-  .links {
-    margin-top: 15px;
   }
 
 </style>
