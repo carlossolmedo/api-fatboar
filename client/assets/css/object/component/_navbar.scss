@@ -301,8 +301,7 @@ Navbar component
       text-decoration: underline;
 
       &:hover,
-      &:focus,
-      &:visited {
+      &:focus {
         color: $color-blue;
       }
     }

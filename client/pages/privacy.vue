@@ -37,7 +37,7 @@
             <li>Les «cookies de session» qui servent à suivre les pages que vous consultez et à savoir si vous avez déjà visité le Site auparavant, ce qui nous permet de répondre à vos besoins et de comprendre comment les visiteurs utilisent notre Site.</li>
             <li>Les «cookies d'analyse» qui sont enregistrés lors de votre première visite sur notre Site et revalidés à chacune de vos prochaines visites afin de nous permettre d'obtenir des statistiques sur l'utilisation de notre Site. Ces informations nous servent à améliorer votre expérience de navigation. Le recours à un service d'analyse d'audience nous permet d'améliorer le service que nous vous offrons.</li>
           </ul>
-          Veuillez noter que les cookies que nous utilisons ne contiennent AUCUNE DONNÉE PERSONNELLE et sont utilisés uniquement par MAVALA S.A. à des fins d'analyse, dans le but d'améliorer le service fourni sur notre Site.
+          Veuillez noter que les cookies que nous utilisons ne contiennent AUCUNE DONNÉE PERSONNELLE et sont utilisés uniquement par <strong>FatBoar S.A.</strong> à des fins d'analyse, dans le but d'améliorer le service fourni sur notre Site.
           Si vous choisissez de désactiver tous les cookies, il est possible que l'accès à certaines parties du Site ne fonctionne pas.
         </p>
       </section>
