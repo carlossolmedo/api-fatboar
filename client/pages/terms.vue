@@ -88,7 +88,7 @@
 
 <style lang="scss" scoped>
   h1, h2 {
-    color: #833dce;
+    color: #7952b3;
   }
   h3, section {
     margin-bottom: 1rem;

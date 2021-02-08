@@ -56,7 +56,7 @@
     line-height: 2rem;
   }
   h1, h2 {
-    color: #833dce;
+    color: #7952b3;
   }
   h1 {
     font-size: 2rem;

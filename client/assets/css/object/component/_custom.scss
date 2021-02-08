@@ -81,9 +81,13 @@
 footer {
   margin-bottom: 3rem;
 
-  .text-copyright {
-    text-align: center;
-    color: $color-yellow;
+  .text {
+    &__copyright-home {
+      color: $color-yellow;
+    }
+    &__copyright-default {
+      color: $color-copyright;
+    }
   }
 }
 

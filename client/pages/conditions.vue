@@ -2,7 +2,7 @@
   <div class="c-container text-conditions">
     <article class="c-row">
       <h1>Conditions Générales</h1>
-      <div>
+      <p>
         <ol>
           <li>Les inscriptions au jeu-concours relatives aux produits du restaurant ayant merité leur galons sont uniquement acceptés via le formulaire d'inscription en ligne de <strong>FatBoar S.A</strong></li>
           <li>Le jeu-concours est réservé aux résidents européens âgés de plus de 18 ans.</li>
@@ -25,7 +25,7 @@
           <li>Les employés de <strong>FatBoar</strong> ne sont pas autorisés à participer à ce concours.</li>
           <li>Aucune alternative monétaire ne sera proposée à la place du prix. Le gagnant du concours sera informé par <strong>FatBoar</strong> par écrit, par e-mail ou sur les réseaux sociaux, et devra fournir si nécessaire une preuve de son identité pour certifier l'acceptation du prix.</li>
         </ol>
-      </div>
+      </p>
     </article>
   </div>
 </template>
@@ -39,6 +39,9 @@
     font-size: 2rem;
     margin-top: 50px;
     margin-bottom: 50px;
-    color: #833dce;
+    color: #7952b3;
+  }
+  p {
+    margin-bottom: 1rem;
   }
 </style>

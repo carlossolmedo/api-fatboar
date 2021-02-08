@@ -282,14 +282,29 @@ Navbar component
     }
   }
 
-  a.footer__link {
-    transition: background-color 0.1s ease-out, color 0.1s ease-out;
-    color: $color-footer-link;
-    opacity: 0.5;
+  a.footer {
 
-    &:hover {
+    &__link {
+      transition: background-color 0.1s ease-out,
+      color 0.1s ease-out;
       color: $color-footer-link;
-      opacity: 1;
+      opacity: 0.5;
+
+      &:hover {
+        color: $color-footer-link;
+        opacity: 1;
+      }
+    }
+
+    &__link-primary {
+      color: $color-violet;
+      text-decoration: underline;
+
+      &:hover,
+      &:focus,
+      &:visited {
+        color: $color-blue;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <Header />
     <Nuxt />
-    <Footer />
+    <Footer :pageIndex="pageIndex" />
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      pageIndex: false
+    }
+  },
+  created() {
+    if (this.$route.name === 'index') {
+      this.pageIndex = true;
+    }
   }
 }
 </script>
