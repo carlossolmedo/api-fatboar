@@ -87,8 +87,8 @@
 </template>
 
 <style lang="scss" scoped>
-  h1, h2, h3 {
-    color: rgb(97, 66, 130);
+  h1, h2 {
+    color: #833dce;
   }
   h3, section {
     margin-bottom: 1rem;

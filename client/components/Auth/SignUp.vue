@@ -96,6 +96,14 @@
           </label>
         </dt>
       </dl>
+      <dl>
+        <dt>
+          <label for="newsletter">
+            <input type="checkbox" autofocus="autofocus" id="newsletter" class="c-form-control" required>
+            Je souhaite m'inscrire à la newsletter.
+          </label>
+        </dt>
+      </dl>
       <div class="btn-block">
         <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
         :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
