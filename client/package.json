@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.2",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.1.2",

@@ -1,0 +1,103 @@
+/*
+---
+name: $_color-text
+category:
+  - core/variable
+  - core/variable/color
+---
+Default text color
+
+### scss
+```scss
+$_color-text: #333;
+```
+*/
+
+$_color-text: #333 !default;
+
+/*
+---
+name: $_color-black
+category:
+  - core/variable
+  - core/variable/color
+---
+Default black color
+
+### scss
+```scss
+$_color-black: #111;
+```
+*/
+
+$_color-black: #111 !default;
+
+/*
+---
+name: $_color-white
+category:
+  - core/variable
+  - core/variable/color
+---
+Default white color
+
+### scss
+```scss
+$_color-white: #fff;
+```
+*/
+
+$_color-white: #fff !default;
+
+/*
+---
+name: $_color-gray
+category:
+  - core/variable
+  - core/variable/color
+---
+Default gray color
+
+### scss
+```scss
+$_color-gray: #999;
+```
+*/
+
+$_color-gray: #999 !default;
+
+/*
+---
+name: $_color-red
+category:
+  - core/variable
+  - core/variable/color
+---
+Default red color
+
+### scss
+```scss
+$_color-red: #e74c3c;
+```
+*/
+
+$_color-red: #e74c3c !default;
+
+
+// Custom
+
+$color-main:    #f3f8f8;
+$color-accent:  #0b5ed7;
+$color-primary: #0b5ed7;
+$color-success: #43A047;
+$color-info:    #A4E1E7;
+$color-warning: #C9C756;
+$color-danger : #cb2431;
+$color-placeholder: #6a737d;
+$color-navbar-link:   #fff;
+$color-footer-link: #fff;
+$color-yellow: #f7bc06;
+$color-violet: #7952b3; //#833dce
+$color-blue: #0a58ca;
+$color-copyright: #63707c;
+

@@ -1,8 +1,32 @@
 <template>
   <div>
+    <Header />
     <Nuxt />
+    <Footer :pageIndex="pageIndex" />
   </div>
 </template>
+
+<script>
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
+
+export default {
+  components: {
+    Header,
+    Footer
+  },
+  data() {
+    return {
+      pageIndex: false
+    }
+  },
+  created() {
+    if (this.$route.name === 'index') {
+      this.pageIndex = true;
+    }
+  }
+}
+</script>
 
 <style>
 
@@ -18,6 +42,7 @@
 .button--green:hover {
   color: #fff;
   background-color: #3b8070;
+  cursor: pointer;
 }
 
 .button--grey {

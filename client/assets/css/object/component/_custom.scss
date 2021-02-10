@@ -1,0 +1,175 @@
+/* -------------------------------------------------------------------------- */
+/*                                Custom styles                               */
+/* -------------------------------------------------------------------------- */
+
+// Body
+
+.bg-purple {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  background: rgb(97, 66, 130);
+  background: radial-gradient(circle, rgba(97, 66, 130, 1) 0%, rgba(41, 6, 64, 1) 100%);
+  z-index: -1;
+}
+
+main {
+  &.content {
+    margin-bottom: 1rem;
+
+    @include _media-min(md) {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+.img-logo {
+  width: 60px;
+  padding-top: 1.25rem;
+}
+
+.text-container {
+  color: white;
+  font-family: 'lobster', Georgia, 'Times New Roman', Times, serif;
+}
+
+@font-face {
+  font-family: 'lobster';
+  font-display: swap;
+  src: url('~assets/fonts/lobster.woff2') format('woff2'),
+    url('~assets/fonts/lobster.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// home
+
+.c-images-prize {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  h1 {
+    color: $color-yellow;
+    text-shadow: 3px 3px 3px $_color-black;
+  }
+  h2 {
+    text-shadow: 1px 1px 1px $_color-black;
+  }
+}
+
+.c-message-prize {
+  text-align: center;
+
+  & > h1 {
+    color: $color-yellow;
+    font-size: 2.7rem;
+    margin: 1rem 0 1rem 0;
+    text-shadow: 3px 3px 3px $_color-black;
+
+    @include _media-min(md) {
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 1px $_color-black;
+
+    @include _media-min(md) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .c-btn-play {
+    margin: 2rem 0 2rem 0;
+  }
+}
+
+.btn-play {
+  @include _btn();
+  // @include _padding(.5, 2);
+  padding: 1.25em 2em;
+  background-color: $color-yellow;
+  color: $_color-black;
+  width: 50%;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+  background 150ms cubic-bezier(0, 0, 0.58, 1);
+  animation: jittery 4s infinite;
+
+  &:hover {
+    background-color: #dba600;
+    animation: heartbeat 0.2s infinite;
+  }
+}
+
+// Footer
+
+footer {
+  margin-bottom: 3rem;
+
+  .text {
+    &__copyright-home {
+      color: $color-yellow;
+    }
+    &__copyright-default {
+      color: $color-copyright;
+    }
+  }
+}
+
+
+// Animations
+
+@keyframes jittery {
+
+  5%,
+  50% {
+    transform: scale(1);
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.19),
+    0 6px 3px 0 rgba(0, 0, 0, 0.23);
+  }
+
+  10% {
+    transform: scale(0.9);
+  }
+
+  15% {
+    transform: scale(1.15);
+  }
+
+  20% {
+    transform: scale(1.15) rotate(-5deg);
+  }
+
+  25% {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  30% {
+    transform: scale(1.15) rotate(-3deg);
+  }
+
+  35% {
+    transform: scale(1.15) rotate(2deg);
+  }
+
+  40% {
+    transform: scale(1.15) rotate(0);
+  }
+}
+
+@keyframes heartbeat {
+  50% {
+    transform: scale(1.1);
+  }
+}

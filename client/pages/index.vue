@@ -1,66 +1,50 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        Fatboar
-      </h1>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" rel="noopener noreferrer" class="button--green">
-          Documentations
-        </a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" rel="noopener noreferrer" class="button--grey">
-          GitHub
-        </a>
-        <a href="#" class="">Testing scss</a>
+  <main class="content">
+    <div class="bg-purple"></div>
+    <div class="c-container text-container">
+      <div class="c-row c-row--middle">
+        <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
+          <div class="c-images-prize">
+            <h1>FatBoar</h1>
+            <h2>Fête son 100e restaurant !</h2>
+          </div>
+          <img class="prizes" src="~/assets/images/prizes-fatboar.png" alt="all prizes">
+        </div>
+        <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
+          <div class="c-message-prize">
+            <h1>Gangez des prix !</h1>
+            <p>
+              Testez votre change avec votre ticket FatBoar<br />
+              et gangez de millier de prix&nbsp;!
+            </p>
+            <div class="c-btn-play">
+              <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
+                Jouer
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    <ModalAuth ref="connectionModal" />
+  </main>
 </template>
 
 <script>
-  export default {}
+  import ModalAuth from '~/components/auth/ModalAuth';
 
+  export default {
+    components: {
+      ModalAuth
+    }
+  }
 </script>
 
-<style>
-
-  .container {
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .title {
-    font-family:
-      'Quicksand',
-      'Source Sans Pro',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      'Helvetica Neue',
-      Arial,
-      sans-serif;
+<style scoped>
+  .prizes {
     display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-
-  .links {
-    padding-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 </style>
