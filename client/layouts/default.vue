@@ -2,8 +2,8 @@
   <div>
     <Header />
     <Nuxt />
-    <Footer :pageIndex="pageIndex" />
-    <GDPR :cookieAccepted="cookieAccepted" />
+    <Footer />
+    <GDPR />
   </div>
 </template>
 
@@ -17,17 +17,6 @@ export default {
     Header,
     Footer,
     GDPR
-  },
-  data() {
-    return {
-      pageIndex: false,
-      cookieAccepted: false
-    }
-  },
-  created() {
-    if (this.$route.name === 'index') {
-      this.pageIndex = true;
-    }
   }
 }
 </script>

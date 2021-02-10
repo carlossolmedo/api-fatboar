@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!cookieAccepted" class="banner-gdpr">
+  <div v-if="!$store.state.cookie" class="banner-gdpr">
     <p class="c-gdpr-message">
       Nous utilisons des cookies pour activer certaines fonctionnalités, obtenir des statistiques et assurer la meilleure expérience possible sur notre site Web (voir notre <a href="/privacy">politique de confidentialité</a>). En poursuivant votre exploration de notre site Web sans modifier les paramètres, vous acceptez l'utilisation de ces cookies.
     </p>
@@ -9,12 +9,9 @@
 
 <script>
 export default {
-  props: {
-    cookieAccepted: { type: Boolean }
-  },
   methods: {
     cookieValidate() {
-      this.cookieAccepted = true;
+      this.$store.commit('cookieDone');
     }
   }
 }
