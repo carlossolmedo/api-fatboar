@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <main class="content">
+    <div class="bg-purple"></div>
     <div class="c-container text-container">
-      <div class="index-style"></div>
-      <div class="c-row">
+      <div class="c-row c-row--middle">
         <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
-          <div>
-            <img src="~/assets/images/range-rover-evoque.png" alt="range rover evoque">
+          <div class="c-images-prize">
+            <h1>FatBoar</h1>
+            <h2>Fête son 100e restaurant !</h2>
           </div>
+          <img class="prizes" src="~/assets/images/prizes-fatboar.png" alt="all prizes">
         </div>
         <div class="c-row__col c-row__col--1-1 c-row__col--md-1-2">
           <div class="c-message-prize">
@@ -25,7 +27,7 @@
       </div>
     </div>
     <ModalAuth ref="connectionModal" />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -39,29 +41,10 @@
 </script>
 
 <style scoped>
-  .index-style {
-    position: absolute;
+  .prizes {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgb(97, 66, 130);
-    background: radial-gradient(circle, rgba(97, 66, 130, 1) 0%, rgba(41, 6, 64, 1) 100%);
-    z-index: -1;
   }
-
-  .container {
-    margin: 0 auto;
-    min-height: calc(100vh - 30vh);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
 </style>

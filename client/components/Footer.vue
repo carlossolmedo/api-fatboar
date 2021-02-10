@@ -2,7 +2,7 @@
   <footer>
     <div class="c-container">
       <ul class="c-navbar c-navbar--center">
-        <li class="c-navbar__item"><a href="/conditions" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Condition Générales</a></li>
+        <li class="c-navbar__item"><a href="/conditions" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Conditions Générales</a></li>
         <li class="c-navbar__item"><a href="/terms" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Mentions Légales</a></li>
         <li class="c-navbar__item"><a href="/privacy" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Politique de Confidentialité</a></li>
       </ul>
