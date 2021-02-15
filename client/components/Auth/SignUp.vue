@@ -16,12 +16,12 @@
       </dl>
       <dl class="required">
         <dt>
-          <label for="name">Nom complet</label>
+          <label for="username">Nom complet</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.name.$model" type="text" name="name" id="name" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.form.name.$error}" autocomplete="off" required>
-          <small class="error" v-if="!$v.form.name.minLength">Votre nom doit contenir au moins {{$v.form.name.$params.minLength.min}}
+          <input v-model.trim="$v.form.username.$model" type="text" name="username" id="username" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.form.username.$error}" autocomplete="off" required>
+          <small class="error" v-if="!$v.form.username.minLength">Votre nom doit contenir au moins {{$v.form.username.$params.minLength.min}}
             lettres.</small>
         </dd>
       </dl>
@@ -140,14 +140,14 @@
       return {
         form: {
           gender: null,
-          name: null,
+          username: null,
           email: null,
           password: null,
           postalCode: null,
           country: null,
-          conditions: false,
-          legalAge: false,
-          newsletter: false
+          conditions: null,
+          legalAge: null,
+          newsletter: null
         },
         messageCountry: false,
         messageSubmit: "Je m'inscris",
@@ -160,7 +160,7 @@
     },
     validations: {
       form: {
-        name: {
+        username: {
           required,
           minLength: minLength(6)
         },
@@ -189,7 +189,7 @@
         }
       },
       validationGroup: [
-        'form.name', 'form.email', 'form.password',
+        'form.username', 'form.email', 'form.password',
         'form.postalCode', 'form.country', 'form.conditions',
         'form.legalAge'
       ]
@@ -202,12 +202,21 @@
           this.messageCountry = false;
         }
       },
+      async postFormData(formData) {
+        try {
+          const register = await this.$axios.$post('/auth/signup', formData)
+          return register;
+        } catch (error) {
+          console.error(error);
+        }
+      },
       submit() {
         this.$v.form.$touch();
         this.loading = true;
+
         if (!this.$v.form.$invalid) {
-          // do your submit logic here
           console.log('VALUES', this.form);
+          let formSent = this.postFormData(this.form);
           this.submitStatus = 'PENDING';
           setTimeout(() => {
             this.loading = false;
