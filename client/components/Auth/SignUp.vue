@@ -7,10 +7,10 @@
         </dt>
         <dd>
           <label>
-            <input type="radio" name="gender" value="M" autofocus="autofocus" class="c-form-control"> M.
+            <input v-model="form.gender" type="radio" name="gender" value="M" autofocus="autofocus" class="c-form-control"> M.
           </label>
           <label>
-            <input type="radio" name="gender" value="F" autofocus="autofocus" class="c-form-control"> Mme.
+            <input v-model="form.gender" type="radio" name="gender" value="F" autofocus="autofocus" class="c-form-control"> Mme.
           </label>
         </dd>
       </dl>
@@ -19,9 +19,9 @@
           <label for="name">Nom complet</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.name.$model" type="text" name="name" id="name" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.name.$error}" autocomplete="off" required>
-          <small class="error" v-if="!$v.name.minLength">Votre nom doit contenir au moins {{$v.name.$params.minLength.min}}
+          <input v-model.trim="$v.form.name.$model" type="text" name="name" id="name" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.form.name.$error}" autocomplete="off" required>
+          <small class="error" v-if="!$v.form.name.minLength">Votre nom doit contenir au moins {{$v.form.name.$params.minLength.min}}
             lettres.</small>
         </dd>
       </dl>
@@ -30,9 +30,9 @@
           <label for="email">Adresse mail</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.email.$model" type="email" name="email" id="email" autofocus="autofocus"
-                class="c-form-control-input" :class="{'input-error': $v.email.$error}" required>
-          <small class="error" v-if="$v.email.$error">Adresse mail invalide.</small>
+          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+                class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
+          <small class="error" v-if="$v.form.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
       <div class="c-row c-row--between">
@@ -42,9 +42,9 @@
               <label for="postal_code">Code postal</label>
             </dt>
             <dd>
-              <input v-model.trim="$v.postalCode.$model" type="text" name="postal_code" id="postal_code"
-                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.postalCode.$error}" maxlength="5" required>
-              <small class="error" v-if="$v.postalCode.$error">Code postal invalide.</small>
+              <input v-model.trim="$v.form.postalCode.$model" type="text" name="postal_code" id="postal_code"
+                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.postalCode.$error}" maxlength="5" required>
+              <small class="error" v-if="$v.form.postalCode.$error">Code postal invalide.</small>
             </dd>
           </dl>
         </div>
@@ -55,8 +55,8 @@
             </dt>
             <dd>
               <div class="c-select">
-                <select @change="setCountry($event.target.value)" class="c-select__control" :class="{'input-error': messageCountry}" id="country" name="country"
-                  required>
+                <select @change="setCountry($event.target.value)" v-model="$v.form.country.$model" class="c-select__control"
+                :class="{'input-error': messageCountry}" id="country" name="country" required>
                   <option value="FR">France</option>
                   <option value="other">Autre</option>
                 </select>
@@ -74,24 +74,24 @@
           <label for="password">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.password.$model" type="password" name="password" id="password" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.password.$error}" required>
-          <small class="error" v-if="!$v.password.minLength">Votre mot de passe doit contenir
-            {{$v.password.$params.minLength.min}} characteres minimum.</small>
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.form.password.$error}" required>
+          <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
+            {{$v.form.password.$params.minLength.min}} characteres minimum.</small>
         </dd>
       </dl>
       <dl class="required">
         <dt>
           <label for="cdg">
-            <input type="checkbox" autofocus="autofocus" id="cdg" class="c-form-control" required>
-            J'accepte les <a href="#cdg">conditions générales</a> de participation.
+            <input v-model="$v.form.conditions.$model" type="checkbox" autofocus="autofocus" id="cdg" class="c-form-control">
+            J'accepte les <NuxtLink to="/conditions">conditions générales</NuxtLink> de participation.
           </label>
         </dt>
       </dl>
       <dl class="required">
         <dt>
           <label for="legalAge">
-            <input type="checkbox" autofocus="autofocus" id="legalAge" class="c-form-control" required>
+            <input v-model="$v.form.legalAge.$model" type="checkbox" autofocus="autofocus" id="legalAge" class="c-form-control">
             Je certifie sur l'honneur avoir 18 ans ou plus.
           </label>
         </dt>
@@ -99,7 +99,7 @@
       <dl>
         <dt>
           <label for="newsletter">
-            <input type="checkbox" autofocus="autofocus" id="newsletter" class="c-form-control" required>
+            <input v-model="form.newsletter" name="newsletter" type="checkbox" autofocus="autofocus" id="newsletter" class="c-form-control">
             Je souhaite m'inscrire à la newsletter.
           </label>
         </dt>
@@ -138,12 +138,19 @@
   export default {
     data() {
       return {
-        name: '',
-        password: '',
-        postalCode: '',
-        email: '',
+        form: {
+          gender: null,
+          name: null,
+          email: null,
+          password: null,
+          postalCode: null,
+          country: null,
+          conditions: false,
+          legalAge: false,
+          newsletter: false
+        },
         messageCountry: false,
-        messageSubmit: 'Je m\'inscris',
+        messageSubmit: "Je m'inscris",
         loading: false,
         submitStatus: null
       }
@@ -152,25 +159,40 @@
       Loader
     },
     validations: {
-      name: {
-        required,
-        minLength: minLength(6)
+      form: {
+        name: {
+          required,
+          minLength: minLength(6)
+        },
+        email: {
+          required,
+          email
+        },
+        password: {
+          required,
+          minLength: minLength(8)
+        },
+        postalCode: {
+          required,
+          numeric,
+          minLength: minLength(5),
+          maxLength: maxLength(5)
+        },
+        country: {
+          required
+        },
+        conditions: {
+          required
+        },
+        legalAge: {
+          required
+        }
       },
-      email: {
-        required,
-        email
-      },
-      postalCode: {
-        required,
-        numeric,
-        minLength: minLength(5),
-        maxLength: maxLength(5)
-      },
-      password: {
-        required,
-        minLength: minLength(8)
-      },
-      validationGroup: ['name', 'email', 'postalCode', 'password']
+      validationGroup: [
+        'form.name', 'form.email', 'form.password',
+        'form.postalCode', 'form.country', 'form.conditions',
+        'form.legalAge'
+      ]
     },
     methods: {
       setCountry(value) {
@@ -181,10 +203,11 @@
         }
       },
       submit() {
-        this.$v.$touch();
+        this.$v.form.$touch();
         this.loading = true;
-        if (!this.$v.$invalid) {
+        if (!this.$v.form.$invalid) {
           // do your submit logic here
+          console.log('VALUES', this.form);
           this.submitStatus = 'PENDING';
           setTimeout(() => {
             this.loading = false;
