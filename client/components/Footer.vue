@@ -1,20 +1,60 @@
 <template>
-  <footer>
+  <footer class="footer-style" :class="{'index': $store.state.bodyClass}">
     <div class="c-container">
       <ul class="c-navbar c-navbar--center">
-        <li class="c-navbar__item"><a href="/conditions" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Conditions Générales</a></li>
-        <li class="c-navbar__item"><a href="/terms" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Mentions Légales</a></li>
-        <li class="c-navbar__item"><a href="/privacy" :class="{'footer__link': pageIndex, 'footer__link-primary': !pageIndex}">Politique de Confidentialité</a></li>
+        <li class="c-navbar__item">
+          <NuxtLink to="/conditions">Conditions Générales</NuxtLink>
+        </li>
+        <li class="c-navbar__item">
+          <NuxtLink to="/terms">Mentions Légales</NuxtLink>
+        </li>
+        <li class="c-navbar__item">
+          <NuxtLink to="/privacy">Politique de Confidentialité</NuxtLink>
+        </li>
       </ul>
-      <div class="u-text-center" :class="{'text__copyright-home': pageIndex, 'text__copyright-default': !pageIndex}">&copy; Copyright Fatboar 2021</div>
+      <div class="text__copyright" :class="{'index': $store.state.bodyClass}">&copy; Copyright Fatboar 2021</div>
     </div>
   </footer>
 </template>
 
-<script>
-export default {
-  props: {
-    pageIndex: { type: Boolean }
+<style lang="scss" scoped>
+  footer {
+    margin-bottom: 3rem;
+
+    &.footer-style {
+      & a {
+        color: #7952b3;
+
+        &:hover,
+        &:focus {
+          color: #0a58ca;
+        }
+      }
+
+      &.index {
+        & a {
+          transition: background-color 0.1s ease-out,
+          color 0.1s ease-out;
+          color: #fff;
+          opacity: 0.5;
+
+          &:hover {
+            color: #fff;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .text {
+      &__copyright {
+        text-align: center;
+        color: #63707c;
+
+        &.index {
+          color: #f7bc06;
+        }
+      }
+    }
   }
-}
-</script>
+</style>
