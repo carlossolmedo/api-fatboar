@@ -1,6 +1,7 @@
 export const state = () => ({
   cookie: false,
-  bodyClass: ''
+  bodyClass: '',
+  authenticated: false
 });
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
   },
   setClass(state, bodyClass) {
     state.bodyClass = bodyClass
+  },
+  userLogged(state) {
+    state.authenticated = !state.authenticated;
   }
 };

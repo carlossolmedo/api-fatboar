@@ -37,12 +37,6 @@
     components: {
       ModalAuth
     }
-    // async asyncData({ $axios }) {
-    //   const ip = await $axios.$get('/users');
-    //   return {
-    //     result: ip
-    //   }
-    // }
   }
 </script>
 
