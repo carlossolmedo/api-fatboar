@@ -7,21 +7,24 @@
         </dt>
         <dd>
           <label>
-            <input type="radio" name="gender" value="M" autofocus="autofocus" class="c-form-control"> M.
+            <input v-model="form.gender" type="radio" name="gender" value="M" autofocus="autofocus"
+              class="c-form-control"> M.
           </label>
           <label>
-            <input type="radio" name="gender" value="F" autofocus="autofocus" class="c-form-control"> Mme.
+            <input v-model="form.gender" type="radio" name="gender" value="F" autofocus="autofocus"
+              class="c-form-control"> Mme.
           </label>
         </dd>
       </dl>
       <dl class="required">
         <dt>
-          <label for="name">Nom complet</label>
+          <label for="username">Nom complet</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.name.$model" type="text" name="name" id="name" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.name.$error}" autocomplete="off" required>
-          <small class="error" v-if="!$v.name.minLength">Votre nom doit contenir au moins {{$v.name.$params.minLength.min}}
+          <input v-model.trim="$v.form.username.$model" type="text" name="username" id="username" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.form.username.$error}" autocomplete="off" required>
+          <small class="error" v-if="!$v.form.username.minLength">Votre nom doit contenir au moins
+            {{$v.form.username.$params.minLength.min}}
             lettres.</small>
         </dd>
       </dl>
@@ -30,9 +33,9 @@
           <label for="email">Adresse mail</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.email.$model" type="email" name="email" id="email" autofocus="autofocus"
-                class="c-form-control-input" :class="{'input-error': $v.email.$error}" required>
-          <small class="error" v-if="$v.email.$error">Adresse mail invalide.</small>
+          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+            class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
+          <small class="error" v-if="$v.form.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
       <div class="c-row c-row--between">
@@ -42,9 +45,10 @@
               <label for="postal_code">Code postal</label>
             </dt>
             <dd>
-              <input v-model.trim="$v.postalCode.$model" type="text" name="postal_code" id="postal_code"
-                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.postalCode.$error}" maxlength="5" required>
-              <small class="error" v-if="$v.postalCode.$error">Code postal invalide.</small>
+              <input v-model.trim="$v.form.postalCode.$model" type="text" name="postal_code" id="postal_code"
+                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.postalCode.$error}"
+                maxlength="5" required>
+              <small class="error" v-if="$v.form.postalCode.$error">Code postal invalide.</small>
             </dd>
           </dl>
         </div>
@@ -55,7 +59,8 @@
             </dt>
             <dd>
               <div class="c-select">
-                <select @change="setCountry($event.target.value)" class="c-select__control" :class="{'input-error': messageCountry}" id="country" name="country"
+                <select @change="setCountry($event.target.value)" v-model="$v.form.country.$model"
+                  class="c-select__control" :class="{'input-error': messageCountry}" id="country" name="country"
                   required>
                   <option value="FR">France</option>
                   <option value="other">Autre</option>
@@ -74,24 +79,27 @@
           <label for="password">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.password.$model" type="password" name="password" id="password" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.password.$error}" required>
-          <small class="error" v-if="!$v.password.minLength">Votre mot de passe doit contenir
-            {{$v.password.$params.minLength.min}} characteres minimum.</small>
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password"
+            autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.password.$error}"
+            required>
+          <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
+            {{$v.form.password.$params.minLength.min}} characteres minimum.</small>
         </dd>
       </dl>
       <dl class="required">
         <dt>
           <label for="cdg">
-            <input type="checkbox" autofocus="autofocus" id="cdg" class="c-form-control" required>
-            J'accepte les <a href="#cdg">conditions générales</a> de participation.
+            <input v-model="$v.form.conditions.$model" type="checkbox" autofocus="autofocus" id="cdg"
+              class="c-form-control">
+            J'accepte les <NuxtLink to="/conditions">conditions générales</NuxtLink> de participation.
           </label>
         </dt>
       </dl>
       <dl class="required">
         <dt>
           <label for="legalAge">
-            <input type="checkbox" autofocus="autofocus" id="legalAge" class="c-form-control" required>
+            <input v-model="$v.form.legalAge.$model" type="checkbox" autofocus="autofocus" id="legalAge"
+              class="c-form-control">
             Je certifie sur l'honneur avoir 18 ans ou plus.
           </label>
         </dt>
@@ -99,19 +107,23 @@
       <dl>
         <dt>
           <label for="newsletter">
-            <input type="checkbox" autofocus="autofocus" id="newsletter" class="c-form-control" required>
+            <input v-model="form.newsletter" name="newsletter" type="checkbox" autofocus="autofocus" id="newsletter"
+              class="c-form-control">
             Je souhaite m'inscrire à la newsletter.
           </label>
         </dt>
       </dl>
       <div class="btn-block">
-        <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
-        :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
+        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
+          :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
           <span v-if="!loading">{{messageSubmit}}</span>
           <Loader :loading="loading" />
         </button>
+        <div v-if="submitStatus === 'OK'" class="c-alert c-alert--success" role="alert">
+          <div v-if="!loading">{{messageSubmit}}</div>
+          <div>Connectez-vous !</div>
+        </div>
       </div>
-      <div class="message--success" v-if="submitStatus === 'OK'">Connectez-vous !</div>
     </form>
     <div class="third-connection-block">
       <h5><span class="hyphen">Ou</span></h5>
@@ -132,18 +144,31 @@
 </template>
 
 <script>
-  import {required, minLength, maxLength, numeric, email} from 'vuelidate/lib/validators';
+  import {
+    required,
+    minLength,
+    maxLength,
+    numeric,
+    email
+  } from 'vuelidate/lib/validators';
   import Loader from '../Loader';
 
   export default {
     data() {
       return {
-        name: '',
-        password: '',
-        postalCode: '',
-        email: '',
+        form: {
+          gender: null,
+          username: null,
+          email: null,
+          password: null,
+          postalCode: null,
+          country: null,
+          conditions: null,
+          legalAge: null,
+          newsletter: null
+        },
         messageCountry: false,
-        messageSubmit: 'Je m\'inscris',
+        messageSubmit: "Je m'inscris",
         loading: false,
         submitStatus: null
       }
@@ -152,25 +177,40 @@
       Loader
     },
     validations: {
-      name: {
-        required,
-        minLength: minLength(6)
+      form: {
+        username: {
+          required,
+          minLength: minLength(6)
+        },
+        email: {
+          required,
+          email
+        },
+        password: {
+          required,
+          minLength: minLength(8)
+        },
+        postalCode: {
+          required,
+          numeric,
+          minLength: minLength(5),
+          maxLength: maxLength(5)
+        },
+        country: {
+          required
+        },
+        conditions: {
+          required
+        },
+        legalAge: {
+          required
+        }
       },
-      email: {
-        required,
-        email
-      },
-      postalCode: {
-        required,
-        numeric,
-        minLength: minLength(5),
-        maxLength: maxLength(5)
-      },
-      password: {
-        required,
-        minLength: minLength(8)
-      },
-      validationGroup: ['name', 'email', 'postalCode', 'password']
+      validationGroup: [
+        'form.username', 'form.email', 'form.password',
+        'form.postalCode', 'form.country', 'form.conditions',
+        'form.legalAge'
+      ]
     },
     methods: {
       setCountry(value) {
@@ -180,17 +220,35 @@
           this.messageCountry = false;
         }
       },
-      submit() {
-        this.$v.$touch();
+      async postFormData(formData) {
+        try {
+          const register = await this.$axios.$post('/auth/signup', {
+            gender: formData.gender,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            postal_code: formData.postalCode,
+            country: formData.country,
+            newsletter: formData.newsletter
+          });
+          return register;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async submit() {
+        this.$v.form.$touch();
         this.loading = true;
-        if (!this.$v.$invalid) {
-          // do your submit logic here
-          this.submitStatus = 'PENDING';
-          setTimeout(() => {
+
+        if (!this.$v.form.$invalid) {
+          const userRegistered = await this.postFormData(this.form);
+          if (userRegistered) {
             this.loading = false;
             this.messageSubmit = 'Inscription avec succès';
             this.submitStatus = 'OK';
-          }, 2000);
+          } else {
+            this.messageSubmit = 'Inscription non effectuée';
+          }
         }
       }
     }

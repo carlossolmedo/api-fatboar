@@ -37,11 +37,27 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/dotenv'
   ],
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:4000'
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    baseURL: process.env.API_URL
+  },
+
+  // publicRuntimeConfig: {
+  //   axios: {
+  //     baseURL: 'https://api.nuxtjs.dev'
+  //   }
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
