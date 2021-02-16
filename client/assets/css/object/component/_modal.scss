@@ -116,10 +116,6 @@
   color: red;
 }
 
-.show {
-  display: block !important;
-}
-
 .third {
   &-connection-block {
     width: 100%;
@@ -145,4 +141,5 @@
   margin: 1rem;
   font-size: 1.125rem;
   font-weight: bold;
+  text-align: center;
 }

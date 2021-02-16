@@ -47,7 +47,30 @@ main {
   font-style: normal;
 }
 
-// home
+// Global
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.c-alert {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  border-radius: .25rem;
+  @include _padding(1);
+
+  &.c-alert--success {
+    background-color: $color-success;
+    color: $_color-white;
+  }
+}
+
+// Home
 
 .c-images-prize {
   text-align: center;

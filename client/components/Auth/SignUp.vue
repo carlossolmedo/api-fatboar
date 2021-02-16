@@ -7,10 +7,12 @@
         </dt>
         <dd>
           <label>
-            <input v-model="form.gender" type="radio" name="gender" value="M" autofocus="autofocus" class="c-form-control"> M.
+            <input v-model="form.gender" type="radio" name="gender" value="M" autofocus="autofocus"
+              class="c-form-control"> M.
           </label>
           <label>
-            <input v-model="form.gender" type="radio" name="gender" value="F" autofocus="autofocus" class="c-form-control"> Mme.
+            <input v-model="form.gender" type="radio" name="gender" value="F" autofocus="autofocus"
+              class="c-form-control"> Mme.
           </label>
         </dd>
       </dl>
@@ -21,7 +23,8 @@
         <dd>
           <input v-model.trim="$v.form.username.$model" type="text" name="username" id="username" autofocus="autofocus"
             class="c-form-control-input" :class="{'input-error': $v.form.username.$error}" autocomplete="off" required>
-          <small class="error" v-if="!$v.form.username.minLength">Votre nom doit contenir au moins {{$v.form.username.$params.minLength.min}}
+          <small class="error" v-if="!$v.form.username.minLength">Votre nom doit contenir au moins
+            {{$v.form.username.$params.minLength.min}}
             lettres.</small>
         </dd>
       </dl>
@@ -31,7 +34,7 @@
         </dt>
         <dd>
           <input v-model.trim="$v.form.email.$model" type="email" name="email" id="email" autofocus="autofocus"
-                class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
+            class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
           <small class="error" v-if="$v.form.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
@@ -43,7 +46,8 @@
             </dt>
             <dd>
               <input v-model.trim="$v.form.postalCode.$model" type="text" name="postal_code" id="postal_code"
-                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.postalCode.$error}" maxlength="5" required>
+                autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.postalCode.$error}"
+                maxlength="5" required>
               <small class="error" v-if="$v.form.postalCode.$error">Code postal invalide.</small>
             </dd>
           </dl>
@@ -55,8 +59,9 @@
             </dt>
             <dd>
               <div class="c-select">
-                <select @change="setCountry($event.target.value)" v-model="$v.form.country.$model" class="c-select__control"
-                :class="{'input-error': messageCountry}" id="country" name="country" required>
+                <select @change="setCountry($event.target.value)" v-model="$v.form.country.$model"
+                  class="c-select__control" :class="{'input-error': messageCountry}" id="country" name="country"
+                  required>
                   <option value="FR">France</option>
                   <option value="other">Autre</option>
                 </select>
@@ -74,8 +79,9 @@
           <label for="password">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.form.password.$error}" required>
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password"
+            autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.password.$error}"
+            required>
           <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
             {{$v.form.password.$params.minLength.min}} characteres minimum.</small>
         </dd>
@@ -83,7 +89,8 @@
       <dl class="required">
         <dt>
           <label for="cdg">
-            <input v-model="$v.form.conditions.$model" type="checkbox" autofocus="autofocus" id="cdg" class="c-form-control">
+            <input v-model="$v.form.conditions.$model" type="checkbox" autofocus="autofocus" id="cdg"
+              class="c-form-control">
             J'accepte les <NuxtLink to="/conditions">conditions générales</NuxtLink> de participation.
           </label>
         </dt>
@@ -91,7 +98,8 @@
       <dl class="required">
         <dt>
           <label for="legalAge">
-            <input v-model="$v.form.legalAge.$model" type="checkbox" autofocus="autofocus" id="legalAge" class="c-form-control">
+            <input v-model="$v.form.legalAge.$model" type="checkbox" autofocus="autofocus" id="legalAge"
+              class="c-form-control">
             Je certifie sur l'honneur avoir 18 ans ou plus.
           </label>
         </dt>
@@ -99,19 +107,23 @@
       <dl>
         <dt>
           <label for="newsletter">
-            <input v-model="form.newsletter" name="newsletter" type="checkbox" autofocus="autofocus" id="newsletter" class="c-form-control">
+            <input v-model="form.newsletter" name="newsletter" type="checkbox" autofocus="autofocus" id="newsletter"
+              class="c-form-control">
             Je souhaite m'inscrire à la newsletter.
           </label>
         </dt>
       </dl>
       <div class="btn-block">
-        <button type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
-        :class="{'c-btn--primary': !$v.validationGroup.$invalid, 'c-btn--success': submitStatus === 'OK'}">
+        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
+          :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
           <span v-if="!loading">{{messageSubmit}}</span>
           <Loader :loading="loading" />
         </button>
+        <div v-if="submitStatus === 'OK'" class="c-alert c-alert--success" role="alert">
+          <div v-if="!loading">{{messageSubmit}}</div>
+          <div>Connectez-vous !</div>
+        </div>
       </div>
-      <div class="message--success" v-if="submitStatus === 'OK'">Connectez-vous !</div>
     </form>
     <div class="third-connection-block">
       <h5><span class="hyphen">Ou</span></h5>
@@ -132,7 +144,13 @@
 </template>
 
 <script>
-  import {required, minLength, maxLength, numeric, email} from 'vuelidate/lib/validators';
+  import {
+    required,
+    minLength,
+    maxLength,
+    numeric,
+    email
+  } from 'vuelidate/lib/validators';
   import Loader from '../Loader';
 
   export default {
@@ -204,25 +222,33 @@
       },
       async postFormData(formData) {
         try {
-          const register = await this.$axios.$post('/auth/signup', formData)
+          const register = await this.$axios.$post('/auth/signup', {
+            gender: formData.gender,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            postal_code: formData.postalCode,
+            country: formData.country,
+            newsletter: formData.newsletter
+          });
           return register;
         } catch (error) {
           console.error(error);
         }
       },
-      submit() {
+      async submit() {
         this.$v.form.$touch();
         this.loading = true;
 
         if (!this.$v.form.$invalid) {
-          console.log('VALUES', this.form);
-          let formSent = this.postFormData(this.form);
-          this.submitStatus = 'PENDING';
-          setTimeout(() => {
+          const userRegistered = await this.postFormData(this.form);
+          if (userRegistered) {
             this.loading = false;
             this.messageSubmit = 'Inscription avec succès';
             this.submitStatus = 'OK';
-          }, 2000);
+          } else {
+            this.messageSubmit = 'Inscription non effectuée';
+          }
         }
       }
     }
