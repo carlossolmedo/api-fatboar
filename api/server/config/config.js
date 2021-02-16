@@ -13,6 +13,9 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_CLUSTER = process.env.DB_CLUSTER;
 const DB_NAME = process.env.DB_NAME;
 
+// Client
+const URL_CLIENT = process.env.URL_CLIENT;
+
 // API
 const PORT = process.env.PORT;
 const API_VERSION = process.env.API_VERSION || 'v1';
@@ -47,10 +50,11 @@ module.exports = {
         name: DB_NAME,
     },
     urlAPI: URL_API,
+    urlClient: URL_CLIENT,
     routeWithoutAuth: {
         home: routeWithoutAuth.home,
         signup: routeWithoutAuth.signup,
         login: routeWithoutAuth.login,
         test: routeWithoutAuth.test,
-    },
+    }
 };

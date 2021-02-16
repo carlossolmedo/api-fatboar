@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import YAML from 'yamljs';
 import swaggerUi from 'swagger-ui-express';
-import { urlAPI, nodeEnv } from './config/config';
+import { nodeEnv, urlAPI, urlClient } from './config/config';
 import DB from './helpers/db.helper';
 import authMiddleware from './helpers/auth.helper';
 import Ticket from './helpers/ticket.helper';
@@ -37,6 +37,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, '../public')));
+
+// CORS
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", urlClient);
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 // API Documentation
 app.use(

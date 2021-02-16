@@ -14,9 +14,10 @@ exports.signup = async (req, res) => {
             email: req.body.email,
             postal_code: req.body.postal_code,
             country: req.body.country,
+            newsletter: req.body.newsletter,
             role: req.body.role,
             last_connection: '',
-            date_updated: '',
+            date_updated: ''
         });
 
         const result = await user.save();
