@@ -16,15 +16,16 @@
           <label for="password">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password" autofocus="autofocus"
-            class="c-form-control-input" :class="{'input-error': $v.form.password.$error}" required>
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password"
+            autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.password.$error}"
+            required>
           <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
             {{$v.form.password.$params.minLength.min}} characteres minimum.</small>
         </dd>
       </dl>
       <div class="btn-block">
-        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
-          :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
+        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid"
+          class="c-btn c-btn--block" :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
           <span v-if="!loading">{{messageSubmit}}</span>
           <Loader :loading="loading" />
         </button>
@@ -52,7 +53,11 @@
 </template>
 
 <script>
-  import { required, minLength, email } from 'vuelidate/lib/validators';
+  import {
+    required,
+    minLength,
+    email
+  } from 'vuelidate/lib/validators';
   import Loader from '../Loader';
 
   export default {
@@ -83,9 +88,6 @@
       validationGroup: ['form.email', 'form.password']
     },
     methods: {
-      login() {
-        this.$store.commit('userLogged');
-      },
       async sendLoginData(formData) {
         try {
           const logged = await this.$axios.$post('/auth/login', {
@@ -101,24 +103,19 @@
         this.$v.$touch();
         this.loading = true;
         const userLogged = await this.sendLoginData(this.form);
-          if (userLogged) {
-            this.login();
+        if (userLogged) {
+          this.$store.commit('auth/setUser', this.form.username)
+          this.$store.commit('auth/setPass', this.form.password)
+          setTimeout(() => {
             this.loading = false;
-            this.messageSubmit = 'Bienvenue !';
             this.submitStatus = 'OK';
-          } else {
-            this.messageSubmit = 'Accès non autorisé';
-          }
-
-        // if (!this.$v.$invalid) {
-        //   this.submitStatus = 'PENDING';
-        //   setTimeout(() => {
-        //     this.loading = false;
-        //     this.messageSubmit = 'Bienvenue !';
-        //     this.submitStatus = 'OK';
-        //   }, 2000);
-        // }
+            this.$router.push({name: 'game'});
+          }, 1000);
+        } else {
+          this.messageSubmit = 'Accès non autorisé';
+        }
       }
     }
   }
+
 </script>
