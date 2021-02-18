@@ -60,6 +60,7 @@ exports.login = async (req, res) => {
 
         res.status(200).json({
             accessToken: token,
+            userId: userFound._id,
             message: 'Connection with success',
         });
     } catch (error) {
