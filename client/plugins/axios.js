@@ -7,7 +7,7 @@ export default function ({ $axios, redirect }) {
     const code = parseInt(error.response && error.response.status)
     console.log('CODE: ', code);
     if (code === 401) {
-      redirect({name: 'privacy'})
+      redirect({name: 'index'})
     }
   });
 }
