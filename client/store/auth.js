@@ -1,13 +1,13 @@
 export const state = () => ({
-  user: null,
-  pass: null
+  user: null
 });
+
+export const getters = {
+  isAuthenticated: state => !!state.user
+};
 
 export const mutations = {
   setUser(state, user) {
-    state.user = user;
-  },
-  setPass(state, user) {
     state.user = user;
   }
 };

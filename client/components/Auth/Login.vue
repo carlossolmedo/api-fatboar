@@ -94,6 +94,9 @@
             email: formData.email,
             password: formData.password
           });
+          if (logged) {
+            localStorage.setItem('api_logged', JSON.stringify(logged));
+          }
           return logged;
         } catch (error) {
           console.error(error);
@@ -104,8 +107,7 @@
         this.loading = true;
         const userLogged = await this.sendLoginData(this.form);
         if (userLogged) {
-          this.$store.commit('auth/setUser', this.form.username)
-          this.$store.commit('auth/setPass', this.form.password)
+          this.$store.commit('auth/setUser', this.form.email);
           setTimeout(() => {
             this.loading = false;
             this.submitStatus = 'OK';

@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="logged" class="u-pull-right" role="navigation">
+  <nav class="u-pull-right" role="navigation">
     <ul class="c-navbar c-navbar--right">
       <li class="c-navbar__item"><a class="navbar__link" href="#blog">Blog</a></li>
       <li class="c-navbar__item"><a class="navbar__link" href="#menu">Menu</a></li>
@@ -10,7 +10,7 @@
             <a href="#">Settings</a>
           </li>
           <li class="c-menu__subitem" aria-haspopup="true">
-            <a href="#">Logout</a>
+            <button @click="logout">Logout</button>
           </li>
         </ul>
       </li>
@@ -19,13 +19,15 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      logged: { type: Boolean }
+export default {
+  methods: {
+    logout() {
+      localStorage.removeItem('api_logged');
     }
   }
-
+}
 </script>
+
 
 <style lang="scss" scoped>
   .c-navbar__item:hover > .c-menu__submenu {

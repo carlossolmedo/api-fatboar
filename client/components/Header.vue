@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="c-row__col c-row__col--auto u-hidden-sm u-hidden-md">
-          <Navbar :logged="logged" />
+          <Navbar v-if="isLogged" />
         </div>
       </div>
     </div>
@@ -24,9 +24,9 @@
     components: {
       Navbar
     },
-    data() {
-      return {
-        logged: false
+    computed: {
+      isLogged() {
+        return this.$store.getters['auth/isAuthenticated'];
       }
     }
   }
