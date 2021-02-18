@@ -6,6 +6,7 @@ const router = Router();
 
 router.post(authRoute.signup, authController.signup);
 router.post(authRoute.login, authController.login);
+router.post(authRoute.logout, authController.logout);
 router.post(authRoute.google, authController.google);
 router.post(authRoute.facebook, authController.facebook);
 

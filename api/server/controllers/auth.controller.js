@@ -68,6 +68,10 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.logout = async (req, res) => {
+    res.json({ status: 'OK' });
+};
+
 exports.google = async (req, res) => {
     res.send('Login by google');
 };

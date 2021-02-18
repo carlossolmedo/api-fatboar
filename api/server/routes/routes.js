@@ -14,6 +14,7 @@ export const userRoute = {
 export const authRoute = {
     signup: `${urlAPI}/auth/signup`,
     login: `${urlAPI}/auth/login`,
+    logout: `${urlAPI}/auth/logout`,
     google: `${urlAPI}/auth/google`,
     facebook: `${urlAPI}/auth/facebook`,
 };
