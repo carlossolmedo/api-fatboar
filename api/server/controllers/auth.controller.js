@@ -51,18 +51,14 @@ exports.login = async (req, res) => {
         }
 
         // if everything is valid
-        const token = jwt.sign({ userId: userFound._id }, tokenSecret, {
+        const token = jwt.sign({ userId: userFound._id, username: userFound.username }, tokenSecret, {
             expiresIn: 86400,
         }); // expire in 24 hours
 
         userFound.last_connection = Date.now();
         userFound.save();
 
-        res.status(200).json({
-            accessToken: token,
-            userId: userFound._id,
-            message: 'Connection with success',
-        });
+        res.status(200).json({ accessToken: token });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

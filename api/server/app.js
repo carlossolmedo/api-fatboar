@@ -21,7 +21,7 @@ const dbAPI = new DB();
 const tickets = new Ticket();
 const corsOptions = {
     origin: `${urlClient}`,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'],
+    methods: '*',
     credentials: true,
     maxAge: 3600,
     optionsSuccessStatus: 204
