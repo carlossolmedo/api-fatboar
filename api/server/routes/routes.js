@@ -4,6 +4,7 @@ import { urlAPI } from '../config/config';
 /** All routes to users management */
 export const userRoute = {
     getUsers: `${urlAPI}/users`,
+    getUser: `${urlAPI}/user`,
     getUserById: `${urlAPI}/users/:id`,
     addUser: `${urlAPI}/users`,
     updateUser: `${urlAPI}/users/:id`,

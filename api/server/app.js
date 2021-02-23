@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { join } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -18,6 +19,13 @@ const app = express();
 const swaggerOptions = YAML.load(`${__dirname}/config/swagger/swaggerDoc.yml`);
 const dbAPI = new DB();
 const tickets = new Ticket();
+const corsOptions = {
+    origin: `${urlClient}`,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'],
+    credentials: true,
+    maxAge: 3600,
+    optionsSuccessStatus: 204
+};
 
 // Connection Database by mongoose
 if (nodeEnv !== 'test') {
@@ -25,7 +33,7 @@ if (nodeEnv !== 'test') {
 }
 
 // console.log('RANDOM VALUE', );
-tickets.getRandomTicket();
+// tickets.getRandomTicket();
 
 // if (nodeEnv === 'test') {
 //     dbAPI.connection();
@@ -39,14 +47,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, '../public')));
 
 // CORS
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", urlClient);
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
+app.use(cors(corsOptions));
 
 // API Documentation
 app.use(
