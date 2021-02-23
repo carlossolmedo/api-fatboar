@@ -88,32 +88,20 @@
       validationGroup: ['form.email', 'form.password']
     },
     methods: {
-      async sendLoginData(formData) {
-        try {
-          const logged = await this.$axios.$post('/auth/login', {
-            email: formData.email,
-            password: formData.password
-          });
-          if (logged) {
-            localStorage.setItem('api_logged', JSON.stringify(logged));
-          }
-          return logged;
-        } catch (error) {
-          console.error(error);
-        }
-      },
       async submit() {
-        this.$v.$touch();
-        this.loading = true;
-        const userLogged = await this.sendLoginData(this.form);
-        if (userLogged) {
-          this.$store.commit('auth/setUser', this.form.email);
-          setTimeout(() => {
-            this.loading = false;
-            this.submitStatus = 'OK';
-            this.$router.push({name: 'game'});
-          }, 1000);
-        } else {
+        try {
+          this.$v.$touch();
+          this.loading = true;
+          await this.$auth.loginWith('local', { data: this.form });
+          if (this.$auth.loggedIn) {
+            this.$store.commit('user/setUser', this.form.email);
+            setTimeout(() => {
+              this.loading = false;
+              this.submitStatus = 'OK';
+              this.$router.push({name: 'game'});
+            }, 1000);
+          }
+        } catch (error) {
           this.messageSubmit = 'Accès non autorisé';
         }
       }

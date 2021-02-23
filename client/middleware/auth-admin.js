@@ -1,4 +1,5 @@
 export default async function ({ $auth, redirect, store }) {
+  // const isAuthenticated = store.state.auth.loggedIn;
   const isAuthenticated = $auth.$state.loggedIn;
   let user = $auth.user;
 
@@ -13,12 +14,3 @@ export default async function ({ $auth, redirect, store }) {
   //   redirect('/')
   // }
 }
-
-
-// export default function ({ store, redirect }) {
-//   const isAuthenticated = store.state.auth.user ? true : false;
-//   if (!isAuthenticated) {
-//     redirect({name: 'index'});
-//   }
-//   // route admin : admin-connection
-// }

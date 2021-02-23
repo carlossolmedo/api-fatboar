@@ -34,7 +34,7 @@ export default {
 
   // Global
   router: {
-    middleware: ['class']
+    middleware: ['class', 'auth']
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -48,11 +48,33 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   axios: {
     baseURL: process.env.API_URL
+  },
+
+  auth: {
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: false
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'accessToken',
+          type: 'JWT'
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post' },
+          logout: { url: '/auth/logout', method: 'delete' },
+          user: { url: '/user', method: 'get'}
+        }
+      }
+    }
   },
 
   // publicRuntimeConfig: {

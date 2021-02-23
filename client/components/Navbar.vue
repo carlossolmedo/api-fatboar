@@ -4,13 +4,13 @@
       <li class="c-navbar__item"><a class="navbar__link" href="#blog">Blog</a></li>
       <li class="c-navbar__item"><a class="navbar__link" href="#menu">Menu</a></li>
       <li class="c-navbar__item">
-        <a href="#user" class="navbar__link">User <span class="c-ic-angle-down" aria-hidden="true"></span></a>
+        <a href="#user" class="navbar__link">{{$auth.user.username}} <span class="c-ic-angle-down" aria-hidden="true"></span></a>
         <ul class="c-menu__submenu" aria-hidden="true">
           <li class="c-menu__subitem" aria-haspopup="true">
             <a href="#">Settings</a>
           </li>
           <li class="c-menu__subitem" aria-haspopup="true">
-            <button @click="logout">Logout</button>
+            <button @click="$auth.logout()">Logout</button>
           </li>
         </ul>
       </li>
