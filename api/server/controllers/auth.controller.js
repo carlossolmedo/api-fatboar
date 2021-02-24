@@ -51,9 +51,11 @@ exports.login = async (req, res) => {
         }
 
         // if everything is valid
-        const token = jwt.sign({ userId: userFound._id, username: userFound.username }, tokenSecret, {
-            expiresIn: 86400,
-        }); // expire in 24 hours
+        const token = jwt.sign({
+            userId: userFound._id,
+            username: userFound.username,
+            role: userFound.role
+        }, tokenSecret, { expiresIn: 86400 }); // expire in 24 hours
 
         userFound.last_connection = Date.now();
         userFound.save();
