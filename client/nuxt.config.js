@@ -23,6 +23,12 @@ export default {
     '~/assets/css/basis'
   ],
 
+  loading: {
+    color: '#f7bc06',
+    failedColor: 'red',
+    height: '2px'
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src: '~/plugins/vuelidate.js', mode: 'client'},
@@ -60,6 +66,7 @@ export default {
     redirect: {
       login: '/',
       logout: '/',
+      home: '/',
       callback: false
     },
     strategies: {

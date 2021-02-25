@@ -14,8 +14,8 @@
           <div class="c-message-prize">
             <h1>Gangez des prix !</h1>
             <p>
-              Testez votre change avec votre ticket FatBoar<br />
-              et gangez de millier de prix&nbsp;!
+              Testez votre chance avec votre ticket FatBoar<br />
+              et gagnez des milliers de prix&nbsp;!
             </p>
             <div class="c-btn-play">
               <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">

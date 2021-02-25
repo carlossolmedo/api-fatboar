@@ -30,10 +30,10 @@
       </dl>
       <dl class="required">
         <dt>
-          <label for="email">Adresse mail</label>
+          <label for="emailSignUp">Adresse mail</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="emailSignUp" autofocus="autofocus"
             class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
           <small class="error" v-if="$v.form.email.$error">Adresse mail invalide.</small>
         </dd>
@@ -76,10 +76,10 @@
       </div>
       <dl class="required">
         <dt>
-          <label for="password">Password</label>
+          <label for="passwordSignUp">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password"
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="passwordSignUp"
             autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.password.$error}"
             required>
           <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
@@ -107,22 +107,19 @@
       <dl>
         <dt>
           <label for="newsletter">
-            <input v-model="form.newsletter" name="newsletter" type="checkbox" autofocus="autofocus" id="newsletter"
+            <input v-model="form.newsletter" name="newsletter" type="checkbox" id="newsletter"
               class="c-form-control">
             Je souhaite m'inscrire à la newsletter.
           </label>
         </dt>
       </dl>
       <div class="btn-block">
-        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
+        <button id="submitSignUp" v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn c-btn--block"
           :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
-          <span v-if="!loading">{{messageSubmit}}</span>
+          <span v-if="!loading">Je m'inscris</span>
           <Loader :loading="loading" />
         </button>
-        <div v-if="submitStatus === 'OK'" class="c-alert c-alert--success" role="alert">
-          <div v-if="!loading">{{messageSubmit}}</div>
-          <div>Connectez-vous !</div>
-        </div>
+        <div v-if="submitStatus === 'ERROR'" class="error">{{messageSubmit}}</div>
       </div>
     </form>
     <div class="third-connection-block">
@@ -220,35 +217,37 @@
           this.messageCountry = false;
         }
       },
-      async postFormData(formData) {
-        try {
-          const register = await this.$axios.$post('/auth/signup', {
-            gender: formData.gender,
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-            postal_code: formData.postalCode,
-            country: formData.country,
-            newsletter: formData.newsletter
-          });
-          return register;
-        } catch (error) {
-          console.error(error);
-        }
-      },
       async submit() {
         this.$v.form.$touch();
         this.loading = true;
-
         if (!this.$v.form.$invalid) {
-          const userRegistered = await this.postFormData(this.form);
-          if (userRegistered) {
+          await this.$axios.$post('/auth/signup', {
+            gender: this.form.gender,
+            username: this.form.username,
+            email: this.form.email,
+            password: this.form.password,
+            postal_code: this.form.postalCode,
+            country: this.form.country,
+            newsletter: this.form.newsletter === null ? false : true
+          }).then(() => {
+            this.$auth.loginWith('local', {
+              data: {
+                email:  this.form.email,
+                password: this.form.password
+              }
+            }).then(() => {
+              setTimeout(() => {
+                this.loading = false;
+                this.submitStatus = 'OK';
+                this.$router.push({name: 'game'});
+              }, 1000);
+            });
+          }).catch(() => {
             this.loading = false;
-            this.messageSubmit = 'Inscription avec succès';
-            this.submitStatus = 'OK';
-          } else {
-            this.messageSubmit = 'Inscription non effectuée';
-          }
+            this.submitStatus = 'ERROR';
+            document.getElementById('submitSignUp').setAttribute("disabled", true);
+            this.messageSubmit = "Compte déjà existant, veuillez changer d'adresse mail";
+          });
         }
       }
     }

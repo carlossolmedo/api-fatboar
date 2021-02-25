@@ -51,6 +51,13 @@
   </div>
 </template>
 
+<script>
+  export default {
+    middleware: ['auth'],
+    auth: false
+  }
+</script>
+
 <style scoped>
   .text-conditions {
     line-height: 2rem;

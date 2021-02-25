@@ -3,20 +3,20 @@
     <form @submit.prevent="submit" class="connection">
       <dl>
         <dt>
-          <label for="email">Adresse mail</label>
+          <label for="emailLogin">Adresse mail</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="email" autofocus="autofocus"
+          <input v-model.trim="$v.form.email.$model" type="email" name="email" id="emailLogin" autofocus="autofocus"
             class="c-form-control-input" :class="{'input-error': $v.form.email.$error}" required>
           <small class="error" v-if="$v.form.email.$error">Adresse mail invalide.</small>
         </dd>
       </dl>
       <dl>
         <dt>
-          <label for="password">Password</label>
+          <label for="passwordLogin">Password</label>
         </dt>
         <dd>
-          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="password"
+          <input v-model.trim="$v.form.password.$model" type="password" name="password" id="passwordLogin"
             autofocus="autofocus" class="c-form-control-input" :class="{'input-error': $v.form.password.$error}"
             required>
           <small class="error" v-if="!$v.form.password.minLength">Votre mot de passe doit contenir
@@ -24,14 +24,12 @@
         </dd>
       </dl>
       <div class="btn-block">
-        <button v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid"
+        <button id="submitLogin" v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid"
           class="c-btn c-btn--block" :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
-          <span v-if="!loading">{{messageSubmit}}</span>
+          <span v-if="!loading">Se connecter</span>
           <Loader :loading="loading" />
         </button>
-        <div v-if="submitStatus === 'OK'" class="c-alert c-alert--success" role="alert">
-          <div v-if="!loading">{{messageSubmit}}</div>
-        </div>
+        <div v-if="submitStatus === 'ERROR'" class="error">{{messageSubmit}}</div>
       </div>
     </form>
     <div class="third-connection-block">
@@ -78,7 +76,8 @@
     validations: {
       form: {
         email: {
-          email
+          email,
+          required
         },
         password: {
           required,
@@ -89,20 +88,23 @@
     },
     methods: {
       async submit() {
-        try {
-          this.$v.$touch();
-          this.loading = true;
-          await this.$auth.loginWith('local', { data: this.form });
-          if (this.$auth.loggedIn) {
+        this.$v.form.$touch();
+        this.loading = true;
+        if (!this.$v.form.$invalid) {
+          await this.$auth.loginWith('local', { data: this.form })
+          .then(() => {
             this.$store.commit('user/setUser', this.form.email);
             setTimeout(() => {
               this.loading = false;
               this.submitStatus = 'OK';
               this.$router.push({name: 'game'});
             }, 1000);
-          }
-        } catch (error) {
-          this.messageSubmit = 'Accès non autorisé';
+          }).catch(() => {
+            this.loading = false;
+            document.getElementById('submitLogin').setAttribute("disabled", true);
+            this.submitStatus = 'ERROR';
+            this.messageSubmit = 'Vérifiez vos identifiants';
+          });
         }
       }
     }

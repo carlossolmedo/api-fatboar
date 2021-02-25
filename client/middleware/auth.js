@@ -1,7 +1,23 @@
 export default async function ({ $auth, redirect, store }) {
   const isAuthenticated = $auth.$state.loggedIn;
-  let user = $auth.user;
+  const userRole = $auth.user.role;
 
+  if (!isAuthenticated) {
+    redirect({name: 'index'});
+  }
+
+  switch (userRole) {
+    case 'admin':
+      console.log('ADMIN USER logged');
+      break;
+    case 'waiter':
+      console.log('WAITER USER logged');
+      break;
+    default:
+      console.log('CUSTOMER USER logged');
+      break;
+  }
+  // route admin : admin-connection
   // console.log('AUTH ', $auth);
   console.log('isAuthenticated ', isAuthenticated);
   console.log('USER ', user);
@@ -20,5 +36,5 @@ export default async function ({ $auth, redirect, store }) {
 //   if (!isAuthenticated) {
 //     redirect({name: 'index'});
 //   }
-//   // route admin : admin-connection
+//
 // }
