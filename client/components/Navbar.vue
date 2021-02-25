@@ -4,7 +4,7 @@
       <li class="c-navbar__item"><a class="navbar__link" href="#blog">Blog</a></li>
       <li class="c-navbar__item"><a class="navbar__link" href="#menu">Menu</a></li>
       <li class="c-navbar__item">
-        <a href="#user" class="navbar__link"><span>{{$auth.user.username}}</span> <span class="c-ic-angle-down" aria-hidden="true"></span></a>
+        <a href="#user" class="navbar__link"><span v-if="splitName">{{username}}</span> <span class="c-ic-angle-down" aria-hidden="true"></span></a>
         <ul class="c-menu__submenu" aria-hidden="true">
           <li class="c-menu__subitem" aria-haspopup="true">
             <a href="#">Settings</a>
@@ -20,10 +20,19 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      username: ''
+    }
+  },
+  computed: {
+    splitName() {
+      let name = this.$auth.user.username.split(' ');
+      return this.username = name[0];
+    }
+  }
 }
 </script>
-
 
 <style lang="scss" scoped>
   .c-navbar__item:hover > .c-menu__submenu {
