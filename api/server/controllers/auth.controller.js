@@ -19,6 +19,11 @@ exports.signup = async (req, res) => {
             last_connection: '',
             date_updated: ''
         });
+        const isUserExist = await User.findOne({ email: user.email }).exec();
+
+        if (isUserExist) {
+            return res.status(400).json({ message: `User ${user.email} has already been created` });
+        }
 
         const result = await user.save();
 
@@ -51,20 +56,23 @@ exports.login = async (req, res) => {
         }
 
         // if everything is valid
-        const token = jwt.sign({ userId: userFound._id }, tokenSecret, {
-            expiresIn: 86400,
-        }); // expire in 24 hours
+        const token = jwt.sign({
+            userId: userFound._id,
+            username: userFound.username,
+            role: userFound.role
+        }, tokenSecret, { expiresIn: 86400 }); // expire in 24 hours
 
         userFound.last_connection = Date.now();
         userFound.save();
 
-        res.status(200).json({
-            accessToken: token,
-            message: 'Connection with success',
-        });
+        res.status(200).json({ accessToken: token });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
+};
+
+exports.logout = async (req, res) => {
+    res.json({ status: 'OK' });
 };
 
 exports.google = async (req, res) => {

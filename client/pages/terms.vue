@@ -86,6 +86,13 @@
   </div>
 </template>
 
+<script>
+  export default {
+    middleware: ['auth'],
+    auth: false
+  }
+</script>
+
 <style lang="scss" scoped>
   h1, h2 {
     color: #7952b3;

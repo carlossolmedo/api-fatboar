@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer-style" :class="{'index': $store.state.bodyClass}">
+  <footer class="footer-style" :class="$store.state.bodyClass">
     <div class="c-container">
       <ul class="c-navbar c-navbar--center">
         <li class="c-navbar__item">
@@ -12,7 +12,7 @@
           <NuxtLink to="/privacy">Politique de Confidentialité</NuxtLink>
         </li>
       </ul>
-      <div class="text__copyright" :class="{'index': $store.state.bodyClass}">&copy; Copyright Fatboar 2021</div>
+      <div class="text__copyright" :class="$store.state.bodyClass">&copy; Copyright Fatboar 2021</div>
     </div>
   </footer>
 </template>
@@ -31,7 +31,7 @@
         }
       }
 
-      &.index {
+      &.index, &.game {
         & a {
           transition: background-color 0.1s ease-out,
           color 0.1s ease-out;
@@ -51,7 +51,7 @@
         text-align: center;
         color: #63707c;
 
-        &.index {
+        &.index, &.game {
           color: #f7bc06;
         }
       }

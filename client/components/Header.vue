@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="c-row__col c-row__col--auto u-hidden-sm u-hidden-md">
-          <Navbar :logged="logged" />
+          <Navbar v-if="$auth.loggedIn" />
         </div>
       </div>
     </div>
@@ -19,15 +19,9 @@
 
 <script>
   import Navbar from './Navbar';
-
   export default {
     components: {
       Navbar
-    },
-    data() {
-      return {
-        logged: false
-      }
     }
   }
 </script>

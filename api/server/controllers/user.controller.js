@@ -41,6 +41,11 @@ exports.getUserByEmail = async (req, res) => {
     }
 };
 
+// Send user infos was logged by token
+exports.getUser = async (req, res) => {
+    res.json({ user: req.user })
+};
+
 // Add a new user
 exports.addUser = async (req, res) => {
     try {
