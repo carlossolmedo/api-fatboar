@@ -56,6 +56,19 @@ main {
   display: none;
 }
 
+.#{$_prefix}c-ic-angle-down-white {
+  &::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+  }
+}
+
 .c-alert {
   display: block;
   text-align: center;
