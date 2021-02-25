@@ -1,26 +1,21 @@
-export default async function ({ $auth, redirect, store }) {
+export default function ({ $auth, redirect, route }) {
   const isAuthenticated = $auth.$state.loggedIn;
   const userRole = $auth.user.role;
-
+  // console.log('isAuthenticated ', isAuthenticated);
+  // console.log('userRole', userRole);
   if (!isAuthenticated) {
     redirect({name: 'index'});
   }
 
-  switch (userRole) {
-    case 'admin':
-      console.log('ADMIN USER logged');
-      break;
-    case 'waiter':
-      console.log('WAITER USER logged');
-      break;
-    default:
-      console.log('CUSTOMER USER logged');
-      break;
+  if (userRole === 'customer') {
+    if (route.name === 'index') {
+      redirect({name: 'game'})
+    }
   }
-  // route admin : admin-connection
-  // console.log('AUTH ', $auth);
-  console.log('isAuthenticated ', isAuthenticated);
-  console.log('USER ', user);
+}
+
+// route admin : admin-connection
+//   const isAuthenticated = store.state.auth.user ? true : false;
 
   // if (user && user.admin) {
   //   // let the user in
@@ -28,13 +23,3 @@ export default async function ({ $auth, redirect, store }) {
   //   store.dispatch('snackbar/setSnackbar', { color: 'error', text: "You must be an admin to view that page." })
   //   redirect('/')
   // }
-}
-
-
-// export default function ({ store, redirect }) {
-//   const isAuthenticated = store.state.auth.user ? true : false;
-//   if (!isAuthenticated) {
-//     redirect({name: 'index'});
-//   }
-//
-// }
