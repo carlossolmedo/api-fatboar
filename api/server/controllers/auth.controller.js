@@ -19,6 +19,11 @@ exports.signup = async (req, res) => {
             last_connection: '',
             date_updated: ''
         });
+        const isUserExist = await User.findOne({ email: user.email }).exec();
+
+        if (isUserExist) {
+            return res.status(400).json({ message: `User ${user.email} has already been created` });
+        }
 
         const result = await user.save();
 
