@@ -119,7 +119,7 @@
           <span v-if="!loading">Je m'inscris</span>
           <Loader :loading="loading" />
         </button>
-        <div v-if="submitStatus === 'ERROR'" class="error">{{messageSubmit}}</div>
+        <!-- <div v-if="submitStatus === 'ERROR'" class="error">{{messageSubmit}}</div> -->
       </div>
     </form>
     <div class="third-connection-block">
@@ -241,12 +241,13 @@
                 this.submitStatus = 'OK';
                 this.$router.push({name: 'game'});
               }, 1000);
+              this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(1500)
             });
           }).catch(() => {
             this.loading = false;
             this.submitStatus = 'ERROR';
             document.getElementById('submitSignUp').setAttribute("disabled", true);
-            this.messageSubmit = "Compte déjà existant, veuillez changer d'adresse mail";
+            this.$toast.error("Compte déjà existant, veuillez changer d'adresse mail").goAway(3000);
           });
         }
       }

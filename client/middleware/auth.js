@@ -2,15 +2,9 @@ export default function ({ $auth, redirect, route }) {
   const isAuthenticated = $auth.$state.loggedIn;
   const userRole = $auth.user.role;
   // console.log('isAuthenticated ', isAuthenticated);
-  // console.log('userRole', userRole);
+  console.log('userRole', userRole);
   if (!isAuthenticated) {
     redirect({name: 'index'});
-  }
-
-  if (userRole === 'customer') {
-    if (route.name === 'index') {
-      redirect({name: 'game'})
-    }
   }
 }
 
