@@ -40,7 +40,7 @@ export default {
 
   // Global
   router: {
-    middleware: ['class']
+    middleware: ['class', 'auth']
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -68,7 +68,6 @@ export default {
   },
 
   auth: {
-    // plugins: ['~/plugins/auth.js'],
     redirect: {
       login: '/',
       logout: '/',

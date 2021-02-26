@@ -5,7 +5,7 @@
       <li v-if="$auth.user.role === 'customer'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/account/prizes">Gains</NuxtLink></li>
       <li v-if="$auth.user.role === 'admin'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/admin">Admin</NuxtLink></li>
       <li class="c-navbar__item">
-        <a class="navbar__link"><span v-if="splitName">{{username}}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span></a>
+        <a class="navbar__link"><span v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span></a>
         <ul class="c-menu__submenu" aria-hidden="true">
           <li class="c-menu__subitem" aria-haspopup="true">
             <NuxtLink to="/account/settings">Mon compte</NuxtLink>
@@ -20,16 +20,19 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       username: ''
     }
   },
-  computed: {
-    splitName() {
-      let name = this.$auth.user.username.split(' ');
-      return this.username = name[0];
+  methods: {
+    getName(username) {
+      if (username) {
+        let name = username.split(' ');
+        return this.username = name[0];
+      }
     }
   }
 }
