@@ -1,11 +1,11 @@
 <template>
   <nav class="u-pull-right" role="navigation">
-    <ul class="c-navbar c-navbar--right">
-      <li v-if="$auth.user.role === 'customer'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/game">Jouer</NuxtLink></li>
+    <ul v-if="$auth.user.role !== 'waiter'" class="c-navbar c-navbar--right">
+      <li class="c-navbar__item"><NuxtLink class="navbar__link" to="/game">Jouer</NuxtLink></li>
       <li v-if="$auth.user.role === 'customer'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/account/prizes">Gains</NuxtLink></li>
-      <li v-if="$auth.user.role === 'admin'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/admin">Admin</NuxtLink></li>
+      <li v-if="$auth.user.role === 'admin'" class="c-navbar__item"><NuxtLink class="navbar__link" to="/admin/dashboard">Dashboard</NuxtLink></li>
       <li class="c-navbar__item">
-        <a class="navbar__link"><span v-if="splitName">{{username}}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span></a>
+        <a class="navbar__link"><span v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span></a>
         <ul class="c-menu__submenu" aria-hidden="true">
           <li class="c-menu__subitem" aria-haspopup="true">
             <NuxtLink to="/account/settings">Mon compte</NuxtLink>
@@ -16,20 +16,28 @@
         </ul>
       </li>
     </ul>
+    <ul v-if="$auth.user.role === 'waiter'" class="c-navbar c-navbar--right">
+      <li class="c-navbar__item">
+        <a @click="$auth.logout()" style="cursor: pointer;">Déconnexion</a>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       username: ''
     }
   },
-  computed: {
-    splitName() {
-      let name = this.$auth.user.username.split(' ');
-      return this.username = name[0];
+  methods: {
+    getName(username) {
+      if (username) {
+        let name = username.split(' ');
+        return this.username = name[0];
+      }
     }
   }
 }

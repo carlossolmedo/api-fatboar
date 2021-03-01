@@ -32,7 +32,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuelidate.js', mode: 'client' },
-    { src: '~/plugins/axios' }
+    // '~/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,8 +55,13 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/toast'
   ],
+
+  toast: {
+    position: 'bottom-center'
+  },
 
   axios: {
     baseURL: process.env.API_URL
@@ -66,7 +71,7 @@ export default {
     redirect: {
       login: '/',
       logout: '/',
-      home: '/',
+      home: '/game',
       callback: false
     },
     strategies: {
@@ -83,12 +88,6 @@ export default {
       }
     }
   },
-
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     baseURL: 'https://api.nuxtjs.dev'
-  //   }
-  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

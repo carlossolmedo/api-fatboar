@@ -1,16 +1,17 @@
 <template>
   <div class="c-container">
     <div class="c-row">
-      <client-only>
-        <h1 class="u-text-center">Connection</h1>
-      </client-only>
+      <h1>Dashboard</h1>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  middleware: ['auth'],
-  auth: false
+  middleware: ['auth-admin']
 }
 </script>
+
+<style>
+
+</style>
