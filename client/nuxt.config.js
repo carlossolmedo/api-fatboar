@@ -60,7 +60,7 @@ export default {
   ],
 
   toast: {
-    position: 'bottom-center'
+    position: 'top-right'
   },
 
   axios: {

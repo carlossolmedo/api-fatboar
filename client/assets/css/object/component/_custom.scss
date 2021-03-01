@@ -26,16 +26,58 @@ main {
       margin-bottom: 3rem;
     }
   }
+  &.content-game {
+    height: calc(100vh - 30vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .block-game {
+      width: 100%;
+      text-align: center;
+
+      @include _media-min(md) {
+        width: 40%;
+      }
+    }
+    & span.input {
+      padding: 3px;
+
+      & > input.input-game {
+        $char-w: 1ch;
+        $gap: .5*$char-w;
+        $n-char: 10;
+        $in-w: $n-char*($char-w + $gap);
+
+        display: block;
+        margin: 1rem auto;
+        border: none;
+        padding: 0;
+        width: $in-w + 1;
+        background: repeating-linear-gradient(90deg,$_color-white 0, $_color-white $char-w,
+          transparent 0, transparent $char-w + $gap) 0 100%/ #{$in-w - $gap} 2px no-repeat;
+        font: 2rem $font-family-lobster, courier;
+        letter-spacing: $gap;
+        letter-spacing: 0.62ch;
+
+        &:focus {
+          outline: none;
+          color: $color-yellow;
+        }
+
+        @include _media-min(md) {
+          width: $in-w+1;
+          font: 2.5rem $font-family-lobster,courier;
+          letter-spacing: 0.6ch;
+        }
+      }
+    }
+  }
 }
 
 .img-logo {
   width: 60px;
   padding-top: 1.25rem;
-}
-
-.text-container {
-  color: white;
-  font-family: 'lobster', Georgia, 'Times New Roman', Times, serif;
 }
 
 @font-face {
@@ -45,6 +87,11 @@ main {
     url('~assets/fonts/lobster.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+.text-container {
+  color: white;
+  font-family: $font-family-lobster;
 }
 
 // Global
@@ -135,6 +182,7 @@ main {
   width: 50%;
   border-radius: 0.75em;
   transform-style: preserve-3d;
+  font-family: $font-family-lobster;
   font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -145,6 +193,15 @@ main {
   &:hover {
     background-color: #dba600;
     animation: heartbeat 0.2s infinite;
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    background-color: _lighter($_color-gray); // For IE11
+    background-color: _var-lighter-color-gray();
+    cursor: not-allowed;
+    color: #ccc;
+    // border: 2px solid #ccc;
   }
 }
 
