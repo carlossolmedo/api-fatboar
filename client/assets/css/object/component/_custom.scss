@@ -2,7 +2,25 @@
 /*                                Custom styles                               */
 /* -------------------------------------------------------------------------- */
 
-// Body
+@font-face {
+  font-family: 'lobster';
+  font-display: swap;
+  src: url('~assets/fonts/lobster.woff2') format('woff2'),
+    url('~assets/fonts/lobster.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* --------------------------------- Global --------------------------------- */
+
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none;
+}
 
 .bg-purple {
   position: fixed;
@@ -26,6 +44,7 @@ main {
       margin-bottom: 3rem;
     }
   }
+
   &.content-game {
     height: calc(100vh - 30vh);
     display: flex;
@@ -49,7 +68,7 @@ main {
     & span.input {
       padding: 3px;
 
-      & > input.input-game {
+      &>input.input-game {
         $char-w: 1ch;
         $gap: .5*$char-w;
         $n-char: 10;
@@ -60,7 +79,7 @@ main {
         border: none;
         padding: 0;
         width: $in-w + 1;
-        background: repeating-linear-gradient(90deg,$_color-white 0, $_color-white $char-w,
+        background: repeating-linear-gradient(90deg, $_color-white 0, $_color-white $char-w,
           transparent 0, transparent $char-w + $gap) 0 100%/ #{$in-w - $gap} 2px no-repeat;
         font: 2rem $font-family-lobster, courier;
         letter-spacing: $gap;
@@ -73,7 +92,7 @@ main {
 
         @include _media-min(md) {
           width: $in-w+1;
-          font: 2.5rem $font-family-lobster,courier;
+          font: 2.5rem $font-family-lobster, courier;
           letter-spacing: 0.6ch;
         }
       }
@@ -86,27 +105,9 @@ main {
   padding-top: 1.25rem;
 }
 
-@font-face {
-  font-family: 'lobster';
-  font-display: swap;
-  src: url('~assets/fonts/lobster.woff2') format('woff2'),
-    url('~assets/fonts/lobster.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .text-container {
   color: white;
   font-family: $font-family-lobster;
-}
-
-// Global
-.show {
-  display: block !important;
-}
-
-.hidden {
-  display: none;
 }
 
 .#{$_prefix}c-ic-angle-down-white {
@@ -136,7 +137,7 @@ main {
   }
 }
 
-// Home
+/* ---------------------------------- Home ---------------------------------- */
 
 .c-images-prize {
   text-align: center;
@@ -181,7 +182,6 @@ main {
 
 .btn-play {
   @include _btn();
-  // @include _padding(.5, 2);
   padding: 1.25em 2em;
   background-color: $color-yellow;
   color: $_color-black;
@@ -214,9 +214,34 @@ main {
     width: 50%;
   }
 }
+.btn-restart {
+  @extend .btn-play;
+  animation: none;
+  text-shadow: none;
+}
 
+/* -------------------------------- Page game ------------------------------- */
 
-// Animations
+// Loader game
+.img-logo-game {
+  width: 200px;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+
+.ticket-winner {
+  text-align: center;
+  color: $_color-white;
+  text-shadow: 1px 1px 1px $_color-black;
+
+  & h1 {
+    margin: 20px 0;
+    color: $color-yellow;
+    text-shadow: 1px 1px 1px $_color-black;
+  }
+}
+
+/* ------------------------------- Animations ------------------------------- */
 
 @keyframes jittery {
 
@@ -259,5 +284,25 @@ main {
 @keyframes heartbeat {
   50% {
     transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
