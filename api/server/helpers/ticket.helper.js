@@ -118,6 +118,10 @@ class Ticket {
             return false;
         }
     }
+
+    async updatedCollectionTicket(dataUser) {
+        return dataUser
+    }
 }
 
 export default Ticket;

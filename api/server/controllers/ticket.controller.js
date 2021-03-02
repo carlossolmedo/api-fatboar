@@ -83,6 +83,10 @@ const verifyTicket = async (req, res) => {
             return res.status(404).json({message: `ticket number: ${ticketUser} not found`});
         }
 
+        if (ticketVerified.validated) {
+            return res.status(401).json({ message: `ticket number: ${ticketUser} has already been validated` });
+        }
+
         res.status(200).json(ticketVerified);
 
     } catch (error) {
