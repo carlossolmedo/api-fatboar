@@ -136,7 +136,8 @@ class Ticket {
     async saveTicket(ticket) {
         const ticketPlayed = new TicketModel({
             user_id: ticket.user_id,
-            ticket_number: ticket.ticket_number
+            ticket_number: ticket.ticket_number,
+            type: ticket.type
         });
 
         await WinningTicketModel.updateOne({ticket_number: ticket.ticket_number}, {
