@@ -2,7 +2,25 @@
 /*                                Custom styles                               */
 /* -------------------------------------------------------------------------- */
 
-// Body
+@font-face {
+  font-family: 'lobster';
+  font-display: swap;
+  src: url('~assets/fonts/lobster.woff2') format('woff2'),
+    url('~assets/fonts/lobster.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* --------------------------------- Global --------------------------------- */
+
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none;
+}
 
 .bg-purple {
   position: fixed;
@@ -26,6 +44,60 @@ main {
       margin-bottom: 3rem;
     }
   }
+
+  &.content-game {
+    height: calc(100vh - 30vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-family-lobster;
+
+    & .block-game {
+      text-align: center;
+
+      @include _media-min(md) {
+        width: 40%;
+      }
+    }
+
+    & .title-game {
+      color: $_color-white;
+      text-shadow: 1px 1px 1px $_color-black;
+    }
+
+    & span.input {
+      padding: 3px;
+
+      &>input.input-game {
+        $char-w: 1ch;
+        $gap: .5*$char-w;
+        $n-char: 10;
+        $in-w: $n-char*($char-w + $gap);
+
+        display: block;
+        margin: 1rem auto;
+        border: none;
+        padding: 0;
+        width: $in-w + 1;
+        background: repeating-linear-gradient(90deg, $_color-white 0, $_color-white $char-w,
+          transparent 0, transparent $char-w + $gap) 0 100%/ #{$in-w - $gap} 2px no-repeat;
+        font: 2rem $font-family-lobster, courier;
+        letter-spacing: $gap;
+        letter-spacing: 0.58ch;
+
+        &:focus {
+          outline: none;
+          color: $color-yellow;
+        }
+
+        @include _media-min(md) {
+          width: $in-w+1;
+          font: 2.5rem $font-family-lobster, courier;
+          letter-spacing: 0.6ch;
+        }
+      }
+    }
+  }
 }
 
 .img-logo {
@@ -35,25 +107,7 @@ main {
 
 .text-container {
   color: white;
-  font-family: 'lobster', Georgia, 'Times New Roman', Times, serif;
-}
-
-@font-face {
-  font-family: 'lobster';
-  font-display: swap;
-  src: url('~assets/fonts/lobster.woff2') format('woff2'),
-    url('~assets/fonts/lobster.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-// Global
-.show {
-  display: block !important;
-}
-
-.hidden {
-  display: none;
+  font-family: $font-family-lobster;
 }
 
 .#{$_prefix}c-ic-angle-down-white {
@@ -83,7 +137,7 @@ main {
   }
 }
 
-// Home
+/* ---------------------------------- Home ---------------------------------- */
 
 .c-images-prize {
   text-align: center;
@@ -128,13 +182,14 @@ main {
 
 .btn-play {
   @include _btn();
-  // @include _padding(.5, 2);
   padding: 1.25em 2em;
   background-color: $color-yellow;
   color: $_color-black;
-  width: 50%;
+  width: 95%;
   border-radius: 0.75em;
+  border: none;
   transform-style: preserve-3d;
+  font-family: $font-family-lobster;
   font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -146,10 +201,47 @@ main {
     background-color: #dba600;
     animation: heartbeat 0.2s infinite;
   }
+
+  &[disabled],
+  &[disabled]:hover {
+    background-color: _lighter($_color-gray); // For IE11
+    background-color: _var-lighter-color-gray();
+    cursor: not-allowed;
+    color: #ccc;
+  }
+
+  @include _media-min(md) {
+    width: 50%;
+  }
+}
+.btn-restart {
+  @extend .btn-play;
+  animation: none;
+  text-shadow: none;
 }
 
+/* -------------------------------- Page game ------------------------------- */
 
-// Animations
+// Loader game
+.img-logo-game {
+  width: 200px;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+
+.ticket-winner {
+  text-align: center;
+  color: $_color-white;
+  text-shadow: 1px 1px 1px $_color-black;
+
+  & h1 {
+    margin: 20px 0;
+    color: $color-yellow;
+    text-shadow: 1px 1px 1px $_color-black;
+  }
+}
+
+/* ------------------------------- Animations ------------------------------- */
 
 @keyframes jittery {
 
@@ -192,5 +284,25 @@ main {
 @keyframes heartbeat {
   50% {
     transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

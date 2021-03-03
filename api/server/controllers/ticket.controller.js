@@ -1,4 +1,3 @@
-// import TicketModel from '../models/ticket.model';
 import Ticket from '../helpers/ticket.helper';
 
 const generateWinningTickets = (req, res) => {
@@ -10,27 +9,27 @@ const generateWinningTickets = (req, res) => {
         // Save tickets by percent and type of ticket
         const ticketsStarter = tickets.addAndSaveTicketNumber(
             winningTickets.starter,
-            'starter'
+            'une entrée au choix'
         );
         const ticketsDessert = tickets.addAndSaveTicketNumber(
             winningTickets.dessert,
-            'dessert'
+            'un dessert au choix'
         );
         const ticketsBurger = tickets.addAndSaveTicketNumber(
             winningTickets.burger,
-            'burger'
+            'un burger au choix'
         );
         const ticketsMenuDay = tickets.addAndSaveTicketNumber(
             winningTickets.menu_day,
-            'menu_day'
+            'un menu du jour'
         );
         const ticketsMenuChoice = tickets.addAndSaveTicketNumber(
             winningTickets.menu_choice,
-            'menu_choice'
+            'un menu au choix'
         );
         const ticketsDiscount = tickets.addAndSaveTicketNumber(
             winningTickets.discount,
-            'discount'
+            '70% réduction'
         );
 
         if (
@@ -71,17 +70,23 @@ const verifyTicket = async (req, res) => {
     try {
         const tickets = new Ticket();
         const regex = /\d{10}/g;
-        const ticketUser = req.body.ticket_number;
+        const ticketUser = req.body;
 
-        if(!regex.test(ticketUser)) {
+        if(!regex.test(ticketUser.ticket_number)) {
             return res.status(400).json({ message: 'format ticket not valid'});
         }
 
-        const ticketVerified = await tickets.findTicket(ticketUser);
+        const ticketVerified = await tickets.findTicketValid(ticketUser);
 
-        if (!ticketVerified) {
-            return res.status(404).json({message: `ticket number: ${ticketUser} not found`});
+        if (ticketVerified.error.found === false) {
+            return res.status(404).json({ message: `ticket number: ${ticketUser.ticket_number} not found`});
         }
+
+        if (ticketVerified.error.validated) {
+            return res.status(401).json({ message: `ticket number: ${ticketUser.ticket_number} has already been validated` });
+        }
+
+        await tickets.saveTicket(ticketVerified);
 
         res.status(200).json(ticketVerified);
 

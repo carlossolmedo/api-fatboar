@@ -99,7 +99,7 @@
               this.submitStatus = 'OK';
               this.$router.push({name: 'game'});
             }, 1000);
-            this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(1500)
+            this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000)
           }).catch(() => {
             this.loading = false;
             document.getElementById('submitLogin').setAttribute("disabled", true);
