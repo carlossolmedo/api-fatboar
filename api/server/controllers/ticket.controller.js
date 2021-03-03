@@ -9,27 +9,27 @@ const generateWinningTickets = (req, res) => {
         // Save tickets by percent and type of ticket
         const ticketsStarter = tickets.addAndSaveTicketNumber(
             winningTickets.starter,
-            'starter'
+            'une entrée au choix'
         );
         const ticketsDessert = tickets.addAndSaveTicketNumber(
             winningTickets.dessert,
-            'dessert'
+            'un dessert au choix'
         );
         const ticketsBurger = tickets.addAndSaveTicketNumber(
             winningTickets.burger,
-            'burger'
+            'un burger au choix'
         );
         const ticketsMenuDay = tickets.addAndSaveTicketNumber(
             winningTickets.menu_day,
-            'menu_day'
+            'un menu du jour'
         );
         const ticketsMenuChoice = tickets.addAndSaveTicketNumber(
             winningTickets.menu_choice,
-            'menu_choice'
+            'un menu au choix'
         );
         const ticketsDiscount = tickets.addAndSaveTicketNumber(
             winningTickets.discount,
-            'discount'
+            '70% réduction'
         );
 
         if (
