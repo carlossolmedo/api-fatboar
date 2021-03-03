@@ -1,4 +1,6 @@
 import WinningTicketModel from '../models/winningTicket.model';
+import TicketModel from '../models/ticket.model';
+
 
 class Ticket {
     /** Generate a number of 10 digits length */
@@ -108,19 +110,42 @@ class Ticket {
         return randomTicket;
     }
 
-    async findTicket(ticket) {
-        let ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket });
-        if (ticketFounded) {
-            ticketFounded.validated = true;
-            await ticketFounded.save();
-            return ticketFounded;
+    async findTicketValid(ticket) {
+        const ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket.ticket_number });
+        const dataTicketFounded = Object.assign({}, ticketFounded._doc);
+
+        dataTicketFounded.error = {
+            found: true,
+            validated: false
+        };
+
+        if (dataTicketFounded) {
+            if (dataTicketFounded.validated === false) {
+                dataTicketFounded.user_id = ticket.user_id;
+                return dataTicketFounded;
+            } else {
+                dataTicketFounded.error.validated = true;
+                return dataTicketFounded;
+            }
         } else {
-            return false;
+            dataTicketFounded.error.found = false;
+            return dataTicketFounded;
         }
     }
 
-    async updatedCollectionTicket(dataUser) {
-        return dataUser
+    async saveTicket(ticket) {
+        const ticketPlayed = new TicketModel({
+            user_id: ticket.user_id,
+            ticket_number: ticket.ticket_number
+        });
+
+        await WinningTicketModel.updateOne({ticket_number: ticket.ticket_number}, {
+            validated: true
+        }).then((res) => {
+            if (res.ok) ticketPlayed.save();
+        }).catch((err) => {
+            console.error(err);
+        });
     }
 }
 
