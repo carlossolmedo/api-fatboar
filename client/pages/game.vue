@@ -66,7 +66,8 @@
         this.$v.$touch()
         if (!this.$v.$invalid) {
           await this.$axios.$post('/tickets/verify', {
-            ticket_number: this.ticketNumber
+            ticket_number: this.ticketNumber,
+            user_id: this.$auth.user.userId
           }).then((ticketWinner) => {
               setTimeout(() => {
                 this.loading = false;
