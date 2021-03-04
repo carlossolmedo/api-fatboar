@@ -1,4 +1,5 @@
 import User from '../models/user.model';
+import TicketModel from '../models/ticket.model';
 
 // Get all users
 exports.getUsers = async (req, res) => {
@@ -104,3 +105,17 @@ exports.deleteUser = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+/** Get all tickets by user */
+exports.getTicketsByUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const tickets = await TicketModel.find({user_id: userId}).exec();
+        if (!tickets) {
+            res.status(404).json({ message: `Tickets not found from ${userId} user` });
+        }
+        res.status(200).json(tickets);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
