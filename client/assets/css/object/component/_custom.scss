@@ -98,6 +98,10 @@ main {
       }
     }
   }
+
+  &.content-prizes {
+    height: calc(100vh - 50vh);
+  }
 }
 
 .img-logo {
@@ -220,7 +224,7 @@ main {
   text-shadow: none;
 }
 
-/* -------------------------------- Page game ------------------------------- */
+/* -------------------------------- Page Game ------------------------------- */
 
 // Loader game
 .img-logo-game {
@@ -239,6 +243,12 @@ main {
     color: $color-yellow;
     text-shadow: 1px 1px 1px $_color-black;
   }
+}
+
+/* ------------------------------- Page Prizes ------------------------------ */
+.block-list {
+  width: 50%;
+  margin: auto;
 }
 
 /* ------------------------------- Animations ------------------------------- */

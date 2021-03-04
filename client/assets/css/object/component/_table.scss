@@ -1,0 +1,15 @@
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+
+  &.table-prizes {
+    border: 1px solid $_color-black;
+
+    & thead th {
+      border-bottom: 2px solid $_color-black;
+      padding: 8px;
+    }
+  }
+}
