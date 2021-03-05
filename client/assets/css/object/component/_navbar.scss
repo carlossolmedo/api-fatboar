@@ -274,10 +274,27 @@ Navbar component
   a.navbar__link {
     transition: background-color 0.1s ease-out, color 0.1s ease-out;
     color: $color-navbar-link;
-    opacity: 0.3;
+    opacity: 0.5;
+
+    &.game {
+      color: $_color-white;
+      opacity: 0.5;
+      &:hover {
+        color: $_color-white;
+        opacity: 1;
+      }
+      &.nuxt-link-active {
+        color: $color-yellow;
+        opacity: 1;
+      }
+    }
 
     &:hover {
       color: $color-navbar-link;
+      opacity: 1;
+    }
+    &.nuxt-link-active {
+      color: $color-violet;
       opacity: 1;
     }
   }
@@ -305,5 +322,45 @@ Navbar component
         color: $color-blue;
       }
     }
+  }
+}
+
+.c-navbar__item:hover>.c-menu__submenu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.c-menu__submenu {
+  position: absolute;
+  inset: 50px auto auto 0px;
+  visibility: hidden;
+  min-width: 150px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: opacity 0.1s ease-out;
+  background-color: $_color-white;
+  border: 1px solid rgba(0, 0, 0, .15);
+}
+
+.c-menu__subitem {
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    a {
+      color: $_color-white;
+      background-color: $color-violet;
+    }
+  }
+
+  & a {
+    display: block;
+    padding: 0.6875rem 0.875rem;
+    text-align: left;
+    text-decoration: none;
+    color: $color-violet;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
   }
 }

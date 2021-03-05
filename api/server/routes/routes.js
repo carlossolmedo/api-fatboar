@@ -9,6 +9,7 @@ export const userRoute = {
     addUser: `${urlAPI}/users`,
     updateUser: `${urlAPI}/users/:id`,
     deleteUser: `${urlAPI}/users/:id`,
+    getTicketsByUser: `${urlAPI}/users/:id/tickets`
 };
 
 /** All routes to authentication */
@@ -17,11 +18,11 @@ export const authRoute = {
     login: `${urlAPI}/auth/login`,
     logout: `${urlAPI}/auth/logout`,
     google: `${urlAPI}/auth/google`,
-    facebook: `${urlAPI}/auth/facebook`,
+    facebook: `${urlAPI}/auth/facebook`
 };
 
 export const ticketRoute = {
     generateWinningTickets: `${urlAPI}/tickets/winning-tickets/generate/:quantity`,
     getTicket: `${urlAPI}/tickets`,
-    verifyTicket: `${urlAPI}/tickets/verify`,
+    verifyTicket: `${urlAPI}/tickets/verify`
 };

@@ -51,6 +51,7 @@ const generateWinningTickets = (req, res) => {
     }
 };
 
+/** Get one winning ticket random */
 const getTicket = async (req, res) => {
     try {
         const tickets = new Ticket();
