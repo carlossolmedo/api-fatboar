@@ -93,13 +93,12 @@
         if (!this.$v.form.$invalid) {
           await this.$auth.loginWith('local', { data: this.form })
           .then(() => {
-            this.$store.commit('user/setUser', this.form.email);
             setTimeout(() => {
               this.loading = false;
               this.submitStatus = 'OK';
               this.$router.push({name: 'game'});
             }, 1000);
-            this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000)
+            this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000);
           }).catch(() => {
             this.loading = false;
             document.getElementById('submitLogin').setAttribute("disabled", true);

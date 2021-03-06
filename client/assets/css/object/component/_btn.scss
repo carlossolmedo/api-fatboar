@@ -28,6 +28,7 @@ Button component
   border: 2px solid $color-accent;
   color: $color-accent;
   font-weight: bold;
+  cursor: pointer;
   @include _padding(.5, 1);
 
   @include _hover() {
@@ -41,10 +42,6 @@ Button component
     color: #ccc;
     border: 2px solid #ccc;
   }
-  // &--ghost {
-  //   border-color: #fff;
-  //   color: #fff;
-  // }
 
   &--primary {
     border-color: $color-primary;
@@ -100,7 +97,8 @@ Button component
     color: $color-danger;
 
     @include _hover() {
-      background-color: _lightest($color-danger);
+      background-color: $color-danger;
+      color: $_color-white;
     }
   }
 
