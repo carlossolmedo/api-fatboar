@@ -275,6 +275,7 @@ Navbar component
     transition: background-color 0.1s ease-out, color 0.1s ease-out;
     color: $color-navbar-link;
     opacity: 0.5;
+    cursor: pointer;
 
     &.game {
       color: $_color-white;

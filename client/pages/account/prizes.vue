@@ -1,6 +1,6 @@
 <template>
   <div class="c-container">
-    <h1 class="u-text-center">Mes gains</h1>
+    <h1 class="u-text-center title-lobster">Mes gains</h1>
     <main class="content-prizes">
       <div class="block-list">
         <table class="table table-prizes">
