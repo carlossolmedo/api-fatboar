@@ -3,7 +3,7 @@
     <h1 class="u-text-center title-lobster">Mes gains</h1>
     <main class="content-prizes">
       <div class="block-list">
-        <table class="table table-prizes">
+        <table v-if="ticketsPlayed" class="table table-prizes">
           <thead>
             <tr>
               <th>#</th>
@@ -23,6 +23,7 @@
             </tr>
           </tbody>
         </table>
+        <h3 v-if="!ticketsPlayed" class="u-text-center">Vous n'avez pas encore jouer</h3>
       </div>
     </main>
   </div>
@@ -43,6 +44,11 @@ export default {
       if (!date) return ''
       date = dateFormat(date);
       return date;
+    }
+  },
+  computed: {
+    ticketsPlayed() {
+      return this.tickets.length === 0 ? false : true
     }
   }
 }

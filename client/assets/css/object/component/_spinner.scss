@@ -36,6 +36,7 @@ Circle spinner component
   font-size: 10px;
 }
 
+// Spinner white
 .spinner > div {
   background-color: $_color-white;
   height: 100%;
@@ -65,6 +66,15 @@ Circle spinner component
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
+
+// Spinner black
+.spinner-black {
+  @extend .spinner;
+  & > div {
+    background-color: $_color-black;
+  }
+}
+
 
 @-webkit-keyframes sk-stretchdelay {
   0%,
