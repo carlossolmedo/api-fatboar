@@ -13,7 +13,7 @@
       </dl>
       <dl>
         <dt>
-          <label for="passwordLogin">Password</label>
+          <label for="passwordLogin">Mot de passe</label>
         </dt>
         <dd>
           <input v-model.trim="$v.form.password.$model" type="password" name="password" id="passwordLogin"

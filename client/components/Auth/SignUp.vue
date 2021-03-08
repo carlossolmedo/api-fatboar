@@ -76,7 +76,7 @@
       </div>
       <dl class="required">
         <dt>
-          <label for="passwordSignUp">Password</label>
+          <label for="passwordSignUp">Mot de passe</label>
         </dt>
         <dd>
           <input v-model.trim="$v.form.password.$model" type="password" name="password" id="passwordSignUp"
