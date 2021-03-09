@@ -11,14 +11,14 @@
             <NuxtLink to="/account/settings">Mon compte</NuxtLink>
           </li>
           <li class="c-menu__subitem" aria-haspopup="true">
-            <a @click="$auth.logout()" style="cursor: pointer;">Déconnexion</a>
+            <a @click="logout" style="cursor: pointer;">Déconnexion</a>
           </li>
         </ul>
       </li>
     </ul>
     <ul v-if="$auth.user.role === 'waiter'" class="c-navbar c-navbar--right">
       <li class="c-navbar__item">
-        <a @click="$auth.logout()" style="cursor: pointer;">Déconnexion</a>
+        <a @click="logout" style="cursor: pointer;">Déconnexion</a>
       </li>
     </ul>
   </nav>
@@ -37,6 +37,15 @@ export default {
       if (username) {
         let name = username.split(' ');
         return this.username = name[0];
+      }
+    },
+    logout() {
+      if (this.$auth.user.role !== 'customer') {
+        this.$auth.logout().then(() => {
+          this.$router.push({name: 'admin-connection'});
+        }).catch((err) => {
+          console.error(err);
+        });
       }
     }
   }
