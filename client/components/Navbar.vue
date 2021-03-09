@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -46,6 +45,8 @@ export default {
         }).catch((err) => {
           console.error(err);
         });
+      } else {
+        this.$auth.logout();
       }
     }
   }
