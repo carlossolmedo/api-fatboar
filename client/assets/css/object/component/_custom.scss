@@ -264,6 +264,16 @@ main {
   }
 }
 
+/* ------------------------------ Page Winners ------------------------------ */
+.block-list-winners {
+  @extend .block-list;
+
+  @include _media-min(md) {
+    width: 70%;
+  }
+}
+
+
 /* ------------------------------ Page Settings ----------------------------- */
 .block-delete-account {
   margin-top: 20px;
