@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const gameSchema = new mongoose.Schema({
-    user_id: String,
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     game_count: Number,
     date_created: { type: Date, default: Date.now },
 });

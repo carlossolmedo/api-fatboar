@@ -13,7 +13,7 @@
       </dl>
       <dl>
         <dt>
-          <label for="passwordLogin">Password</label>
+          <label for="passwordLogin">Mot de passe</label>
         </dt>
         <dd>
           <input v-model.trim="$v.form.password.$model" type="password" name="password" id="passwordLogin"
@@ -97,8 +97,8 @@
               this.loading = false;
               this.submitStatus = 'OK';
               this.$router.push({name: 'game'});
+              this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000);
             }, 1000);
-            this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000);
           }).catch(() => {
             this.loading = false;
             document.getElementById('submitLogin').setAttribute("disabled", true);

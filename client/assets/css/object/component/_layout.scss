@@ -1,0 +1,49 @@
+/* -------------------------------------------------------------------------- */
+/*                           Style for Nuxt Layouts                           */
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- admin-connection ---------------------------- */
+
+.content-connection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+// page connection
+.block-img-logo {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.img-logo-connection {
+  width: 50px;
+  height: 50px;
+  background-color: $color-violet-dark;
+  border-radius: 999rem;
+}
+
+.block-form-connection {
+  width: 85%;
+
+  @include _media-min(md) {
+    width: 55%;
+  }
+
+  @include _media-min(lg) {
+    width: 25%;
+  }
+}
+
+form {
+  &.admin-connection {
+    & dl {
+      text-align: left;
+      margin-bottom: 1rem;
+      & > dt {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

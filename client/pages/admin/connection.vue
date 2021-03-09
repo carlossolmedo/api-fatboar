@@ -1,16 +1,21 @@
 <template>
-  <div class="c-container">
-    <div class="c-row">
-      <client-only>
-        <h1 class="u-text-center">Connection</h1>
-      </client-only>
-    </div>
-  </div>
+  <main class="content-connection">
+    <FormAdmin />
+  </main>
 </template>
 
 <script>
+import FormAdmin from '~/components/auth/FormAdmin';
+
 export default {
+  layout: 'admin-connection',
   middleware: ['auth'],
-  auth: false
+  auth: false,
+  components: {
+    FormAdmin
+  },
+  mounted() {
+    localStorage.setItem('gdpr', true);
+  }
 }
 </script>

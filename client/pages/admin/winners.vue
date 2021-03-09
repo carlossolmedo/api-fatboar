@@ -7,9 +7,10 @@
 </template>
 
 <script>
-export default {
-  middleware: ['auth-admin']
-}
+  export default {
+    middleware: ['auth-waiter']
+  }
+
 </script>
 
 <style>
