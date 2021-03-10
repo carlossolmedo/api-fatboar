@@ -1,6 +1,6 @@
 <template>
   <div class="c-container">
-    <main class="content-prizes">
+    <main class="content-winners">
       <h1 class="u-text-center title-lobster">Gagnants</h1>
       <div class="block-list">
         <table v-if="listTickets" class="table-fluid table-prizes">
@@ -9,49 +9,88 @@
               <th>#</th>
               <th>Ticket</th>
               <th>Prix</th>
-              <th>Date</th>
               <th>Nom</th>
               <th>Adresse mail</th>
+              <th>Date</th>
               <th>Récuperé</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>1234567890</td>
-              <td>une entrée</td>
-              <td>09/04/2021</td>
-              <td>Carlos Test</td>
-              <td>test@test.com</td>
-              <td>
-                <div class="switch-received">
-                  <input class="tgl tgl-success" id="received" type="checkbox"/>
-                  <label class="tgl-btn" for="received"></label>
-                </div>
-              </td>
-            </tr>
-            <!-- <tr v-for="(ticket, index) in tickets" :key="ticket.ticket_number">
+            <tr v-for="(ticket, index) in ticketsWinners" :key="ticket.ticket_number">
               <th>{{ index + 1 }}</th>
               <td>{{ ticket.ticket_number }}</td>
               <td>{{ ticket.type }}</td>
+              <td>{{ ticket.user_id.username }}</td>
+              <td>{{ ticket.user_id.email }}</td>
               <td>{{ ticket.date_created | date }}</td>
-              <td><span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span></td>
-            </tr> -->
+              <td id="receivedField">
+                <span :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" class="received-waiter" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
+              </td>
+            </tr>
           </tbody>
         </table>
-        <h3 v-if="!listTickets" class="u-text-center">Vous n'avez pas encore jouer</h3>
+        <h3 v-if="!listTickets" class="u-text-center">Pas de tickets joué actuellement</h3>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+  import dateFormat from '../../utils/dateFormat';
+
   export default {
     layout: 'waiter',
     middleware: ['auth-waiter'],
+    async asyncData({ $axios }) {
+      const tickets = await $axios.$get(`/tickets/winners`);
+      return {
+        ticketsWinners: tickets
+      }
+    },
+    filters: {
+      date(date) {
+        if (!date) return ''
+        date = dateFormat(date);
+        return date;
+      }
+    },
     data() {
       return {
-        listTickets: true
+        btnReceivedChecked: false
+      }
+    },
+    computed: {
+      listTickets() {
+        return this.ticketsWinners.length === 0 ? false : true
+      }
+    },
+    methods: {
+      async setReceived(ticketNumber, elementId) {
+        if (confirm('Voulez-vous modifier ce champ?')) {
+          let elReceived = document.getElementById(elementId);
+          let stateClassSuccess = elReceived.classList.contains('success');
+          let stateClassNot = elReceived.classList.contains('not-yet');
+          let valueReceived = null;
+
+          if (stateClassSuccess) {
+            elReceived.classList.remove('success');
+            elReceived.classList.add('not-yet');
+            valueReceived = false;
+          }
+
+          if (stateClassNot) {
+            elReceived.classList.remove('not-yet');
+            elReceived.classList.add('success');
+            valueReceived = true;
+          }
+
+          if (valueReceived !== null) {
+            await this.$axios.$put('/tickets/winners', {
+              ticket_number: ticketNumber,
+              received: valueReceived
+            });
+          }
+        }
       }
     }
   }

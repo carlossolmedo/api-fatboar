@@ -107,7 +107,7 @@
                 this.messageSubmit = "Vérifiez vos identifiants";
                 localStorage.clear();
               }
-            }, 1000);
+            }, 2000);
           }).catch(() => {
             this.loading = false;
             this.submitStatus = 'ERROR';

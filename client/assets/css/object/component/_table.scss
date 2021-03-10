@@ -17,7 +17,7 @@
       padding: 8px;
     }
     & tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: $color-table-bg;
     }
     & tbody tr td {
       padding: 5px;
@@ -27,5 +27,5 @@
 
 .table-fluid {
   @extend .table;
-  width: 650px;
+  width: 700px;
 }

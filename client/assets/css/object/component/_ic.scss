@@ -145,8 +145,14 @@ Icon (Angle Down) component
     }
   }
 
-  &:checked+.tgl-btn::after {
-    left: 50%;
+  // &:checked+.tgl-btn::after {
+  //   left: 50%;
+  // }
+
+  &.is-checked {
+    &:checked+.tgl-btn::after {
+      left: 50%;
+    }
   }
 }
 
@@ -164,7 +170,13 @@ Icon (Angle Down) component
     }
   }
 
-  &:checked+.tgl-btn {
-    background: $color-success;
+  // &:checked+.tgl-btn {
+  //   background: $color-success;
+  // }
+
+  &.is-checked {
+    &:checked+.tgl-btn {
+      background: $color-success;
+    }
   }
 }

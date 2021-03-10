@@ -58,18 +58,4 @@ export default {
   h1 {
     margin: 50px 0 50px 0;
   }
-  .received {
-    display: block;
-    height: 20px;
-    width: 20px;
-    margin: auto;
-    border-radius: 999rem;
-  }
-  .success {
-    background-color: #43A047;
-  }
-  .not-yet {
-    background-color: #ddd;
-  }
-
 </style>

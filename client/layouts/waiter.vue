@@ -7,3 +7,9 @@
     </footer>
   </div>
 </template>
+
+<style scoped>
+footer {
+  margin-bottom: 50px;
+}
+</style>
