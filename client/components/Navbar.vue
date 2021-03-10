@@ -18,7 +18,7 @@
     </ul>
     <ul v-if="$auth.user.role === 'waiter'" class="c-navbar c-navbar--right">
       <li class="c-navbar__item">
-        <a @click="logout" style="cursor: pointer;">Déconnexion</a>
+        <a class="navbar__link" @click="logout" style="cursor: pointer;">Déconnexion</a>
       </li>
     </ul>
   </nav>

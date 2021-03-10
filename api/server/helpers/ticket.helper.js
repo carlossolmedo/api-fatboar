@@ -148,6 +148,16 @@ class Ticket {
             console.error(err);
         });
     }
+
+    async populateTicketsWithUsers() {
+        const ticketsWithUsers = await TicketModel.find().populate('user_id', ['username', 'email']).exec();
+        return ticketsWithUsers;
+    }
+
+    async updateTicketReceived(ticket) {
+        const fieldUpdated = await TicketModel.updateOne({ ticket_number: ticket.ticket_number }, { received: ticket.received});
+        return fieldUpdated;
+    }
 }
 
 export default Ticket;

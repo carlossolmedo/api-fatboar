@@ -1,6 +1,6 @@
 import Ticket from '../helpers/ticket.helper';
 
-const generateWinningTickets = (req, res) => {
+exports.generateWinningTickets = (req, res) => {
     try {
         const quantity = req.params.quantity;
         const tickets = new Ticket();
@@ -52,7 +52,7 @@ const generateWinningTickets = (req, res) => {
 };
 
 /** Get one winning ticket random */
-const getTicket = async (req, res) => {
+exports.getTicket = async (req, res) => {
     try {
         const tickets = new Ticket();
         const randomTicket = await tickets.getRandomTicket();
@@ -67,7 +67,8 @@ const getTicket = async (req, res) => {
     }
 };
 
-const verifyTicket = async (req, res) => {
+/** Verify ticket played */
+exports.verifyTicket = async (req, res) => {
     try {
         const tickets = new Ticket();
         const regex = /\d{10}/g;
@@ -96,6 +97,26 @@ const verifyTicket = async (req, res) => {
     }
 };
 
-exports.generateWinningTickets = generateWinningTickets;
-exports.getTicket = getTicket;
-exports.verifyTicket = verifyTicket;
+/** Get all tickets with users information */
+exports.getTicketsWinners = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const ticketsWithUsers = await tickets.populateTicketsWithUsers();
+        res.status(200).json(ticketsWithUsers);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.updateTicketReceived = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const ticketReceived = req.body;
+        const updateField = await tickets.updateTicketReceived(ticketReceived);
+        if (updateField.ok) {
+            res.status(200).json({ message: `Ticket ${ticketReceived.ticket_number} value received updated with success`});
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};

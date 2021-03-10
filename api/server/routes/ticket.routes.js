@@ -10,5 +10,7 @@ router.get(
 );
 router.get(ticketRoute.getTicket, ticketController.getTicket);
 router.post(ticketRoute.verifyTicket, ticketController.verifyTicket);
+router.get(ticketRoute.getTicketsWinners, ticketController.getTicketsWinners);
+router.put(ticketRoute.updateTicketReceived, ticketController.updateTicketReceived);
 
 module.exports = router;
