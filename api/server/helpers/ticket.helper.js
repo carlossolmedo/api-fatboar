@@ -148,6 +148,11 @@ class Ticket {
             console.error(err);
         });
     }
+
+    async populateTicketsWithUsers() {
+        const ticketsWithUsers = await TicketModel.find().populate('user_id', ['username', 'email']).exec();
+        return ticketsWithUsers;
+    }
 }
 
 export default Ticket;
