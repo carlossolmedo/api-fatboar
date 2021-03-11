@@ -7,6 +7,13 @@
   </div>
 </template>
 
+<script>
+export default {
+  middleware: ['auth'],
+  auth: false
+}
+</script>
+
 <style scoped>
   .c-404 {
     display: flex;

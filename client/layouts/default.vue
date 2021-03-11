@@ -13,6 +13,7 @@ import Footer from '~/components/Footer';
 import GDPR from '~/components/GDPR';
 
 export default {
+  middleware: ['404'],
   components: {
     Header,
     Footer,
