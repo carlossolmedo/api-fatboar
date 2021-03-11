@@ -37,7 +37,7 @@ export default {
 
   // Global
   router: {
-    middleware: ['class', 'auth']
+    middleware: ['class', 'auth', '404']
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
