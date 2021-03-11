@@ -11,6 +11,9 @@ export default {
   layout: 'admin-connection',
   middleware: ['auth'],
   auth: false,
+  head: {
+    title: 'Connexion'
+  },
   components: {
     FormAdmin
   },

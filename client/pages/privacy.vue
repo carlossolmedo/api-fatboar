@@ -54,7 +54,10 @@
 <script>
   export default {
     middleware: ['auth'],
-    auth: false
+    auth: false,
+    head: {
+      title: 'Politique de Confidentialité'
+    }
   }
 </script>
 

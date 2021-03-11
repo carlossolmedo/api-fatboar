@@ -33,7 +33,10 @@
 <script>
   export default {
     middleware: ['auth'],
-    auth: false
+    auth: false,
+    head: {
+      title: 'Conditions Générales'
+    }
   }
 </script>
 

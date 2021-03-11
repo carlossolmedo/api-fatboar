@@ -27,6 +27,9 @@
 import Loader from '~/components/Loader';
 
 export default {
+  head: {
+    title: 'Mon compte'
+  },
   components: {
     Loader
   },

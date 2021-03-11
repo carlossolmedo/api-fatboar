@@ -11,8 +11,11 @@
         <li class="c-navbar__item">
           <NuxtLink to="/privacy">Politique de Confidentialité</NuxtLink>
         </li>
+        <li class="c-navbar__item">
+          <NuxtLink to="/contact">Contact</NuxtLink>
+        </li>
       </ul>
-      <div class="text__copyright" :class="$store.state.bodyClass">&copy; Copyright Fatboar 2021</div>
+      <div class="text__copyright" :class="$store.state.bodyClass">&copy; Fatboar 2021</div>
     </div>
   </footer>
 </template>

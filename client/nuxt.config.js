@@ -6,12 +6,12 @@ export default {
   head: {
     title: 'FatBoar',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'fr'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Les meilleurs burgers des viandes de gibiers' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
@@ -53,7 +53,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxtjs/sitemap'
   ],
 
   toast: {
@@ -88,5 +89,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  // Sitemap for SEO
+  sitemap: {
+    hostname: process.env.BASE_URL, // https://www.yoursite.com
+    gzip: false,
+    exclude: [
+      '/admin/**'
+    ]
+  },
 }

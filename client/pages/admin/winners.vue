@@ -41,6 +41,9 @@
   export default {
     layout: 'waiter',
     middleware: ['auth-waiter'],
+    head: {
+      title: 'Gagnants'
+    },
     async asyncData({ $axios }) {
       const tickets = await $axios.$get(`/tickets/winners`);
       return {

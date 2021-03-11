@@ -37,6 +37,9 @@
 
   export default {
     middleware: 'auth',
+    head: {
+      title: 'Jouer'
+    },
     components: {
       LoaderGame
     },

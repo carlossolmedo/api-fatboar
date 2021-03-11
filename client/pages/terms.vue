@@ -89,7 +89,10 @@
 <script>
   export default {
     middleware: ['auth'],
-    auth: false
+    auth: false,
+    head: {
+      title: 'Mentions Légales'
+    }
   }
 </script>
 

@@ -8,7 +8,10 @@
 
 <script>
 export default {
-  middleware: ['auth-admin']
+  middleware: ['auth-admin'],
+  head: {
+    title: 'Dashboard'
+  }
 }
 </script>
 

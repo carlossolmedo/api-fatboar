@@ -33,6 +33,9 @@
 import dateFormat from '../../utils/dateFormat';
 
 export default {
+  head: {
+    title: 'Mes gains'
+  },
   async asyncData({ $axios, $auth }) {
     const tickets = await $axios.$get(`/users/${$auth.user.userId}/tickets`);
     return {

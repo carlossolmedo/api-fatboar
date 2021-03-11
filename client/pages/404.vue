@@ -15,7 +15,10 @@
   export default {
     layout: '404',
     middleware: ['auth'],
-    auth: false
+    auth: false,
+    head: {
+      title: '404 - Page non trouvée'
+    }
   }
 
 </script>
