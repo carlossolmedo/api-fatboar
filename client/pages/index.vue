@@ -34,6 +34,7 @@
   import ModalAuth from '~/components/auth/ModalAuth';
 
   export default {
+    layout: 'home',
     components: {
       ModalAuth
     }
