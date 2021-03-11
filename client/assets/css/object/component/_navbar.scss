@@ -326,15 +326,15 @@ Navbar component
   }
 }
 
-.c-navbar__item:hover>.c-menu__submenu {
-  visibility: visible;
-  opacity: 1;
-}
+// .c-navbar__item:hover>.c-menu__submenu {
+//   visibility: visible;
+//   opacity: 1;
+// }
 
 .c-menu__submenu {
   position: absolute;
-  inset: 50px auto auto 0px;
-  visibility: hidden;
+  inset: 50px auto auto -80%;
+  visibility: visible;
   min-width: 150px;
   margin: 0;
   padding: 0;
@@ -342,6 +342,11 @@ Navbar component
   transition: opacity 0.1s ease-out;
   background-color: $_color-white;
   border: 1px solid rgba(0, 0, 0, .15);
+  opacity: 1;
+
+  @include _media-min(lg) {
+    inset: 50px auto auto 0;
+  }
 }
 
 .c-menu__subitem {

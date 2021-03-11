@@ -167,6 +167,9 @@ main {
 }
 .received-waiter {
   @extend .received;
+  &:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   &::after {
     content: '✏️';
     display: block;
@@ -325,7 +328,11 @@ main {
 }
 
 .block-btn-delete {
-  width: 30%;
+  width: 100%;
+
+  @include _media-min(md) {
+    width: 30%;
+  }
 }
 
 /* ------------------------------- Animations ------------------------------- */
