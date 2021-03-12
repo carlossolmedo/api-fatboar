@@ -28,4 +28,16 @@
 .table-fluid {
   @extend .table;
   width: 700px;
+
+  &.table-users {
+    @extend .table-prizes;
+    & thead th {
+      background-color: $color-violet;
+      color: $_color-white;
+    }
+    & tbody tr:nth-child(even) {
+      background-color: $color-violet;
+      color: $_color-white;
+    }
+  }
 }

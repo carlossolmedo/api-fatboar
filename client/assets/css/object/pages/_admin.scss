@@ -1,0 +1,54 @@
+/* -------------------------------------------------------------------------- */
+/*                     All page for section administration                    */
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- Global --------------------------------- */
+
+.content-admin {
+  width: 100%;
+  margin: 50px 0 50px 0;
+  & > div > h1, h2 {
+    margin-bottom: 50px;
+  }
+}
+
+/* ----------------------------- Page dashboard ----------------------------- */
+
+.title-section {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.title-stats {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-family: Roboto, sans-serif;
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: 1rem;
+
+  & .graph-round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 5px solid $color-violet;
+    border-radius: 999rem;
+  }
+}
+
+.block-list-users {
+  width: 100%;
+  margin: auto;
+
+  @include _media-min(md) {
+    width: 85%;
+  }
+}
