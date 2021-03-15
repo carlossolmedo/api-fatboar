@@ -8,10 +8,10 @@
         <NuxtLink :class="$store.state.bodyClass" class="navbar__link" to="/account/prizes">Gains</NuxtLink>
       </li>
       <li class="c-navbar__item">
-        <a @click="openSubmenuCustomer = !openSubmenuCustomer" class="navbar__link" :class="$store.state.bodyClass"><span
+        <a @click="openSubMenu('subMenuCustomer')" class="navbar__link" :class="$store.state.bodyClass"><span id="subMenu"
             v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white"
             aria-hidden="true"></span></a>
-        <ul v-if="openSubmenuCustomer" class="c-menu__submenu" aria-hidden="false">
+        <ul id="subMenuCustomer" class="c-menu__submenu" aria-hidden="false">
           <li class="c-menu__subitem" aria-haspopup="true">
             <NuxtLink to="/account/settings">Mon compte</NuxtLink>
           </li>
@@ -28,10 +28,10 @@
         <NuxtLink class="navbar__link" to="/admin/dashboard">Dashboard</NuxtLink>
       </li>
       <li class="c-navbar__item">
-        <a @click="openSubmenuAdmin = !openSubmenuAdmin" class="navbar__link">
-          <span>Administration</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
+        <a @click="openSubMenu('subMenuAdmin')" class="navbar__link">
+          <span id="subMenu">Administration</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
         </a>
-        <ul v-if="openSubmenuAdmin" class="c-menu__submenu" aria-hidden="false">
+        <ul id="subMenuAdmin" class="c-menu__submenu" aria-hidden="false">
           <li class="c-menu__subitem" aria-haspopup="true">
             <NuxtLink to="/admin/accounts">Comptes</NuxtLink>
           </li>
@@ -41,10 +41,10 @@
         </ul>
       </li>
       <li class="c-navbar__item">
-        <a @click="openSubmenuWaiter = !openSubmenuWaiter" class="navbar__link">
-          <span v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
+        <a @click="openSubMenu('subMenuAccount')" class="navbar__link">
+          <span id="subMenu" v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
         </a>
-        <ul v-if="openSubmenuWaiter" class="c-menu__submenu" aria-hidden="false">
+        <ul id="subMenuAccount" class="c-menu__submenu" aria-hidden="false">
           <li class="c-menu__subitem" aria-haspopup="true">
             <NuxtLink to="/account/settings">Mon compte</NuxtLink>
           </li>
@@ -68,10 +68,21 @@
   export default {
     data() {
       return {
-        username: '',
-        openSubmenuCustomer: false,
-        openSubmenuAdmin: false,
-        openSubmenuWaiter: false
+        username: ''
+      }
+    },
+    mounted() {
+      window.onclick = function(event) {
+        const elSubMenu = event.target.id;
+
+        if (elSubMenu !== 'subMenu') {
+          const subMenus = document.getElementsByClassName("c-menu__submenu");
+          for (let i = 0; i < subMenus.length; i++) {
+            if (subMenus[i].classList.contains('show-submenu')) {
+              subMenus[i].classList.remove('show-submenu');
+            }
+          }
+        }
       }
     },
     methods: {
@@ -93,6 +104,9 @@
         } else {
           this.$auth.logout();
         }
+      },
+      openSubMenu(subMenu) {
+        document.getElementById(subMenu).classList.toggle("show-submenu");
       }
     }
   }
