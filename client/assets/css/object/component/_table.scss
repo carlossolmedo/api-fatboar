@@ -22,6 +22,11 @@
     & tbody tr td {
       padding: 5px;
     }
+    & tbody tr:hover {
+      & .icon {
+        display: block;
+      }
+    }
   }
 }
 
@@ -38,6 +43,21 @@
     & tbody tr:nth-child(even) {
       background-color: $color-violet;
       color: $_color-white;
+    }
+  }
+  &.table-list-admin {
+    @extend .table-users;
+  }
+  &.table-list-users {
+    @extend .table-prizes;
+    & thead th {
+      background-color: $color-yellow;
+      color: $_color-black;
+    }
+
+    & tbody tr:nth-child(even) {
+      background-color: $color-table-bg;
+      color: $_color-black;
     }
   }
 }

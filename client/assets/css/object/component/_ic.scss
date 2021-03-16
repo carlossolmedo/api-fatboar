@@ -180,3 +180,38 @@ Icon (Angle Down) component
     }
   }
 }
+
+// Icons
+
+.icon {
+  display: none;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid rgba(185, 190, 199, .5);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  &.icon-red:hover {
+    svg {
+      color: $color-danger;
+    }
+  }
+
+  // &:hover {
+  //   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //   fill: red;
+  //   transition: all .3s ease;
+  // }
+}
+
+// .icon-red {
+//   &:hover {
+//     color: $color-danger;
+//   }
+// }
+
+.icon-black {
+  fill: $_color-black;
+}
+
