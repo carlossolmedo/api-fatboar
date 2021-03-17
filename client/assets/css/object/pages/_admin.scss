@@ -12,6 +12,10 @@
   }
 }
 
+.btn-size-default {
+  height: 52px;
+}
+
 /* ----------------------------- Page dashboard ----------------------------- */
 
 .title-section {
@@ -86,4 +90,54 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.block-btn-ops {
+  width: 100%;
+  margin-bottom: 2rem;
+  @include _media-min(md) {
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+
+/* ------------------------------ Page tickets ------------------------------ */
+
+.panel {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ddd;
+  border-radius: 10px;
+
+  & > h3, .block-img-logo {
+    margin-bottom: 2rem;
+  }
+
+  // &.panel-big-prize {
+
+  // }
+}
+
+.img-logo-prize {
+  width: 100px;
+  height: 100px;
+  border-radius: 999rem;
+  background-color: $color-violet-dark;
+}
+
+.block-btn-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.block-form-tickets {
+  width: 30%;
+  margin: auto;
+
+  & > form.connection {
+    dl {
+      margin-bottom: 2rem;
+    }
+  }
 }

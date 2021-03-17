@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import FormAdminSignUp from '@/components/auth/FormAdminSignUp';
+import FormAdminSignUp from '@/components/admin/FormAdminSignUp';
 import ListAdminAccounts from '@/components/admin/ListAdminAccounts';
 import ListUserAccounts from '@/components/admin/ListUserAccounts';
   export default {
