@@ -24,7 +24,7 @@
         <h3 class="title-stats">Tickets Reçu</h3>
         <div class="graph">
           <div class="graph-round">
-            <span>7</span>
+            <span>{{ ticketsReceived }}</span>
           </div>
         </div>
       </div>
@@ -87,8 +87,10 @@
     },
     async asyncData({ $axios }) {
       const ticketsTotal = await $axios.$get(`/tickets/total`);
+      const ticketsReceived = await $axios.$get(`/tickets/received`);
       return {
-        ticketsTotal: ticketsTotal
+        ticketsTotal: ticketsTotal,
+        ticketsReceived: ticketsReceived
       }
     },
     data() {
