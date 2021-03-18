@@ -16,7 +16,7 @@
         <h3 class="title-stats">Tickets Joué</h3>
         <div class="graph">
           <div class="graph-round">
-            <span>25</span>
+            <span>{{ ticketsTotal }}</span>
           </div>
         </div>
       </div>
@@ -84,6 +84,12 @@
     layout: 'admin',
     head: {
       title: 'Dashboard'
+    },
+    async asyncData({ $axios }) {
+      const ticketsTotal = await $axios.$get(`/tickets/total`);
+      return {
+        ticketsTotal: ticketsTotal
+      }
     },
     data() {
       return {
