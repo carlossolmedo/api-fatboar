@@ -163,6 +163,11 @@ class Ticket {
         const totalTickets = await TicketModel.count();
         return totalTickets;
     }
+
+    async countTotalTicketsReceived() {
+        const totalTicketsReceived = await TicketModel.where({ received: true }).count();
+        return totalTicketsReceived;
+    }
 }
 
 export default Ticket;
