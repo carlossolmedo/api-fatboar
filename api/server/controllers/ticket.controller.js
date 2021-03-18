@@ -120,3 +120,13 @@ exports.updateTicketReceived = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+exports.getTicketsTotal = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const totalTickets = await tickets.countTotalTickets();
+        res.status(200).json(totalTickets);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};

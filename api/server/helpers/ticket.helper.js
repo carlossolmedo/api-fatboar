@@ -158,6 +158,11 @@ class Ticket {
         const fieldUpdated = await TicketModel.updateOne({ ticket_number: ticket.ticket_number }, { received: ticket.received});
         return fieldUpdated;
     }
+
+    async countTotalTickets() {
+        const totalTickets = await TicketModel.count();
+        return totalTickets;
+    }
 }
 
 export default Ticket;
