@@ -9,7 +9,8 @@ export const userRoute = {
     addUser: `${urlAPI}/users`,
     updateUser: `${urlAPI}/users/:id`,
     deleteUser: `${urlAPI}/users/:id`,
-    getTicketsByUser: `${urlAPI}/users/:id/tickets`
+    getTicketsByUser: `${urlAPI}/users/:id/tickets`,
+    getUsersCustomer: `${urlAPI}/user/customers`
 };
 
 /** All routes to authentication */

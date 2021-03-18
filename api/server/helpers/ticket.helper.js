@@ -160,12 +160,12 @@ class Ticket {
     }
 
     async countTotalTickets() {
-        const totalTickets = await TicketModel.count();
+        const totalTickets = await TicketModel.countDocuments();
         return totalTickets;
     }
 
     async countTotalTicketsReceived() {
-        const totalTicketsReceived = await TicketModel.where({ received: true }).count();
+        const totalTicketsReceived = await TicketModel.where({ received: true }).countDocuments();
         return totalTicketsReceived;
     }
 }
