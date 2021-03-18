@@ -31,4 +31,5 @@ export const ticketRoute = {
     updateTicketReceived: `${urlAPI}/tickets/winners`,
     getTicketsTotal: `${urlAPI}/tickets/total`,
     getTicketsReceived: `${urlAPI}/tickets/received`,
+    getTicketsPercent: `${urlAPI}/tickets/percent`
 };

@@ -14,5 +14,6 @@ router.get(ticketRoute.getTicketsWinners, ticketController.getTicketsWinners);
 router.put(ticketRoute.updateTicketReceived, ticketController.updateTicketReceived);
 router.get(ticketRoute.getTicketsTotal, ticketController.getTicketsTotal);
 router.get(ticketRoute.getTicketsReceived, ticketController.getTicketsReceived);
+router.get(ticketRoute.getTicketsPercent, ticketController.getTicketsPercent);
 
 module.exports = router;

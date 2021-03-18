@@ -168,6 +168,18 @@ class Ticket {
         const totalTicketsReceived = await TicketModel.where({ received: true }).countDocuments();
         return totalTicketsReceived;
     }
+
+    async countTicketsByPrizes() {
+        let countPrizes = {};
+        countPrizes.starter = await TicketModel.where({ type: 'une entrée au choix' }).countDocuments();
+        countPrizes.dessert = await TicketModel.where({ type: 'un dessert au choix' }).countDocuments();
+        countPrizes.burger = await TicketModel.where({ type: 'un burger au choix' }).countDocuments();
+        countPrizes.menu_day = await TicketModel.where({ type: 'un menu du jour' }).countDocuments();
+        countPrizes.menu_choice = await TicketModel.where({ type: 'un menu au choix' }).countDocuments();
+        countPrizes.discount = await TicketModel.where({ type: '70% réduction' }).countDocuments();
+
+        return countPrizes;
+    }
 }
 
 export default Ticket;

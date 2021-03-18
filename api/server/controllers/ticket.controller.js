@@ -139,4 +139,14 @@ exports.getTicketsReceived = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-}
+};
+
+exports.getTicketsPercent = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const ticketsByPercentage = await tickets.countTicketsByPrizes();
+        res.status(200).json(ticketsByPercentage);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
