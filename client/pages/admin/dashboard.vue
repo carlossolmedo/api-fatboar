@@ -1,18 +1,16 @@
 <template>
   <div>
     <h1 class="title-lobster">Statistiques</h1>
+    <h1 class="u-text-right">
+      <button @click="getStats">
+        update
+        <!-- <refresh-cw-icon size="1.5x" class="custom-class"></refresh-cw-icon> -->
+      </button>
+    </h1>
     <!-- Tickets -->
     <h2 class="title-section">Tickets</h2>
     <section class="c-row c-row--middle">
-      <div class="c-row__col c-row__col--1-4">
-        <h3 class="title-stats">Pourcentage Gains</h3>
-        <div class="graph">
-          <div class="graph-round">
-            <span>10</span>
-          </div>
-        </div>
-      </div>
-      <div class="c-row__col c-row__col--1-4">
+      <div class="c-row__col c-row__col--1-1 c-row__col--md-1-3">
         <h3 class="title-stats">Tickets Joué</h3>
         <div class="graph">
           <div class="graph-round">
@@ -20,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="c-row__col c-row__col--1-4">
+      <div class="c-row__col c-row__col--1-1 c-row__col--md-1-3">
         <h3 class="title-stats">Tickets Reçu</h3>
         <div class="graph">
           <div class="graph-round">
@@ -28,7 +26,7 @@
           </div>
         </div>
       </div>
-      <div class="c-row__col c-row__col--1-4">
+      <div class="c-row__col c-row__col--1-1 c-row__col--md-1-3">
         <h3 class="title-stats">Total Participants</h3>
         <div class="graph">
           <div class="graph-round">
@@ -37,76 +35,79 @@
         </div>
       </div>
     </section>
-
-    <!-- Users -->
-    <h2 class="title-section">Participants</h2>
     <section class="c-row c-row--middle">
-      <div class="block-list-users">
-        <table v-if="listUsers" class="table-fluid table-users">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Genre</th>
-              <th>Nom</th>
-              <th>Adresse mail</th>
-              <th>Date de creation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>M</td>
-              <td>Andres Olmedo</td>
-              <td>andres@fatboar.com</td>
-              <td>10/04/2021</td>
-            </tr>
-            <!-- <tr v-for="(ticket, index) in ticketsWinners" :key="ticket.ticket_number">
-              <th>{{ index + 1 }}</th>
-              <td>{{ ticket.ticket_number }}</td>
-              <td>{{ ticket.type }}</td>
-              <td>{{ ticket.user_id.username }}</td>
-              <td>{{ ticket.user_id.email }}</td>
-              <td>{{ ticket.date_created | date }}</td>
-              <td id="receivedField">
-                <span :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" class="received-waiter" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
-              </td>
-            </tr> -->
-          </tbody>
-        </table>
-        <h3 v-if="!listUsers" class="u-text-center">Pas des utilisateurs inscritent actuellement</h3>
+      <div class="c-row__col c-row__col--1-1">
+        <h3 class="title-stats">Pourcentage Gains</h3>
+        <div class="graph">
+          <div class="chart-dashboard">
+            <GChart
+              type="PieChart"
+              :data="chartData"
+              :options="chartOptions"
+              :resizeDebounce="500"
+            />
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+  import { GChart } from "vue-google-charts";
+  import { RefreshCwIcon } from 'vue-feather-icons';
+
   export default {
     layout: 'admin',
     head: {
       title: 'Dashboard'
     },
-    async asyncData({ $axios }) {
-      const ticketsTotal = await $axios.$get(`/tickets/total`);
-      const ticketsReceived = await $axios.$get(`/tickets/received`);
-      const totalParticipants = await $axios.$get(`/user/customers`);
-
-      return {
-        ticketsTotal: ticketsTotal,
-        ticketsReceived: ticketsReceived,
-        totalParticipants: totalParticipants
-      }
+    componenets: {
+      GChart,
+      RefreshCwIcon
     },
     data() {
       return {
-        listUsers: true
+        ticketsTotal: null,
+        ticketsReceived: null,
+        totalParticipants: null,
+        chartData: null,
+        chartOptions: null
       }
     },
-  }
+    methods: {
+      async getStats() {
+        this.ticketsTotal = await this.$axios.$get(`/tickets/total`);
+        this.ticketsReceived = await this.$axios.$get(`/tickets/received`);
+        this.totalParticipants = await this.$axios.$get(`/user/customers`);
+        let ticketsByPercent = await this.$axios.$get(`/tickets/percent`);
+        let chartData = [
+          ["Prix", "Nombre de Gagnants"],
+          ["Entrées", ticketsByPercent.starter],
+          ["Desserts", ticketsByPercent.dessert],
+          ["Burger", ticketsByPercent.burger],
+          ["Menu du jour", ticketsByPercent.menu_day],
+          ["Menu au choix", ticketsByPercent.menu_choice],
+          ["70% Reductions", ticketsByPercent.discount]
+        ];
+        let chartOptions = {
+          width: 650,
+          height: 400
+        };
 
+        this.chartData = chartData;
+        this.chartOptions = chartOptions;
+        console.log('getStats');
+      }
+    },
+    beforeMount() {
+      this.getStats();
+    }
+  }
 </script>
 
 <style scoped>
 section {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
 }
 </style>

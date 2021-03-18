@@ -25,15 +25,23 @@
 
 .title-stats {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-family: Roboto, sans-serif;
+
+  @include _media-min(md) {
+    margin-bottom: 2.5rem;
+  }
 }
 
 .graph {
   display: flex;
   justify-content: center;
   align-items: center;
-  // padding: 1rem;
+  margin-bottom: 3rem;
+
+  @include _media-min(md) {
+    margin-bottom: 0;
+  }
 
   & .graph-round {
     display: flex;
@@ -45,6 +53,13 @@
     font-weight: bold;
     border: 5px solid $color-violet;
     border-radius: 999rem;
+  }
+  & .chart-dashboard {
+    overflow-x: auto;
+
+    @include _media-min(md) {
+      overflow: hidden;
+    }
   }
 }
 
