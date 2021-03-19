@@ -1,6 +1,12 @@
 import User from '../models/user.model';
 import TicketModel from '../models/ticket.model';
 
+const roles = {
+    admin: 'admin',
+    customer: 'customer',
+    waiter: 'waiter'
+}
+
 // Get all users
 exports.getUsers = async (req, res) => {
     try {
@@ -121,11 +127,37 @@ exports.getTicketsByUser = async (req, res) => {
 };
 
 /** Get number of total users customer */
-exports.getUsersCustomer = async (req, res) => {
+exports.getNumberUsersCustomer = async (req, res) => {
     try {
-        const totalUsersCustomer = await User.where({ role: 'customer' }).countDocuments();
+        const totalUsersCustomer = await User.where({ role: roles.customer }).countDocuments();
         res.status(200).json(totalUsersCustomer);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
+
+/**
+ * Get users with admin permissions
+ * roles: admin & waiter
+ */
+exports.getUsersAdmin = async (req, res) => {
+    try {
+        const usersAdmin = await User.find({ role: { $in: [roles.admin, roles.waiter] } }).select('-password').exec();
+        if (usersAdmin) {
+            res.status(200).json(usersAdmin);
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.getUsersCustomer = async (req, res) => {
+    try {
+        const usersCustomer = await User.find({role: roles.customer}).select('-password -role').exec();
+        if (usersCustomer) {
+            res.status(200).json(usersCustomer);
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
