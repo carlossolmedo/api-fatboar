@@ -76,12 +76,12 @@ class Ticket {
      * The ticket will create and save with the key ticket_number, and type
      * from createTicket to WinningTicketModel
      */
-    addAndSaveTicketNumber(typeOfTicket, keyOfTicket) {
+    addAndSaveTicketNumber(typeOfTicket, valueTypeOfTicket) {
         let ticketModeled = [];
         for (let i = 0; i < typeOfTicket.length; i++) {
             ticketModeled.push({
                 ticket_number: typeOfTicket[i],
-                type: keyOfTicket,
+                type: valueTypeOfTicket,
                 validated: false,
                 date_created: new Date(),
             });
@@ -169,14 +169,14 @@ class Ticket {
         return totalTicketsReceived;
     }
 
-    async countTicketsByPrizes() {
+    async countTicketsByPrizes(prizes) {
         let countPrizes = {};
-        countPrizes.starter = await TicketModel.where({ type: 'une entrée au choix' }).countDocuments();
-        countPrizes.dessert = await TicketModel.where({ type: 'un dessert au choix' }).countDocuments();
-        countPrizes.burger = await TicketModel.where({ type: 'un burger au choix' }).countDocuments();
-        countPrizes.menu_day = await TicketModel.where({ type: 'un menu du jour' }).countDocuments();
-        countPrizes.menu_choice = await TicketModel.where({ type: 'un menu au choix' }).countDocuments();
-        countPrizes.discount = await TicketModel.where({ type: '70% réduction' }).countDocuments();
+        countPrizes.starter = await TicketModel.where({ type: prizes.starter }).countDocuments();
+        countPrizes.dessert = await TicketModel.where({ type: prizes.dessert }).countDocuments();
+        countPrizes.burger = await TicketModel.where({ type: prizes.burger }).countDocuments();
+        countPrizes.menu_day = await TicketModel.where({ type: prizes.menu_day }).countDocuments();
+        countPrizes.menu_choice = await TicketModel.where({ type: prizes.menu_choice }).countDocuments();
+        countPrizes.discount = await TicketModel.where({ type: prizes.discount }).countDocuments();
 
         return countPrizes;
     }
