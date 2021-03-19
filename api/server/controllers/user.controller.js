@@ -118,4 +118,14 @@ exports.getTicketsByUser = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-}
+};
+
+/** Get number of total users customer */
+exports.getUsersCustomer = async (req, res) => {
+    try {
+        const totalUsersCustomer = await User.where({ role: 'customer' }).countDocuments();
+        res.status(200).json(totalUsersCustomer);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};

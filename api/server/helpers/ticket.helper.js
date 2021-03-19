@@ -76,12 +76,12 @@ class Ticket {
      * The ticket will create and save with the key ticket_number, and type
      * from createTicket to WinningTicketModel
      */
-    addAndSaveTicketNumber(typeOfTicket, keyOfTicket) {
+    addAndSaveTicketNumber(typeOfTicket, valueTypeOfTicket) {
         let ticketModeled = [];
         for (let i = 0; i < typeOfTicket.length; i++) {
             ticketModeled.push({
                 ticket_number: typeOfTicket[i],
-                type: keyOfTicket,
+                type: valueTypeOfTicket,
                 validated: false,
                 date_created: new Date(),
             });
@@ -157,6 +157,28 @@ class Ticket {
     async updateTicketReceived(ticket) {
         const fieldUpdated = await TicketModel.updateOne({ ticket_number: ticket.ticket_number }, { received: ticket.received});
         return fieldUpdated;
+    }
+
+    async countTotalTickets() {
+        const totalTickets = await TicketModel.countDocuments();
+        return totalTickets;
+    }
+
+    async countTotalTicketsReceived() {
+        const totalTicketsReceived = await TicketModel.where({ received: true }).countDocuments();
+        return totalTicketsReceived;
+    }
+
+    async countTicketsByPrizes(prizes) {
+        let countPrizes = {};
+        countPrizes.starter = await TicketModel.where({ type: prizes.starter }).countDocuments();
+        countPrizes.dessert = await TicketModel.where({ type: prizes.dessert }).countDocuments();
+        countPrizes.burger = await TicketModel.where({ type: prizes.burger }).countDocuments();
+        countPrizes.menu_day = await TicketModel.where({ type: prizes.menu_day }).countDocuments();
+        countPrizes.menu_choice = await TicketModel.where({ type: prizes.menu_choice }).countDocuments();
+        countPrizes.discount = await TicketModel.where({ type: prizes.discount }).countDocuments();
+
+        return countPrizes;
     }
 }
 

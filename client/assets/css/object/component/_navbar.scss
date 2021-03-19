@@ -331,7 +331,12 @@ Navbar component
 //   opacity: 1;
 // }
 
+.show-submenu {
+  display: block !important;
+}
+
 .c-menu__submenu {
+  display: none;
   position: absolute;
   inset: 50px auto auto -80%;
   visibility: visible;

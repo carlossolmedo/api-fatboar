@@ -1,11 +1,11 @@
 <template>
   <main class="content-connection">
-    <FormAdmin />
+    <FormAdminConnection />
   </main>
 </template>
 
 <script>
-import FormAdmin from '~/components/auth/FormAdmin';
+import FormAdminConnection from '~/components/auth/FormAdminConnection';
 
 export default {
   layout: 'admin-connection',
@@ -15,7 +15,7 @@ export default {
     title: 'Connexion'
   },
   components: {
-    FormAdmin
+    FormAdminConnection
   },
   mounted() {
     localStorage.setItem('gdpr', true);

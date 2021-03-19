@@ -13,6 +13,7 @@
               <th>Adresse mail</th>
               <th>Date</th>
               <th>Récuperé</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -23,8 +24,11 @@
               <td>{{ ticket.user_id.username }}</td>
               <td>{{ ticket.user_id.email }}</td>
               <td>{{ ticket.date_created | date }}</td>
-              <td id="receivedField">
-                <span :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" class="received-waiter" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
+              <td>
+                <span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
+              </td>
+              <td class="actions">
+                <a class="icon icon-red" :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" title="modifier"><edit-2-icon size="16" class=""></edit-2-icon></a>
               </td>
             </tr>
           </tbody>
@@ -37,12 +41,16 @@
 
 <script>
   import dateFormat from '../../utils/dateFormat';
+  import { Edit2Icon } from 'vue-feather-icons';
 
   export default {
     layout: 'waiter',
     middleware: ['auth-waiter'],
     head: {
       title: 'Gagnants'
+    },
+    components: {
+      Edit2Icon
     },
     async asyncData({ $axios }) {
       const tickets = await $axios.$get(`/tickets/winners`);

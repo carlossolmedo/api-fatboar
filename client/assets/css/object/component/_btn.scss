@@ -102,6 +102,16 @@ Button component
     }
   }
 
+  &--cancel {
+    border-color: _lightest($color-cancel);
+    color: _lightest($color-cancel);
+
+    @include _hover() {
+      border-color: $color-cancel;
+      color: $color-cancel;
+    }
+  }
+
   &--block {
     display: block;
     width: 100%;

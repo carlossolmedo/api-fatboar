@@ -1,0 +1,174 @@
+/* -------------------------------------------------------------------------- */
+/*                     All page for section administration                    */
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- Global --------------------------------- */
+
+.content-admin {
+  width: 100%;
+  margin: 50px 0 50px 0;
+  & > div > h1, h2 {
+    margin-bottom: 50px;
+  }
+}
+
+.btn-size-default {
+  height: 52px;
+}
+
+/* ----------------------------- Page dashboard ----------------------------- */
+
+.title-section {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.title-stats {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: Roboto, sans-serif;
+
+  @include _media-min(md) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  @include _media-min(md) {
+    margin-bottom: 0;
+  }
+
+  & .graph-round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 5px solid $color-violet;
+    border-radius: 999rem;
+  }
+  & .chart-dashboard {
+    overflow-x: auto;
+
+    @include _media-min(md) {
+      overflow: hidden;
+    }
+  }
+}
+
+.btn-update {
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  padding: 7px;
+  color: white;
+  background-color: #7952b3;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 3px 3px 0 #333;
+    transition: all .3s ease-in;
+    & > svg {
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+    }
+  }
+}
+
+.block-list-users {
+  width: 100%;
+  margin: auto;
+
+  @include _media-min(md) {
+    width: 85%;
+  }
+}
+
+/* ------------------------------ Page accounts ----------------------------- */
+
+.subtitle {
+  display: block;
+  margin-bottom: 3rem;
+}
+.block-btn-add {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.form-sign-up {
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  background-color: #ddd;
+  border-radius: 10px;
+  width: 100%;
+
+  @include _media-min(md) {
+    width: 50%;
+    padding: 3rem;
+  }
+}
+.block-btn-form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.block-btn-ops {
+  width: 100%;
+  margin-bottom: 2rem;
+  @include _media-min(md) {
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+
+/* ------------------------------ Page tickets ------------------------------ */
+
+.panel {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ddd;
+  border-radius: 10px;
+
+  & > h3, .block-img-logo {
+    margin-bottom: 2rem;
+  }
+}
+
+.img-logo-prize {
+  width: 100px;
+  height: 100px;
+  border-radius: 999rem;
+  background-color: $color-violet-dark;
+}
+
+.block-btn-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.block-form-tickets {
+  width: 30%;
+  margin: auto;
+
+  & > form.connection {
+    dl {
+      margin-bottom: 2rem;
+    }
+  }
+}

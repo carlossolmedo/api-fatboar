@@ -11,6 +11,7 @@ router.get(userRoute.getTicketsByUser, userController.getTicketsByUser);
 router.post(userRoute.addUser, userController.addUser);
 router.put(userRoute.updateUser, userController.updateUser);
 router.delete(userRoute.deleteUser, userController.deleteUser);
+router.get(userRoute.getUsersCustomer, userController.getUsersCustomer);
 // router.post(`/users/searchEmail`, userController.getUserByEmail);
 
 module.exports = router;

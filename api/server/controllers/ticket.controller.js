@@ -1,5 +1,14 @@
 import Ticket from '../helpers/ticket.helper';
 
+const prizes = {
+    starter: 'une entrée au choix',
+    dessert: 'un dessert au choix',
+    burger: 'un burger au choix',
+    menu_day: 'un menu du jour',
+    menu_choice: 'un menu au choix',
+    discount: '70% réduction'
+}
+
 exports.generateWinningTickets = (req, res) => {
     try {
         const quantity = req.params.quantity;
@@ -9,27 +18,27 @@ exports.generateWinningTickets = (req, res) => {
         // Save tickets by percent and type of ticket
         const ticketsStarter = tickets.addAndSaveTicketNumber(
             winningTickets.starter,
-            'une entrée au choix'
+            prizes.starter
         );
         const ticketsDessert = tickets.addAndSaveTicketNumber(
             winningTickets.dessert,
-            'un dessert au choix'
+            prizes.dessert
         );
         const ticketsBurger = tickets.addAndSaveTicketNumber(
             winningTickets.burger,
-            'un burger au choix'
+            prizes.burger
         );
         const ticketsMenuDay = tickets.addAndSaveTicketNumber(
             winningTickets.menu_day,
-            'un menu du jour'
+            prizes.menu_day
         );
         const ticketsMenuChoice = tickets.addAndSaveTicketNumber(
             winningTickets.menu_choice,
-            'un menu au choix'
+            prizes.menu_choice
         );
         const ticketsDiscount = tickets.addAndSaveTicketNumber(
             winningTickets.discount,
-            '70% réduction'
+            prizes.discount
         );
 
         if (
@@ -116,6 +125,36 @@ exports.updateTicketReceived = async (req, res) => {
         if (updateField.ok) {
             res.status(200).json({ message: `Ticket ${ticketReceived.ticket_number} value received updated with success`});
         }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.getTicketsTotal = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const totalTickets = await tickets.countTotalTickets();
+        res.status(200).json(totalTickets);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.getTicketsReceived = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const totalTicketsReceived = await tickets.countTotalTicketsReceived();
+        res.status(200).json(totalTicketsReceived);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.getTicketsPercent = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const ticketsByPercentage = await tickets.countTicketsByPrizes(prizes);
+        res.status(200).json(ticketsByPercentage);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

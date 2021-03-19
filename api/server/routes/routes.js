@@ -9,7 +9,8 @@ export const userRoute = {
     addUser: `${urlAPI}/users`,
     updateUser: `${urlAPI}/users/:id`,
     deleteUser: `${urlAPI}/users/:id`,
-    getTicketsByUser: `${urlAPI}/users/:id/tickets`
+    getTicketsByUser: `${urlAPI}/users/:id/tickets`,
+    getUsersCustomer: `${urlAPI}/user/customers`
 };
 
 /** All routes to authentication */
@@ -21,10 +22,14 @@ export const authRoute = {
     facebook: `${urlAPI}/auth/facebook`
 };
 
+/** All routes to tickets management */
 export const ticketRoute = {
     generateWinningTickets: `${urlAPI}/tickets/winning-tickets/generate/:quantity`,
     getTicket: `${urlAPI}/tickets`,
     verifyTicket: `${urlAPI}/tickets/verify`,
     getTicketsWinners: `${urlAPI}/tickets/winners`,
     updateTicketReceived: `${urlAPI}/tickets/winners`,
+    getTicketsTotal: `${urlAPI}/tickets/total`,
+    getTicketsReceived: `${urlAPI}/tickets/received`,
+    getTicketsPercent: `${urlAPI}/tickets/percent`
 };
