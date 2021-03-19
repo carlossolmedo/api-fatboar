@@ -63,6 +63,26 @@
   }
 }
 
+.btn-update {
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  padding: 6px;
+  color: white;
+  background-color: #7952b3;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 3px 3px 0 #333;
+    transition: all .3s ease-in;
+    & > svg {
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+    }
+  }
+}
+
 .block-list-users {
   width: 100%;
   margin: auto;
@@ -128,10 +148,6 @@
   & > h3, .block-img-logo {
     margin-bottom: 2rem;
   }
-
-  // &.panel-big-prize {
-
-  // }
 }
 
 .img-logo-prize {

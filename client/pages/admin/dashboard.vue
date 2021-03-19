@@ -2,13 +2,10 @@
   <div>
     <h1 class="title-lobster">Statistiques</h1>
     <h1 class="u-text-right">
-      <button @click="getStats">
-        update
-        <!-- <refresh-cw-icon size="1.5x" class="custom-class"></refresh-cw-icon> -->
+      <button @click="getStats" class="btn-update" title="Mettre à jour">
+        <refresh-cw-icon size="1.5x"></refresh-cw-icon>
       </button>
     </h1>
-    <!-- Tickets -->
-    <h2 class="title-section">Tickets</h2>
     <section class="c-row c-row--middle">
       <div class="c-row__col c-row__col--1-1 c-row__col--md-1-3">
         <h3 class="title-stats">Tickets Joué</h3>
@@ -55,14 +52,14 @@
 
 <script>
   import { GChart } from "vue-google-charts";
-  import { RefreshCwIcon } from 'vue-feather-icons';
+  import { RefreshCwIcon }  from 'vue-feather-icons';
 
   export default {
     layout: 'admin',
     head: {
       title: 'Dashboard'
     },
-    componenets: {
+    components: {
       GChart,
       RefreshCwIcon
     },
@@ -97,7 +94,6 @@
 
         this.chartData = chartData;
         this.chartOptions = chartOptions;
-        console.log('getStats');
       }
     },
     beforeMount() {
