@@ -10,7 +10,7 @@
     </section>
     <h3 class="subtitle">Comptes Clients</h3>
     <section>
-      <ListUserAccounts :users="listUsers" />
+      <ListUserAccounts :users="listAdmin" />
     </section>
   </div>
 </template>

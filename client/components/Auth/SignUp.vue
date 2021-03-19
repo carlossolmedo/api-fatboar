@@ -119,7 +119,6 @@
           <span v-if="!loading">Je m'inscris</span>
           <Loader :loading="loading" />
         </button>
-        <!-- <div v-if="submitStatus === 'ERROR'" class="error">{{messageSubmit}}</div> -->
       </div>
     </form>
     <div class="third-connection-block">
@@ -240,8 +239,8 @@
                 this.loading = false;
                 this.submitStatus = 'OK';
                 this.$router.push({name: 'game'});
+                this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(1500)
               }, 1000);
-              this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(1500)
             });
           }).catch(() => {
             this.loading = false;
