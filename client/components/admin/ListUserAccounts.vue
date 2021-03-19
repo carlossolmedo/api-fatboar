@@ -1,5 +1,5 @@
 <template>
-  <div class="block-list-users">
+  <div class="block-lists-admin">
     <table class="table-fluid table-list-users">
       <thead>
         <tr>
@@ -7,28 +7,29 @@
           <th>Genre</th>
           <th>Nom</th>
           <th>Adresse mail</th>
+          <th>Code postal</th>
+          <th>Pays</th>
           <th>Date de création</th>
-          <th>Récuperer</th>
+          <th>Dernière connexion</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>M</td>
-          <td>Carlos Olmedo</td>
-          <td>carlos@fatboar.com</td>
-          <td>10/03/2021</td>
-          <td><span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span></td>
+        <tr v-for="(user, index) in users" :key="user._id">
+          <th>{{ index + 1 }}</th>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.postal_code }}</td>
+          <td>{{ user.country }}</td>
+          <td>{{ user.date_created }}</td>
+          <td>{{ user.last_connection }}</td>
           <td class="actions">
             <a class="icon icon-red" title="désactiver"><trash-2-icon size="16" class=""></trash-2-icon></a>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- <div>
-      {{ users }}
-    </div> -->
   </div>
 </template>
 
@@ -42,13 +43,6 @@ export default {
   components: {
     Edit2Icon,
     Trash2Icon
-  },
-  data() {
-    return {
-      ticket: {
-        received: false
-      }
-    }
   }
 }
 </script>
