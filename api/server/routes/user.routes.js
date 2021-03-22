@@ -11,6 +11,8 @@ router.get(userRoute.getTicketsByUser, userController.getTicketsByUser);
 router.post(userRoute.addUser, userController.addUser);
 router.put(userRoute.updateUser, userController.updateUser);
 router.delete(userRoute.deleteUser, userController.deleteUser);
+router.get(userRoute.getNumberUsersCustomer, userController.getNumberUsersCustomer);
+router.get(userRoute.getUsersAdmin, userController.getUsersAdmin);
 router.get(userRoute.getUsersCustomer, userController.getUsersCustomer);
 // router.post(`/users/searchEmail`, userController.getUserByEmail);
 

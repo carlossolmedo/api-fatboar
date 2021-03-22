@@ -76,7 +76,7 @@
       async getStats() {
         this.ticketsTotal = await this.$axios.$get(`/tickets/total`);
         this.ticketsReceived = await this.$axios.$get(`/tickets/received`);
-        this.totalParticipants = await this.$axios.$get(`/user/customers`);
+        this.totalParticipants = await this.$axios.$get(`/user/number-customers`);
         let ticketsByPercent = await this.$axios.$get(`/tickets/percent`);
         let chartData = [
           ["Prix", "Nombre de Gagnants"],

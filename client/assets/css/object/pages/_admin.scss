@@ -69,8 +69,8 @@
   height: 40px;
   width: 40px;
   padding: 7px;
-  color: white;
-  background-color: #7952b3;
+  color: $_color-white;
+  background-color: $color-violet;
   cursor: pointer;
 
   &:hover {
@@ -83,13 +83,10 @@
   }
 }
 
-.block-list-users {
+.block-lists-admin {
   width: 100%;
   margin: auto;
-
-  @include _media-min(md) {
-    width: 85%;
-  }
+  overflow-x: auto;
 }
 
 /* ------------------------------ Page accounts ----------------------------- */
@@ -115,10 +112,14 @@
     padding: 3rem;
   }
 }
-.block-btn-form {
+.block-btn-form, .block-btn-form-update {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+}
+
+.block-btn-form-update {
+  justify-content: right;
 }
 
 .actions {
