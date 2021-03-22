@@ -15,8 +15,8 @@
           <NuxtLink to="/contact">Contact</NuxtLink>
         </li>
       </ul>
-      <div class="text__copyright" :class="$store.state.bodyClass">&copy; Fatboar 2021</div>
     </div>
+    <div class="text__copyright" :class="$store.state.bodyClass">&copy; Fatboar 2021</div>
   </footer>
 </template>
 
@@ -34,10 +34,11 @@
         }
       }
 
-      &.index, &.game {
+      &.index,
+      &.game {
         & a {
           transition: background-color 0.1s ease-out,
-          color 0.1s ease-out;
+            color 0.1s ease-out;
           color: #fff;
           opacity: 0.5;
 
@@ -54,10 +55,12 @@
         text-align: center;
         color: #63707c;
 
-        &.index, &.game {
+        &.index,
+        &.game {
           color: #f7bc06;
         }
       }
     }
   }
+
 </style>

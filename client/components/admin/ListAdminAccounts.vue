@@ -15,7 +15,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="!loadingBlack">
         <tr v-for="(adminUser, index) in adminUsers" :key="adminUser._id">
           <th>{{ index + 1 }}</th>
           <td>{{ adminUser.role }}</td>
@@ -30,13 +30,21 @@
             <a @click="openModal(adminUser._id)" class="icon icon-red" title="modifier">
               <edit-2-icon size="16" class=""></edit-2-icon>
             </a>
-            <a class="icon icon-red" title="supprimer">
+            <a @click="deleteUser(adminUser._id)" class="icon icon-red" title="supprimer">
               <trash-2-icon size="16" class=""></trash-2-icon>
             </a>
           </td>
         </tr>
       </tbody>
+      <tbody v-if="loadingBlack">
+        <tr>
+          <td colspan="9">
+            <Loader :loadingBlack="loadingBlack" />
+          </td>
+        </tr>
+      </tbody>
     </table>
+
     <!-- Modal -->
     <div v-if="showModal" id="modalUpdate" class="modal">
       <div class="modal__content">
@@ -153,6 +161,7 @@
     data: () => ({
       showModal: false,
       loading: false,
+      loadingBlack: false,
       submitStatus: null,
       userId: null,
       form: {
@@ -196,6 +205,23 @@
         }
         return valuesNotNull;
       },
+      async deleteUser(userId) {
+        if (confirm('Voulez-vous supprimer ce compte ?')) {
+          this.loadingBlack = true;
+          await this.$axios.$delete(`/users/${userId}`)
+          .then(() => {
+            setTimeout(() => {
+              this.$nuxt.refresh();
+              this.loadingBlack = false;
+              this.$toast.success('Le compte a été supprimé avec succès').goAway(3000);
+            }, 1000);
+          }).catch(() => {
+            this.loadingBlack = false;
+            this.submitStatus = 'ERROR';
+            this.$toast.error('Mis à jour impossible').goAway(3000);
+          });
+        }
+      },
       async submitFormUpdate() {
         this.$v.form.$touch();
         this.loading = true;
@@ -206,12 +232,12 @@
             setTimeout(() => {
               this.loading = false;
               this.$nuxt.refresh();
-              this.$toast.success(`Mis à jour avec succès`).goAway(3000);
+              this.$toast.success('Mis à jour avec succès').goAway(3000);
             }, 1000);
           }).catch(() => {
             this.loading = false;
             this.submitStatus = 'ERROR';
-            this.$toast.error("Mis à jour impossible").goAway(3000);
+            this.$toast.error('Mis à jour impossible').goAway(3000);
           });
         }
       }

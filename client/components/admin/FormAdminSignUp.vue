@@ -181,7 +181,9 @@
           await this.$axios.$post('/auth/signup', this.form)
           .then(() => {
             setTimeout(() => {
+              this.$nuxt.refresh();
               this.loading = false;
+              this.openFormSignUp = !this.openFormSignUp;
               this.$toast.success(`Inscription avec succès`).goAway(3000);
             }, 1000);
           }).catch(() => {
