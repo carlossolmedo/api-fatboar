@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import dateFormat from '../../utils/dateFormat';
+import dates from '@/utils/dates';
 
 export default {
   head: {
@@ -45,7 +45,7 @@ export default {
   filters: {
     date(date) {
       if (!date) return ''
-      date = dateFormat(date);
+      date = dates.dateFormat(date);
       return date;
     }
   },

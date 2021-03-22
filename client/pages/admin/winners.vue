@@ -23,7 +23,7 @@
               <td>{{ ticket.type }}</td>
               <td>{{ ticket.user_id.username }}</td>
               <td>{{ ticket.user_id.email }}</td>
-              <td>{{ ticket.date_created | date }}</td>
+              <td>{{ ticket.date_created | dateFr }}</td>
               <td>
                 <span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
               </td>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import dateFormat from '../../utils/dateFormat';
+  import dates from '@/utils/dates';
   import { Edit2Icon } from 'vue-feather-icons';
 
   export default {
@@ -61,7 +61,7 @@
     filters: {
       date(date) {
         if (!date) return ''
-        date = dateFormat(date);
+        dateFr = dates.dateFormat(date);
         return date;
       }
     },

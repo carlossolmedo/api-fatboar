@@ -111,10 +111,14 @@
     padding: 3rem;
   }
 }
-.block-btn-form {
+.block-btn-form, .block-btn-form-update {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+}
+
+.block-btn-form-update {
+  justify-content: right;
 }
 
 .actions {
