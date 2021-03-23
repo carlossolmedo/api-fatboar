@@ -13,7 +13,7 @@
 }
 
 .btn-size-default {
-  height: 52px;
+  height: auto;
 }
 
 /* ----------------------------- Page dashboard ----------------------------- */
@@ -190,5 +190,30 @@
     dl {
       margin-bottom: 2rem;
     }
+  }
+}
+
+.title-total-tickets {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  @include _media-min(md) {
+    text-align: right;
+  }
+}
+
+.total-tickets {
+  padding: 0.5rem;
+  color: $_color-white;
+  background-color: $color-violet;
+  border-radius: 999rem;
+}
+
+.block-number-tickets {
+  width: 80%;
+  margin: auto;
+
+  @include _media-min(md) {
+    width: 50%;
   }
 }

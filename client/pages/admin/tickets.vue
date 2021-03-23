@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="title-lobster">Tickets</h1>
-    <p class="u-text-right"><strong>Total tickets : <span id="currentTickets">50</span></strong></p>
+    <h4 class="title-total-tickets">Total tickets : <span class="total-tickets">{{ totalTickets }}</span></h4>
     <h3 class="subtitle">Operations</h3>
     <section class="c-container">
       <div class="c-row">
@@ -19,7 +19,7 @@
       <div class="c-row">
         <div class="c-row c-row__col--1-1 c-row__col--md-1-2">
           <div class="block-btn-ops">
-            <button @click="openPanelNewTickets = !openPanelNewTickets" class="c-btn c-btn--primary c-btn--block btn-size-default">Générer nouveaux tickets</button>
+            <button @click="generateTickets" class="c-btn c-btn--primary c-btn--block btn-size-default">Générer nouveaux tickets</button>
           </div>
         </div>
         <div class="c-row c-row__col--1-1 c-row__col--md-1-2">
@@ -31,7 +31,10 @@
       <div class="c-row">
         <div class="c-row c-row__col--1-1 c-row__col--md-1-2">
           <div class="block-btn-ops">
-            <button @click="deleteTickets" class="c-btn c-btn--primary c-btn--block btn-size-default">Effacer tous les tickets</button>
+            <button @click="deleteTickets" class="c-btn c-btn--danger c-btn--block btn-size-default">
+              <span v-if="!loading">Supprimer tous les tickets</span>
+              <Loader :loading="loading" />
+            </button>
           </div>
         </div>
         <div class="c-row c-row__col--1-1 c-row__col--md-1-2">
@@ -57,17 +60,42 @@
       BigPrize,
       NewTickets
     },
-    data() {
+    async asyncData({ $axios }) {
+      const tickets = await $axios.$get(`/tickets/number`);
       return {
-        openPanelBigPrize: false,
-        openPanelNewTickets: false,
-        openPanelDeleteTickets: false
+        totalTickets: tickets
       }
     },
+    data: () => ({
+      openPanelBigPrize: false,
+      openPanelNewTickets: false,
+      openPanelDeleteTickets: false,
+      loading: false
+    }),
     methods: {
-      deleteTickets() {
+      generateTickets() {
+        if (this.totalTickets === 0) {
+          this.openPanelNewTickets = !this.openPanelNewTickets;
+        } else {
+          alert("Veuillez effacer les tickets avant");
+        }
+      },
+      async deleteTickets() {
         if (confirm('Voulez-vous supprimer tous les tickets')) {
-          this.openPanelDeleteTickets = true;
+          this.loading = true;
+          await this.$axios.$delete(`/tickets/winning-tickets`)
+          .then((resp) => {
+            if (resp) {
+              setTimeout(() => {
+                this.$nuxt.refresh();
+                this.loading = false;
+                this.$toast.success('Tickets supprimé avec succès').goAway(3000);
+              }, 1000)
+            }
+          }).catch((err) => {
+            this.$toast.error('Suppression de tickets impossible').goAway(3000);
+            console.error(err);
+          });
         }
       }
     }
