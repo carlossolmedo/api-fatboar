@@ -99,13 +99,7 @@ class Ticket {
     async getRandomTicket() {
         let randomTicket = await WinningTicketModel.aggregate([
             { $sample: { size: 1 } }
-        ]);
-
-        if (randomTicket[0].validated === true) {
-            randomTicket = await WinningTicketModel.aggregate([
-                { $sample: { size: 1 } },
-            ]);
-        }
+        ]).match({ validated: { $in: [false] } });
 
         return randomTicket;
     }

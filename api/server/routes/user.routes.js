@@ -14,6 +14,7 @@ router.delete(userRoute.deleteUser, userController.deleteUser);
 router.get(userRoute.getNumberUsersCustomer, userController.getNumberUsersCustomer);
 router.get(userRoute.getUsersAdmin, userController.getUsersAdmin);
 router.get(userRoute.getUsersCustomer, userController.getUsersCustomer);
+router.get(userRoute.getUserBigPrize, userController.getUserBigPrize);
 // router.post(`/users/searchEmail`, userController.getUserByEmail);
 
 module.exports = router;

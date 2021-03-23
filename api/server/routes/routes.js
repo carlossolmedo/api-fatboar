@@ -12,7 +12,8 @@ export const userRoute = {
     getTicketsByUser: `${urlAPI}/users/:id/tickets`,
     getNumberUsersCustomer: `${urlAPI}/user/number-customers`,
     getUsersAdmin: `${urlAPI}/users/admin/accounts`,
-    getUsersCustomer: `${urlAPI}/users/customer/accounts`
+    getUsersCustomer: `${urlAPI}/users/customer/accounts`,
+    getUserBigPrize: `${urlAPI}/user/big-prize`
 };
 
 /** All routes to authentication */

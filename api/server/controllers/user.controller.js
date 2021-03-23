@@ -161,3 +161,21 @@ exports.getUsersCustomer = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+/** Get user for the big prize and check if his account is active */
+exports.getUserBigPrize = async (req, res) => {
+    try {
+        let userRandom = [];
+        while (userRandom.length < 1) {
+            userRandom = await User.aggregate([
+                { $sample: { size: 1 } }
+            ]).match({ active: { $in: [true] }, role: { $in: [roles.customer] } }).project("-password");
+        }
+
+        if (userRandom) {
+            res.status(200).json(userRandom);
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
