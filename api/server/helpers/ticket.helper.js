@@ -72,6 +72,11 @@ class Ticket {
         return tickets;
     }
 
+    async deleteWinningTickets() {
+        const winningTickets = await WinningTicketModel.collection.drop();
+        return winningTickets;
+    }
+
     /**
      * The ticket will create and save with the key ticket_number, and type
      * from createTicket to WinningTicketModel
@@ -173,6 +178,10 @@ class Ticket {
         countPrizes.discount = await TicketModel.where({ type: prizes.discount }).countDocuments();
 
         return countPrizes;
+    }
+    async countNumberOfTickets() {
+        const numberOfTickets = await WinningTicketModel.countDocuments();
+        return numberOfTickets;
     }
 }
 
