@@ -60,16 +60,22 @@ exports.generateWinningTickets = (req, res) => {
     }
 };
 
+exports.deleteWinningTickets = async (req, res) => {
+    try {
+        const winningTickets = new Ticket();
+        const deleteWinningTickets = await winningTickets.deleteWinningTickets();
+        if (deleteWinningTickets) { res.status(200).json(deleteWinningTickets); }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 /** Get one winning ticket random */
 exports.getTicket = async (req, res) => {
     try {
         const tickets = new Ticket();
         const randomTicket = await tickets.getRandomTicket();
-
-        if (!randomTicket) {
-            throw new Error('Cannot get winning ticket');
-        }
-
+        if (!randomTicket) { throw new Error('Cannot get winning ticket'); }
         res.status(200).json(randomTicket);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -130,7 +136,7 @@ exports.updateTicketReceived = async (req, res) => {
     }
 };
 
-exports.getTicketsTotal = async (req, res) => {
+exports.getTicketsPlayed = async (req, res) => {
     try {
         const tickets = new Ticket();
         const totalTickets = await tickets.countTotalTickets();
@@ -155,6 +161,16 @@ exports.getTicketsPercent = async (req, res) => {
         const tickets = new Ticket();
         const ticketsByPercentage = await tickets.countTicketsByPrizes(prizes);
         res.status(200).json(ticketsByPercentage);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+/** Get the total number of tickets */
+exports.getNumberOfTickets = async (req, res) => {
+    try {
+        const tickets = new Ticket();
+        const numberOfTickets = await tickets.countNumberOfTickets();
+        res.status(200).json(numberOfTickets);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

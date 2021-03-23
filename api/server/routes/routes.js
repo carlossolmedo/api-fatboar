@@ -28,11 +28,13 @@ export const authRoute = {
 /** All routes to tickets management */
 export const ticketRoute = {
     generateWinningTickets: `${urlAPI}/tickets/winning-tickets/generate/:quantity`,
+    deleteWinningTickets: `${urlAPI}/tickets/winning-tickets`,
     getTicket: `${urlAPI}/tickets`,
     verifyTicket: `${urlAPI}/tickets/verify`,
     getTicketsWinners: `${urlAPI}/tickets/winners`,
     updateTicketReceived: `${urlAPI}/tickets/winners`,
-    getTicketsTotal: `${urlAPI}/tickets/total`,
+    getTicketsPlayed: `${urlAPI}/tickets/played`,
     getTicketsReceived: `${urlAPI}/tickets/received`,
-    getTicketsPercent: `${urlAPI}/tickets/percent`
+    getTicketsPercent: `${urlAPI}/tickets/percent`,
+    getNumberOfTickets: `${urlAPI}/tickets/number`
 };
