@@ -321,6 +321,29 @@ main {
   }
 }
 
+/* --------------------------------- Footer --------------------------------- */
+
+footer {
+  & .content-link-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-direction: column;
+
+    @include _media-min(md) {
+      flex-direction: row;
+    }
+  }
+  & .link-footer {
+    padding-bottom: 20px;
+
+    @include _media-min(md) {
+      padding-right: 20px;
+    }
+  }
+}
+
 /* ------------------------------- Animations ------------------------------- */
 
 @keyframes jittery {
