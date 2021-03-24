@@ -11,7 +11,7 @@ exports.signup = async (req, res) => {
             gender: req.body.gender,
             username: req.body.username,
             password: bcrypt.hashSync(req.body.password, 10),
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             postal_code: req.body.postal_code,
             country: req.body.country,
             newsletter: req.body.newsletter,
