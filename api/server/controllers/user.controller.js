@@ -53,22 +53,6 @@ exports.getUser = async (req, res) => {
     res.json({ user: req.user })
 };
 
-// Add a new user
-exports.addUser = async (req, res) => {
-    try {
-        const user = new User(req.body);
-        const result = await user.save();
-
-        if (result) {
-            res.status(201).json({
-                message: `New user ${user.name} created with success`,
-            });
-        }
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-};
-
 // Update user
 exports.updateUser = async (req, res) => {
     try {
