@@ -18,7 +18,7 @@
       <tbody v-if="!loadingBlack">
         <tr v-for="(adminUser, index) in adminUsers" :key="adminUser._id">
           <th>{{ index + 1 }}</th>
-          <td>{{ adminUser.role }}</td>
+          <td>{{ adminUser.role | roleFr }}</td>
           <td>{{ adminUser.gender }}</td>
           <td>{{ adminUser.username }}</td>
           <td>{{ adminUser.email }}</td>
@@ -148,14 +148,16 @@
     },
     filters: {
       dateFr(date) {
-        if (!date) return ''
-        date = dates.dateFormat(date);
-        return date;
+        if (!date) return '';
+        return dates.dateFormat(date);
       },
       dateLastConnection(dateLastConnection) {
-        if (!dateLastConnection) return ''
-        dateLastConnection = dates.dateLastConnection(dateLastConnection);
-        return dateLastConnection;
+        if (!dateLastConnection) return '';
+        return dates.dateLastConnection(dateLastConnection);
+      },
+      roleFr(role) {
+        if (!role) return '';
+        return role === 'waiter' ? 'serveur' : role;
       }
     },
     data: () => ({

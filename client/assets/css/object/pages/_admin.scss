@@ -102,10 +102,11 @@
 
 .form-sign-up {
   padding: 1.5rem;
-  border: 1px solid #ccc;
-  background-color: #ddd;
+  border: 1px solid #ddd;
+  background-color: $color-bg-panel;
   border-radius: 10px;
   width: 100%;
+  box-shadow: $box-shadow-panel;
 
   @include _media-min(md) {
     width: 50%;
@@ -143,8 +144,10 @@
   width: 100%;
   padding: 2rem;
   text-align: center;
-  background-color: #ddd;
+  background-color: $color-bg-panel;
   border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: $box-shadow-panel;
 
   & > h3, .block-img-logo {
     margin-bottom: 2rem;
