@@ -19,7 +19,7 @@
               <td>{{ ticket.ticket_number }}</td>
               <td>{{ ticket.type }}</td>
               <td>{{ ticket.date_created | dateFr }}</td>
-              <td><span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span></td>
+              <td><span class="received" :class="{'success': ticket.received}"></span></td>
             </tr>
           </tbody>
         </table>
