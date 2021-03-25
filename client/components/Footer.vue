@@ -1,20 +1,10 @@
 <template>
   <footer class="footer-style" :class="$store.state.bodyClass">
-    <div class="c-container">
-      <ul class="c-navbar c-navbar--center">
-        <li class="c-navbar__item">
-          <NuxtLink to="/conditions">Conditions Générales</NuxtLink>
-        </li>
-        <li class="c-navbar__item">
-          <NuxtLink to="/terms">Mentions Légales</NuxtLink>
-        </li>
-        <li class="c-navbar__item">
-          <NuxtLink to="/privacy">Politique de Confidentialité</NuxtLink>
-        </li>
-        <li class="c-navbar__item">
-          <NuxtLink to="/contact">Contact</NuxtLink>
-        </li>
-      </ul>
+    <div class="content-link-footer">
+      <NuxtLink class="link-footer" to="/conditions">Conditions Générales</NuxtLink>
+      <NuxtLink class="link-footer" to="/terms">Mentions Légales</NuxtLink>
+      <NuxtLink class="link-footer" to="/privacy">Politique de Confidentialité</NuxtLink>
+      <NuxtLink class="link-footer" to="/contact">Contact</NuxtLink>
     </div>
     <div class="text__copyright" :class="$store.state.bodyClass">&copy; Fatboar 2021</div>
   </footer>

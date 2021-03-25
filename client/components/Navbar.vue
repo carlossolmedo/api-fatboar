@@ -1,67 +1,78 @@
 <template>
-  <nav class="u-pull-right" role="navigation">
-    <ul v-if="$auth.user.role === 'customer'" class="c-navbar c-navbar--right">
-      <li class="c-navbar__item">
-        <NuxtLink class="navbar__link" :class="$store.state.bodyClass" to="/game">Jouer</NuxtLink>
-      </li>
-      <li class="c-navbar__item">
-        <NuxtLink :class="$store.state.bodyClass" class="navbar__link" to="/account/prizes">Gains</NuxtLink>
-      </li>
-      <li class="c-navbar__item">
-        <a @click="openSubMenu('subMenuCustomer')" class="navbar__link" :class="$store.state.bodyClass"><span id="subMenu"
-            v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white"
-            aria-hidden="true"></span></a>
-        <ul id="subMenuCustomer" class="c-menu__submenu" aria-hidden="false">
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <NuxtLink to="/account/settings">Mon compte</NuxtLink>
-          </li>
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <a @click="logout" style="cursor: pointer;">Déconnexion</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <div class="content-left">
+          <NuxtLink to="/" class="">
+            <img class="img-logo" src="~/assets/images/logo-fatboar.svg" alt="logo FatBoar">
+          </NuxtLink>
+          <button id="navbarToggler" @click="openMenu()" class="burger" :class="$store.state.bodyClass"
+            type="button"></button>
+        </div>
+        <div class="navbar-collapse">
+          <!-- Customer -->
+          <ul v-if="$auth.user.role === 'customer'" class="navbar-nav">
+            <li>
+              <NuxtLink class="nav-link" :class="$store.state.bodyClass" to="/game">Jouer</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :class="$store.state.bodyClass" class="nav-link" to="/account/prizes">Gains</NuxtLink>
+            </li>
+            <li>
+              <a @click="openDropdown('menuDropdownAccount')" class="nav-link" :class="$store.state.bodyClass"
+                role="button">
+                <span id="subMenu" v-if="getName($auth.user.username)">{{ username }}</span> <span
+                  class="c-ic-angle-down-white" aria-hidden="true"></span>
+              </a>
+              <ul id="menuDropdownAccount" class="dropdown-menu">
+                <li>
+                  <NuxtLink to="/account/settings" class="dropdown-item">Mon compte</NuxtLink>
+                </li>
+                <li><a @click="logout" class="dropdown-item" role="button">Déconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
 
-    <!-- Admin -->
-    <ul v-if="$auth.user.role === 'admin'" class="c-navbar c-navbar--right">
-      <li class="c-navbar__item">
-        <NuxtLink class="navbar__link" to="/admin/dashboard">Dashboard</NuxtLink>
-      </li>
-      <li class="c-navbar__item">
-        <a @click="openSubMenu('subMenuAdmin')" class="navbar__link">
-          <span id="subMenu">Administration</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
-        </a>
-        <ul id="subMenuAdmin" class="c-menu__submenu" aria-hidden="false">
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <NuxtLink to="/admin/accounts">Comptes</NuxtLink>
-          </li>
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <NuxtLink to="/admin/tickets">Tickets</NuxtLink>
-          </li>
-        </ul>
-      </li>
-      <li class="c-navbar__item">
-        <a @click="openSubMenu('subMenuAccount')" class="navbar__link">
-          <span id="subMenu" v-if="getName($auth.user.username)">{{ username }}</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
-        </a>
-        <ul id="subMenuAccount" class="c-menu__submenu" aria-hidden="false">
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <NuxtLink to="/account/settings">Mon compte</NuxtLink>
-          </li>
-          <li class="c-menu__subitem" aria-haspopup="true">
-            <a @click="logout" style="cursor: pointer;">Déconnexion</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+          <!-- Admin -->
+          <ul v-if="$auth.user.role === 'admin'" class="navbar-nav">
+            <li>
+              <NuxtLink class="nav-link" to="/admin/dashboard">Dashboard</NuxtLink>
+            </li>
+            <li>
+              <a @click="openDropdown('menuDropdownAdmin')" class="nav-link" role="button">
+                <span id="subMenu">Administration</span> <span class="c-ic-angle-down-white" aria-hidden="true"></span>
+              </a>
+              <ul id="menuDropdownAdmin" class="dropdown-menu">
+                <li>
+                  <NuxtLink to="/admin/accounts" class="dropdown-item">Comptes</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/admin/tickets" class="dropdown-item">Tickets</NuxtLink>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a @click="openDropdown('menuDropdownAccount')" class="nav-link" role="button">
+                <span id="subMenu" v-if="getName($auth.user.username)">{{ username }}</span> <span
+                  class="c-ic-angle-down-white" aria-hidden="true"></span>
+              </a>
+              <ul id="menuDropdownAccount" class="dropdown-menu">
+                <li>
+                  <NuxtLink to="/account/settings" class="dropdown-item">Mon compte</NuxtLink>
+                </li>
+                <li><a @click="logout" class="dropdown-item" role="button">Déconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
 
-    <!-- Waiter -->
-    <ul v-if="$auth.user.role === 'waiter'" class="c-navbar c-navbar--right">
-      <li class="c-navbar__item">
-        <a class="navbar__link" @click="logout" style="cursor: pointer;">Déconnexion</a>
-      </li>
-    </ul>
-  </nav>
+          <!-- Waiter -->
+          <ul v-if="$auth.user.role === 'waiter'" class="navbar-nav">
+            <li><a @click="logout" class="dropdown-item" role="button">Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -72,14 +83,14 @@
       }
     },
     mounted() {
-      window.onclick = function(event) {
+      window.onclick = function (event) {
         const elSubMenu = event.target.id;
 
         if (elSubMenu !== 'subMenu') {
-          const subMenus = document.getElementsByClassName("c-menu__submenu");
+          const subMenus = document.getElementsByClassName('dropdown-menu');
           for (let i = 0; i < subMenus.length; i++) {
-            if (subMenus[i].classList.contains('show-submenu')) {
-              subMenus[i].classList.remove('show-submenu');
+            if (subMenus[i].classList.contains('show')) {
+              subMenus[i].classList.remove('show');
             }
           }
         }
@@ -91,6 +102,16 @@
           let name = username.split(' ');
           return this.username = name[0];
         }
+      },
+      openDropdown(menuId) {
+        const menuDropdown = document.getElementById(menuId);
+        menuDropdown.classList.toggle('show');
+      },
+      openMenu() {
+        const btn = document.getElementById('navbarToggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        btn.classList.toggle('open');
+        navbarCollapse.classList.toggle('show');
       },
       logout() {
         if (this.$auth.user.role !== 'customer') {

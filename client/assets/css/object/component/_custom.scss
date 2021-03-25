@@ -22,6 +22,10 @@
   display: none;
 }
 
+.mb-5 {
+  margin-bottom: 5rem;
+}
+
 .title-lobster {
   font-family: $font-family-lobster;
   text-align: center;
@@ -50,7 +54,7 @@ main {
     margin-bottom: 1rem;
 
     @include _media-min(md) {
-      margin-bottom: 3rem;
+      margin-bottom: 6rem;
     }
   }
 
@@ -127,7 +131,7 @@ main {
 
 .img-logo {
   width: 60px;
-  padding-top: 1.25rem;
+  // padding-top: 1.25rem;
 }
 
 .text-container {
@@ -318,6 +322,30 @@ main {
 
   @include _media-min(md) {
     width: 30%;
+  }
+}
+
+/* --------------------------------- Footer --------------------------------- */
+
+footer {
+  & .content-link-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-bottom: 2rem;
+    flex-direction: column;
+
+    @include _media-min(md) {
+      flex-direction: row;
+    }
+  }
+  & .link-footer {
+    padding-bottom: 20px;
+    text-decoration: none;
+
+    @include _media-min(md) {
+      padding-right: 20px;
+    }
   }
 }
 

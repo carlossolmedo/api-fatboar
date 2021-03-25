@@ -6,7 +6,7 @@
           <div class="c-row_col c-row__col--auto">
             <div class="c-site-branding">
               <NuxtLink to="/" class="c-site-branding__title">
-                <img class="img-logo" src="~/assets/images/logo-fatboar.svg" alt="logo FatBoar">
+                <img class="img-logo" style="margin-top: 20px;" src="~/assets/images/logo-fatboar.svg" alt="logo FatBoar">
               </NuxtLink>
             </div>
           </div>
@@ -29,5 +29,4 @@
       GDPR
     }
   }
-
 </script>
