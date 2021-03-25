@@ -18,7 +18,7 @@
               <th>{{ index + 1 }}</th>
               <td>{{ ticket.ticket_number }}</td>
               <td>{{ ticket.type }}</td>
-              <td>{{ ticket.date_created | date }}</td>
+              <td>{{ ticket.date_created | dateFr }}</td>
               <td><span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span></td>
             </tr>
           </tbody>
@@ -43,10 +43,9 @@ export default {
     }
   },
   filters: {
-    date(date) {
+    dateFr(date) {
       if (!date) return ''
-      date = dates.dateFormat(date);
-      return date;
+      return dates.dateFormat(date);
     }
   },
   computed: {

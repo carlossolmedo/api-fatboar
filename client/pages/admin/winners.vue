@@ -25,7 +25,7 @@
               <td>{{ ticket.user_id.email }}</td>
               <td>{{ ticket.date_created | dateFr }}</td>
               <td>
-                <span class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
+                <span :id="`received-${index+1}`" class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
               </td>
               <td class="actions">
                 <a class="icon icon-red" :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" title="modifier"><edit-2-icon size="16" class=""></edit-2-icon></a>
@@ -59,10 +59,9 @@
       }
     },
     filters: {
-      date(date) {
+      dateFr(date) {
         if (!date) return ''
-        dateFr = dates.dateFormat(date);
-        return date;
+        return dates.dateFormat(date);
       }
     },
     data() {
