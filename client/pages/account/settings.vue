@@ -8,6 +8,11 @@
         <p>{{$auth.user.username}}</p>
         <h4>Adresse mail</h4>
         <p>{{$auth.user.email}}</p>
+        <h4>Newsletter</h4>
+        <div>
+          <input class="tgl tgl-success" id="cb1" type="checkbox" />
+          <label class="tgl-btn" for="cb1"></label>
+        </div>
         <div class="block-delete-account">
           <h3>Supprimer mon compte</h3>
           <div class="block-btn-delete">
@@ -24,47 +29,49 @@
 </template>
 
 <script>
-import Loader from '~/components/Loader';
+  import Loader from '~/components/Loader';
 
-export default {
-  head: {
-    title: 'Mon compte'
-  },
-  components: {
-    Loader
-  },
-  data() {
-    return {
-      accountDeleted: false,
-      loading: false
-    }
-  },
-  methods: {
-    async deleteAccount() {
-      const message = "Voulez-vous supprimer votre compte ?";
-      if (confirm(message)) {
-        this.loading = true;
-        await this.$axios.$delete(`/users/${this.$auth.user.userId}`)
-        .then((userDeleted) => {
-          if (userDeleted) {
-            this.loading = false;
-            this.$toast.success(`Votre compte a été supprimé avec succès`).goAway(5000);
-            this.accountDeleted = true;
-            setTimeout(() => {
-              this.$auth.logout();
-            }, 5000);
-          }
-        }).catch(() => {
-          this.$toast.error(`Votre compte n'a pas été supprimé`).goAway(3000);
-        });
+  export default {
+    head: {
+      title: 'Mon compte'
+    },
+    components: {
+      Loader
+    },
+    data() {
+      return {
+        accountDeleted: false,
+        loading: false
+      }
+    },
+    methods: {
+      async deleteAccount() {
+        const message = "Voulez-vous supprimer votre compte ?";
+        if (confirm(message)) {
+          this.loading = true;
+          await this.$axios.$delete(`/users/${this.$auth.user.userId}`)
+            .then((userDeleted) => {
+              if (userDeleted) {
+                this.loading = false;
+                this.$toast.success(`Votre compte a été supprimé avec succès`).goAway(5000);
+                this.accountDeleted = true;
+                setTimeout(() => {
+                  this.$auth.logout();
+                }, 5000);
+              }
+            }).catch(() => {
+              this.$toast.error(`Votre compte n'a pas été supprimé`).goAway(3000);
+            });
+        }
       }
     }
   }
-}
+
 </script>
 
 <style scoped>
   h1 {
     margin: 50px 0 50px 0;
   }
+
 </style>

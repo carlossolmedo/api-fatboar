@@ -25,7 +25,7 @@
               <td>{{ ticket.user_id.email }}</td>
               <td>{{ ticket.date_created | dateFr }}</td>
               <td>
-                <span :id="`received-${index+1}`" class="received" :class="{'success': ticket.received, 'not-yet': !ticket.received}"></span>
+                <span :id="`received-${index+1}`" class="received" :class="{'success': ticket.received}"></span>
               </td>
               <td class="actions">
                 <a class="icon icon-red" :id="`received-${index+1}`" @click="setReceived(ticket.ticket_number, `received-${index+1}`)" title="modifier"><edit-2-icon size="16" class=""></edit-2-icon></a>
@@ -79,17 +79,12 @@
         if (confirm('Voulez-vous modifier ce champ?')) {
           let elReceived = document.getElementById(elementId);
           let stateClassSuccess = elReceived.classList.contains('success');
-          let stateClassNot = elReceived.classList.contains('not-yet');
           let valueReceived = null;
 
           if (stateClassSuccess) {
             elReceived.classList.remove('success');
-            elReceived.classList.add('not-yet');
             valueReceived = false;
-          }
-
-          if (stateClassNot) {
-            elReceived.classList.remove('not-yet');
+          } else {
             elReceived.classList.add('success');
             valueReceived = true;
           }
