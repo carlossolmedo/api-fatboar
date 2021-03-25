@@ -173,14 +173,11 @@ main {
   margin: auto;
   border-radius: 999rem;
   box-shadow: 0 0.5px 0.5px 0 #333;
+  background-color: #ddd;
 }
 
 .success {
   background-color: $color-success;
-}
-
-.not-yet {
-  background-color: #ddd;
 }
 
 /* ---------------------------------- Home ---------------------------------- */
