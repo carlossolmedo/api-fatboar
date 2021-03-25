@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Navbar v-if="$auth.loggedIn" />
     <div class="c-container">
       <div class="c-row">
         <main class="content-admin">
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import Header from '~/components/Header';
+import Navbar from '~/components/Navbar';
 import Footer from '~/components/Footer';
 
 export default {
   middleware: ['auth-admin'],
   components: {
-    Header,
+    Navbar,
     Footer
   }
 }

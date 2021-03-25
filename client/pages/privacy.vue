@@ -1,6 +1,6 @@
 <template>
   <div class="c-container text-conditions">
-    <article class="c-row">
+    <article class="c-row mb-5">
       <h1>Politique de Confidentialité</h1>
       <section>
         <h2>Données personnelles</h2>
@@ -55,6 +55,7 @@
   export default {
     middleware: ['auth'],
     auth: false,
+    layout: 'home',
     head: {
       title: 'Politique de Confidentialité'
     }

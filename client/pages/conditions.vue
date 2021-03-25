@@ -1,6 +1,6 @@
 <template>
   <div class="c-container text-conditions">
-    <article class="c-row">
+    <article class="c-row mb-5">
       <h1>Conditions Générales</h1>
       <p>
         <ol>
@@ -34,6 +34,7 @@
   export default {
     middleware: ['auth'],
     auth: false,
+    layout: 'home',
     head: {
       title: 'Conditions Générales'
     }

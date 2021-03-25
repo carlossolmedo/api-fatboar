@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Navbar v-if="$auth.loggedIn" />
     <Nuxt />
     <Footer />
     <GDPR />
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Header from '~/components/Header';
+import Navbar from '~/components/Navbar';
 import Footer from '~/components/Footer';
 import GDPR from '~/components/GDPR';
 
 export default {
   middleware: ['404'],
   components: {
-    Header,
+    Navbar,
     Footer,
     GDPR
   }

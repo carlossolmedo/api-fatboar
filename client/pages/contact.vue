@@ -3,7 +3,7 @@
     <div class="content">
       <img class="img-logo-fatboar" src="~/assets/images/logo-fatboar.svg" alt="logo FatBoar">
       <h1>Contact</h1>
-      <h2>Avez-vous une question ?</h2>
+      <h2>Avez-vous des questions ?</h2>
       <h3>N'hesitez pas à nous contacter</h3>
       <br />
       <h3>
@@ -19,6 +19,7 @@
   export default {
     middleware: ['auth'],
     auth: false,
+    layout: 'home',
     head: {
       title: 'Contact'
     }

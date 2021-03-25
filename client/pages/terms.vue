@@ -2,7 +2,7 @@
   <div class="c-container">
     <h1>Mentions Légales</h1>
     <h2>À propos du site</h2>
-    <div class="c-row">
+    <div class="c-row mb-5">
       <section class="c-row__col c-row__col--1-1">
         <h3>Direction de la publication</h3>
           <table>
@@ -90,6 +90,7 @@
   export default {
     middleware: ['auth'],
     auth: false,
+    layout: 'home',
     head: {
       title: 'Mentions Légales'
     }
