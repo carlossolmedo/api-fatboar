@@ -44,15 +44,23 @@ exports.login = async (req, res) => {
             password,
             userFound.password
         );
+        let error = {
+            active: false,
+            password: false
+        }
 
         if (!userFound) {
             return res.status(404).json({ message: `User ${email} not found` });
         }
 
+        if (!userFound.active) {
+            error.active = true;
+            return res.status(401).json({ error: error });
+        }
+
         if (!passwordIsValid) {
-            return res
-                .status(401)
-                .json({ accessToken: null, message: 'Invalid password !' });
+            error.password = true;
+            return res.status(401).json({ accessToken: null, error: error });
         }
 
         // if everything is valid
