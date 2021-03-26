@@ -99,11 +99,19 @@
               this.$router.push({name: 'game'});
               this.$toast.success(`Bienvenue! ${this.$auth.user.username}`).goAway(3000);
             }, 1000);
-          }).catch(() => {
+          }).catch((error) => {
+            const errorData = error.response.data;
+            const { active, password } = errorData.error;
             this.loading = false;
             document.getElementById('submitLogin').setAttribute("disabled", true);
             this.submitStatus = 'ERROR';
-            this.messageSubmit = "Vérifiez vos identifiants";
+            if (active) {
+              this.messageSubmit = "Votre compte a été desactivé";
+              this.$toast.error('Connexion impossible').goAway(3000);
+            }
+            if (password) {
+              this.messageSubmit = "Vérifiez vos identifiants";
+            }
           });
         }
       }
