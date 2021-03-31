@@ -1,5 +1,10 @@
 <template>
   <div class="block-lists-admin">
+    <div class="search">
+      <form id="formSearchAdmins">
+        <input type="search" name="query" v-model="searchQuery" class="c-form-control" id="searchQuery" placeholder="Recherchez nom">
+      </form>
+    </div>
     <table class="table-fluid table-list-admin">
       <thead>
         <tr>
@@ -16,7 +21,7 @@
         </tr>
       </thead>
       <tbody v-if="!loadingBlack">
-        <tr v-for="(adminUser, index) in adminUsers" :key="adminUser._id">
+        <tr v-for="(adminUser, index) in filteredAdminUsers" :key="adminUser._id">
           <th>{{ index + 1 }}</th>
           <td>{{ adminUser.role | roleFr }}</td>
           <td>{{ adminUser.gender }}</td>
@@ -107,25 +112,25 @@
               </dd>
             </dl>
             <dl>
-            <dt>
-              <label for="postalCode">Code postal</label>
-            </dt>
-            <dd>
-              <input v-model.trim="$v.form.postal_code.$model" type="text" name="postal_code" id="postalCode"
-                class="c-form-control-input" :class="{'input-error': $v.form.postal_code.$error}"
-                maxlength="5">
-              <small class="error" v-if="$v.form.postal_code.$error">Code postal invalide.</small>
-            </dd>
-          </dl>
-          <div class="block-btn-form-update">
-            <div>
-              <button id="submitAdminUpdate" v-if="submitStatus !== 'OK'" type="submit" :disabled="$v.validationGroup.$invalid" class="c-btn"
-                :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
-                <span v-if="!loading">Valider</span>
-                <Loader :loading="loading" />
-              </button>
+              <dt>
+                <label for="postalCode">Code postal</label>
+              </dt>
+              <dd>
+                <input v-model.trim="$v.form.postal_code.$model" type="text" name="postal_code" id="postalCode"
+                  class="c-form-control-input" :class="{'input-error': $v.form.postal_code.$error}" maxlength="5">
+                <small class="error" v-if="$v.form.postal_code.$error">Code postal invalide.</small>
+              </dd>
+            </dl>
+            <div class="block-btn-form-update">
+              <div>
+                <button id="submitAdminUpdate" v-if="submitStatus !== 'OK'" type="submit"
+                  :disabled="$v.validationGroup.$invalid" class="c-btn"
+                  :class="{'c-btn--primary': !$v.validationGroup.$invalid}">
+                  <span v-if="!loading">Valider</span>
+                  <Loader :loading="loading" />
+                </button>
+              </div>
             </div>
-          </div>
           </form>
         </div>
       </div>
@@ -135,8 +140,16 @@
 
 <script>
   import dates from '@/utils/dates';
-  import { Edit2Icon, Trash2Icon } from 'vue-feather-icons';
-  import { minLength, maxLength, numeric, email } from 'vuelidate/lib/validators';
+  import {
+    Edit2Icon,
+    Trash2Icon
+  } from 'vue-feather-icons';
+  import {
+    minLength,
+    maxLength,
+    numeric,
+    email
+  } from 'vuelidate/lib/validators';
 
   export default {
     props: {
@@ -146,25 +159,12 @@
       Edit2Icon,
       Trash2Icon
     },
-    filters: {
-      dateFr(date) {
-        if (!date) return '';
-        return dates.dateFormat(date);
-      },
-      dateLastConnection(dateLastConnection) {
-        if (!dateLastConnection) return '';
-        return dates.dateLastConnection(dateLastConnection);
-      },
-      roleFr(role) {
-        if (!role) return '';
-        return role === 'waiter' ? 'serveur' : role;
-      }
-    },
     data: () => ({
       showModal: false,
       loading: false,
       loadingBlack: false,
       submitStatus: null,
+      searchQuery: '',
       userId: null,
       form: {
         gender: null,
@@ -174,6 +174,19 @@
         postal_code: null
       }
     }),
+    computed: {
+      filteredAdminUsers() {
+        const filterSearch = this.searchQuery.toLowerCase();
+        let adminUsers = this.adminUsers;
+
+        if (filterSearch) {
+          adminUsers = adminUsers.filter((row) => {
+            return String(row['username']).toLowerCase().indexOf(filterSearch) > -1;
+          })
+        }
+        return adminUsers;
+      }
+    },
     validations: {
       form: {
         username: {
@@ -188,7 +201,21 @@
           maxLength: maxLength(5)
         }
       },
-      validationGroup: ['form.username','form.email','form.postal_code']
+      validationGroup: ['form.username', 'form.email', 'form.postal_code']
+    },
+    filters: {
+      dateFr(date) {
+        if (!date) return '';
+        return dates.dateFormat(date);
+      },
+      dateLastConnection(dateLastConnection) {
+        if (!dateLastConnection) return '';
+        return dates.dateLastConnection(dateLastConnection);
+      },
+      roleFr(role) {
+        if (!role) return '';
+        return role === 'waiter' ? 'serveur' : role;
+      }
     },
     methods: {
       openModal(userId) {
@@ -211,17 +238,17 @@
         if (confirm('Voulez-vous supprimer ce compte ?')) {
           this.loadingBlack = true;
           await this.$axios.$delete(`/users/${userId}`)
-          .then(() => {
-            setTimeout(() => {
-              this.$nuxt.refresh();
+            .then(() => {
+              setTimeout(() => {
+                this.$nuxt.refresh();
+                this.loadingBlack = false;
+                this.$toast.success('Le compte a été supprimé avec succès').goAway(3000);
+              }, 1000);
+            }).catch(() => {
               this.loadingBlack = false;
-              this.$toast.success('Le compte a été supprimé avec succès').goAway(3000);
-            }, 1000);
-          }).catch(() => {
-            this.loadingBlack = false;
-            this.submitStatus = 'ERROR';
-            this.$toast.error('Mis à jour impossible').goAway(3000);
-          });
+              this.submitStatus = 'ERROR';
+              this.$toast.error('Mis à jour impossible').goAway(3000);
+            });
         }
       },
       async submitFormUpdate() {
@@ -230,21 +257,22 @@
         if (!this.$v.form.$invalid) {
           let fieldsToUpdate = this.isNull(this.form);
           await this.$axios.$put(`/users/${this.userId}`, fieldsToUpdate)
-          .then(() => {
-            setTimeout(() => {
+            .then(() => {
+              setTimeout(() => {
+                this.loading = false;
+                this.$nuxt.refresh();
+                this.$toast.success('Mis à jour avec succès').goAway(3000);
+              }, 1000);
+            }).catch(() => {
               this.loading = false;
-              this.$nuxt.refresh();
-              this.$toast.success('Mis à jour avec succès').goAway(3000);
-            }, 1000);
-          }).catch(() => {
-            this.loading = false;
-            this.submitStatus = 'ERROR';
-            this.$toast.error('Mis à jour impossible').goAway(3000);
-          });
+              this.submitStatus = 'ERROR';
+              this.$toast.error('Mis à jour impossible').goAway(3000);
+            });
         }
       }
     }
   }
+
 </script>
 
 <style>

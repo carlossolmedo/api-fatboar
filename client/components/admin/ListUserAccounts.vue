@@ -1,5 +1,10 @@
 <template>
   <div class="block-lists-admin">
+    <div class="search">
+      <form id="formSearchUsers">
+        <input type="search" name="query" v-model="searchQuery" class="c-form-control" id="searchQuery" placeholder="Recherchez nom client">
+      </form>
+    </div>
     <table class="table-fluid table-list-users">
       <thead>
         <tr>
@@ -16,7 +21,7 @@
         </tr>
       </thead>
       <tbody v-if="!loadingBlack">
-        <tr v-for="(user, index) in users" :key="user._id">
+        <tr v-for="(user, index) in filteredUsers" :key="user._id">
           <th>{{ index + 1 }}</th>
           <td>{{ user.active | accountActive }}</td>
           <td>{{ user.gender }}</td>
@@ -65,8 +70,22 @@
       UserCheckIcon
     },
     data: () => ({
-      loadingBlack: false
+      loadingBlack: false,
+      searchQuery: ''
     }),
+    computed: {
+      filteredUsers() {
+        const filterSearch = this.searchQuery.toLowerCase();
+        let users = this.users;
+
+        if (filterSearch) {
+          users = users.filter((row) => {
+            return String(row['username']).toLowerCase().indexOf(filterSearch) > -1;
+          })
+        }
+        return users;
+      }
+    },
     filters: {
       accountActive(account) {
         return account === true ? 'Oui' : 'Non'
