@@ -9,7 +9,9 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Rôle</th>
+          <th @click="sortBy('role')" class="filter" :class="{active: sortKey}">
+            Rôle <span class="arrow" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
           <th>Genre</th>
           <th>Nom</th>
           <th>Adresse mail</th>
@@ -165,6 +167,8 @@
       loadingBlack: false,
       submitStatus: null,
       searchQuery: '',
+      sortKey: '',
+      sortOrder: 1,
       userId: null,
       form: {
         gender: null,
@@ -178,11 +182,20 @@
       filteredAdminUsers() {
         const filterSearch = this.searchQuery.toLowerCase();
         let adminUsers = this.adminUsers;
+        let sortKey = this.sortKey
+        let order = this.sortOrder;
 
         if (filterSearch) {
           adminUsers = adminUsers.filter((row) => {
             return String(row['username']).toLowerCase().indexOf(filterSearch) > -1;
-          })
+          });
+        }
+        if (sortKey) {
+          adminUsers = adminUsers.slice().sort((a, b) => {
+            a = a[sortKey];
+            b = b[sortKey];
+            return (a === b ? 0 : a > b ? 1 : -1) * order;
+          });
         }
         return adminUsers;
       }
@@ -218,6 +231,10 @@
       }
     },
     methods: {
+      sortBy(key) {
+        this.sortKey = key;
+        this.sortOrder = this.sortOrder * -1;
+      },
       openModal(userId) {
         this.showModal = true;
         this.userId = userId;

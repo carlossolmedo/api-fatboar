@@ -9,9 +9,15 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Active</th>
-          <th>Genre</th>
-          <th>Nom</th>
+          <th @click="sortBy('active')" class="filter-black" :class="{active: sortKey}">
+            Active <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
+          <th @click="sortBy('gender')" class="filter-black" :class="{active: sortKey}">
+            Genre <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
+          <th @click="sortBy('username')" class="filter-black" :class="{active: sortKey}">
+            Nom <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
           <th>Adresse mail</th>
           <th>Code postal</th>
           <th>Pays</th>
@@ -71,17 +77,28 @@
     },
     data: () => ({
       loadingBlack: false,
-      searchQuery: ''
+      searchQuery: '',
+      sortKey: '',
+      sortOrder: 1,
     }),
     computed: {
       filteredUsers() {
         const filterSearch = this.searchQuery.toLowerCase();
         let users = this.users;
+        let sortKey = this.sortKey;
+        let order = this.sortOrder;
 
         if (filterSearch) {
           users = users.filter((row) => {
             return String(row['username']).toLowerCase().indexOf(filterSearch) > -1;
           })
+        }
+        if (sortKey) {
+          users = users.slice().sort((a, b) => {
+            a = a[sortKey];
+            b = b[sortKey];
+            return (a === b ? 0 : a > b ? 1 : -1) * order;
+          });
         }
         return users;
       }
@@ -102,6 +119,10 @@
       }
     },
     methods: {
+      sortBy(key) {
+        this.sortKey = key;
+        this.sortOrder = this.sortOrder * -1;
+      },
       async updateUser(userId, valueActive) {
         if (confirm('Voulez-vous faire cette operation ?')) {
           this.loadingBlack = true;
