@@ -215,3 +215,62 @@ Icon (Angle Down) component
   fill: $_color-black;
 }
 
+// Arrows
+
+.filter {
+  color: #dbd8d8 !important;
+  cursor: pointer;
+
+  &.active {
+    color: $_color-white !important;
+
+    & .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.filter-black {
+  color: #626262 !important;
+  cursor: pointer;
+
+  &.active {
+    color: $_color-black !important;
+
+    & .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.5;
+
+  &.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+  }
+
+  &.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+  }
+}
+
+.arrow-black {
+  @extend .arrow;
+  &.asc {
+    border-bottom: 4px solid $_color-black;
+  }
+
+  &.dsc {
+    border-top: 4px solid $_color-black;
+  }
+}

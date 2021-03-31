@@ -3,6 +3,11 @@
     <main class="content-winners">
       <h1 class="u-text-center title-lobster">Gagnants</h1>
       <div class="block-list">
+        <div class="search">
+          <form id="formSearch">
+            <input type="search" name="query" v-model="searchQuery" class="c-form-control" id="searchQuery" placeholder="Recherchez nom client">
+          </form>
+        </div>
         <table v-if="listTickets" class="table-fluid table-prizes">
           <thead>
             <tr>
@@ -17,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(ticket, index) in ticketsWinners" :key="ticket.ticket_number">
+            <tr v-for="(ticket, index) in filteredTickets" :key="ticket.ticket_number">
               <th>{{ index + 1 }}</th>
               <td>{{ ticket.ticket_number }}</td>
               <td>{{ ticket.type }}</td>
@@ -64,14 +69,24 @@
         return dates.dateFormat(date);
       }
     },
-    data() {
-      return {
-        btnReceivedChecked: false
-      }
-    },
+    data: () => ({
+      searchQuery: '',
+      btnReceivedChecked: false
+    }),
     computed: {
       listTickets() {
         return this.ticketsWinners.length === 0 ? false : true
+      },
+      filteredTickets() {
+        const filterSearch = this.searchQuery.toLowerCase();
+        let tickets = this.ticketsWinners;
+
+        if (filterSearch) {
+          tickets = tickets.filter((row) => {
+            return String(row['user_id'].username).toLowerCase().indexOf(filterSearch) > -1;
+          })
+        }
+        return tickets;
       }
     },
     methods: {

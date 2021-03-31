@@ -1,12 +1,23 @@
 <template>
   <div class="block-lists-admin">
+    <div class="search">
+      <form id="formSearchUsers">
+        <input type="search" name="query" v-model="searchQuery" class="c-form-control" id="searchQuery" placeholder="Recherchez nom client">
+      </form>
+    </div>
     <table class="table-fluid table-list-users">
       <thead>
         <tr>
           <th>#</th>
-          <th>Active</th>
-          <th>Genre</th>
-          <th>Nom</th>
+          <th @click="sortBy('active')" class="filter-black" :class="{active: sortKey}">
+            Active <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
+          <th @click="sortBy('gender')" class="filter-black" :class="{active: sortKey}">
+            Genre <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
+          <th @click="sortBy('username')" class="filter-black" :class="{active: sortKey}">
+            Nom <span class="arrow-black" :class="sortOrder > 0 ? 'asc' : 'dsc'"></span>
+          </th>
           <th>Adresse mail</th>
           <th>Code postal</th>
           <th>Pays</th>
@@ -16,7 +27,7 @@
         </tr>
       </thead>
       <tbody v-if="!loadingBlack">
-        <tr v-for="(user, index) in users" :key="user._id">
+        <tr v-for="(user, index) in filteredUsers" :key="user._id">
           <th>{{ index + 1 }}</th>
           <td>{{ user.active | accountActive }}</td>
           <td>{{ user.gender }}</td>
@@ -65,8 +76,33 @@
       UserCheckIcon
     },
     data: () => ({
-      loadingBlack: false
+      loadingBlack: false,
+      searchQuery: '',
+      sortKey: '',
+      sortOrder: 1,
     }),
+    computed: {
+      filteredUsers() {
+        const filterSearch = this.searchQuery.toLowerCase();
+        let users = this.users;
+        let sortKey = this.sortKey;
+        let order = this.sortOrder;
+
+        if (filterSearch) {
+          users = users.filter((row) => {
+            return String(row['username']).toLowerCase().indexOf(filterSearch) > -1;
+          })
+        }
+        if (sortKey) {
+          users = users.slice().sort((a, b) => {
+            a = a[sortKey];
+            b = b[sortKey];
+            return (a === b ? 0 : a > b ? 1 : -1) * order;
+          });
+        }
+        return users;
+      }
+    },
     filters: {
       accountActive(account) {
         return account === true ? 'Oui' : 'Non'
@@ -83,6 +119,10 @@
       }
     },
     methods: {
+      sortBy(key) {
+        this.sortKey = key;
+        this.sortOrder = this.sortOrder * -1;
+      },
       async updateUser(userId, valueActive) {
         if (confirm('Voulez-vous faire cette operation ?')) {
           this.loadingBlack = true;
