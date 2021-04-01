@@ -55,6 +55,15 @@
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <nav>
+        <ul class="c-navbar c-navbar--right">
+          <li v-for="(page, index) in pages" :key="page" class="c-navbar__item">
+            <button @click="changePage(`${index+1}`)" class="btn-pagination" role="button">{{page}}</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -80,6 +89,9 @@
       searchQuery: '',
       sortKey: '',
       sortOrder: 1,
+      currentPage: 1,
+      pages: [],
+      perPage: 10
     }),
     computed: {
       filteredUsers() {
@@ -87,6 +99,8 @@
         let users = this.users;
         let sortKey = this.sortKey;
         let order = this.sortOrder;
+        const currentPage = this.currentPage;
+        const perPage = this.perPage;
 
         if (filterSearch) {
           users = users.filter((row) => {
@@ -99,6 +113,14 @@
             b = b[sortKey];
             return (a === b ? 0 : a > b ? 1 : -1) * order;
           });
+        }
+        if (currentPage === 1) {
+          users = users.slice(0, perPage)
+        }
+        if (currentPage > 1) {
+          users = users.slice(perPage, (perPage * currentPage))
+        } else {
+          users = users.slice(0, perPage)
         }
         return users;
       }
@@ -118,10 +140,21 @@
         return dateLastConnection;
       }
     },
+    mounted() {
+      const perPage = this.perPage;
+      const totalElements = this.users.length;
+      const totalPages = Math.ceil(totalElements / perPage);
+      for (let i = 1; i <= totalPages; i++) {
+        this.pages.push(i);
+      }
+    },
     methods: {
       sortBy(key) {
         this.sortKey = key;
         this.sortOrder = this.sortOrder * -1;
+      },
+      changePage(page) {
+        this.currentPage = page;
       },
       async updateUser(userId, valueActive) {
         if (confirm('Voulez-vous faire cette operation ?')) {

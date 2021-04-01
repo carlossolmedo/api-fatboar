@@ -17,9 +17,22 @@
 }
 
 .search {
-  // width: 300px;
   float: right;
   margin-bottom: 1.5rem;
+}
+
+.pagination {
+  margin-top: 1rem;
+  & .btn-pagination {
+    border: 1px solid #333;
+    background-color: #f7bc06;
+    opacity: 0.5;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
 }
 
 /* ----------------------------- Page dashboard ----------------------------- */
