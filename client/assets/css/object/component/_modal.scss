@@ -58,6 +58,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    color: $_color-black;
+    font-family: roboto;
   }
 
   &__footer {
@@ -69,47 +71,42 @@
 
 .connection-title {
   margin-bottom: 1.5rem;
+}
 
-  .btn {
-    width: calc(100%/2);
-    padding: 1rem;
-    font-weight: bold;
-    letter-spacing: .15rem;
-    text-transform: uppercase;
-    cursor: pointer;
+.tab {
+  width: calc(100%/2);
+  padding: 1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+  text-transform: uppercase;
+  cursor: pointer;
 
-    @include _media-max(md) {
-      padding: .5rem;
-      font-size: .8rem;
-    }
-
-    &:hover {
-      background-color: #111;
-      color: #ffffff;
-      transition: all .3s ease;
-    }
-
-    &-signUp {
-      background-color: transparent;
-      color: #111;
-      border-color: transparent transparent #1c374d;
-      border-right: none;
-      // border-color: #1c374d #1c374d transparent;
-    }
-
-    &-login {
-      background-color: transparent;
-      color: #111;
-      border-color: transparent transparent #1c374d;
-      border-left: none;
-    }
+  @include _media-max(md) {
+    padding: .5rem;
+    font-size: .8rem;
   }
 
-  .active {
-    background-color: #111;
-    color: #ffffff;
+  &:hover {
+    background-color: $_color-black;
+    color: $_color-white;
+    transition: all .3s ease;
+  }
+
+  &.tab-link {
+    background-color: transparent;
+    color: $_color-black;
     border: none;
+    border-bottom: 2px solid $_color-black;
+
+    &.active {
+      background-color: $_color-black;
+      color: $_color-white;
+    }
   }
+}
+.tab-content {
+  display: none;
+  animation: fadeEffect 0.5s;
 }
 
 .error {
@@ -172,5 +169,15 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+}
+
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

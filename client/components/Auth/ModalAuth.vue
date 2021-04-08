@@ -1,10 +1,16 @@
+
 <template>
-  <transition name="fade">
+  <div>
+    <div class="c-btn-play">
+      <a @click="openModal" rel="noopener noreferrer" class="btn-play">
+        Jouer
+      </a>
+    </div>
     <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+      <div class="modal__backdrop" @click="closeModal"/>
       <div class="modal__dialog">
         <div class="modal__header">
-          <a type="button" class="modal__close" @click="closeModal()">
+          <a type="button" class="modal__close" @click="closeModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 18 18">
               <path
                 d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
@@ -14,18 +20,18 @@
         <div class="modal__body">
           <div class="c-fluid-container connection-title">
             <div class="c-row">
-              <button id="btn-signUpForm" @click="showForm('signUpForm')" class="btn btn-signUp active"
+              <button @click="showForm($event, 'signUpForm')" class="tab tab-link active"
                 type="button">s'inscrire</button>
-              <button id="btn-loginForm" @click="showForm('loginForm')" class="btn btn-login"
+              <button @click="showForm($event, 'loginForm')" class="tab tab-link"
                 type="button">connexion</button>
             </div>
           </div>
-          <div id="signUpForm" class="form-block signUp__block show">
+          <div id="signUpForm" class="tab-content" style="display: block;">
             <div class="c-fluid-container">
               <SignUp />
             </div>
           </div>
-          <div id="loginForm" class="form-block login__block">
+          <div id="loginForm" class="tab-content">
             <div class="c-fluid-container">
               <Login />
             </div>
@@ -33,7 +39,7 @@
         </div>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -46,32 +52,30 @@
       SignUp,
       Login
     },
-    data() {
-      return {
-        show: false
-      };
-    },
+    data: () => ({
+      show: false
+    }),
     methods: {
-      closeModal() {
-        this.show = false;
-        document.querySelector("body").classList.remove("overflow-hidden");
-      },
       openModal() {
         this.show = true;
         document.querySelector("body").classList.add("overflow-hidden");
       },
-      showForm(idForm) {
-        let buttons = document.getElementsByClassName('btn');
-        let form = document.getElementsByClassName('form-block');
-        let btnToActive = document.getElementById(`btn-${idForm}`);
-        let formToOpen = document.getElementById(`${idForm}`);
+      closeModal() {
+        this.show = false;
+        document.querySelector("body").classList.remove("overflow-hidden");
+      },
+      showForm(event, idForm) {
+        const tabLink = document.getElementsByClassName('tab-link');
+        const tabContent = document.getElementsByClassName('tab-content');
 
-        for (let i = 0; i < buttons.length; i++) {
-          buttons[i].className = buttons[i].className.replace(' active', '');
-          form[i].className = form[i].className.replace(' show', '');
+        for (let i = 0; i < tabContent.length; i++) {
+          tabContent[i].style.display = 'none';
         }
-        btnToActive.classList.add('active');
-        formToOpen.classList.add('show');
+        for (let i = 0; i < tabLink.length; i++) {
+          tabLink[i].className = tabLink[i].className.replace(' active', '');
+        }
+        document.getElementById(idForm).style.display = 'block';
+        event.currentTarget.className += ' active';
       }
     }
   };
@@ -79,24 +83,6 @@
 </script>
 
 <style lang="scss">
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.2s;
-  }
-
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  .signUp__block {
-    display: none;
-  }
-
-  .login__block {
-    display: none;
-  }
-
   form.connection {
     width: 100%;
 
