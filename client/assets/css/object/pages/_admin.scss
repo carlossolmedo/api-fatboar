@@ -1,0 +1,241 @@
+/* -------------------------------------------------------------------------- */
+/*                     All page for section administration                    */
+/* -------------------------------------------------------------------------- */
+
+/* --------------------------------- Global --------------------------------- */
+
+.content-admin {
+  width: 100%;
+  margin: 50px 0 50px 0;
+  & > div > h1, h2 {
+    margin-bottom: 50px;
+  }
+}
+
+.btn-size-default {
+  height: auto;
+}
+
+.search {
+  float: right;
+  margin-bottom: 1.5rem;
+}
+
+.pagination {
+  margin-top: 1rem;
+  & .btn-pagination {
+    border: 1px solid #333;
+    background-color: #f7bc06;
+    opacity: 0.5;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}
+
+/* ----------------------------- Page dashboard ----------------------------- */
+
+.title-section {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.title-stats {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: Roboto, sans-serif;
+
+  @include _media-min(md) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  @include _media-min(md) {
+    margin-bottom: 0;
+  }
+
+  & .graph-round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 5px solid $color-violet;
+    border-radius: 999rem;
+  }
+  & .chart-dashboard {
+    overflow-x: auto;
+
+    @include _media-min(md) {
+      overflow: hidden;
+    }
+  }
+}
+
+.btn-update {
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  padding: 7px;
+  color: $_color-white;
+  background-color: $color-violet;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 3px 3px 0 #333;
+    transition: all .3s ease-in;
+    & > svg {
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+    }
+  }
+}
+
+.block-lists-admin {
+  width: 100%;
+  margin: auto;
+  overflow-x: auto;
+}
+
+/* ------------------------------ Page accounts ----------------------------- */
+
+.subtitle {
+  display: block;
+  margin-bottom: 3rem;
+}
+.block-btn-add {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.form-sign-up {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  background-color: $color-bg-panel;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: $box-shadow-panel;
+
+  @include _media-min(md) {
+    width: 50%;
+    padding: 3rem;
+  }
+}
+.block-btn-form, .block-btn-form-update {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.block-btn-form-update {
+  justify-content: right;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.block-btn-ops {
+  width: 100%;
+  margin-bottom: 2rem;
+  @include _media-min(md) {
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+
+/* ------------------------------ Page tickets ------------------------------ */
+
+.panel {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background-color: $color-bg-panel;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: $box-shadow-panel;
+
+  & > h3, .block-img-logo {
+    margin-bottom: 2rem;
+  }
+}
+
+.img-logo-prize {
+  width: 100px;
+  height: 100px;
+  border-radius: 999rem;
+  background-color: $color-violet-dark;
+
+  &.spin-logo {
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+.winner {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-row-gap: 10px;
+  margin-bottom: 2rem;
+
+  & .title-winner {
+    font-size: 2.5rem;
+    font-family: $font-family-lobster;
+    margin-bottom: 0;
+  }
+}
+
+.block-btn-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.block-form-tickets {
+  width: 30%;
+  margin: auto;
+
+  & > form.connection {
+    dl {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.title-total-tickets {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  @include _media-min(md) {
+    text-align: right;
+  }
+}
+
+.total-tickets {
+  padding: 0.5rem;
+  color: $_color-white;
+  background-color: $color-violet;
+  border-radius: 999rem;
+}
+
+.block-number-tickets {
+  width: 80%;
+  margin: auto;
+
+  @include _media-min(md) {
+    width: 50%;
+  }
+}

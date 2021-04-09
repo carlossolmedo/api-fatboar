@@ -1,0 +1,73 @@
+
+.table {
+  width: 580px;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  @include _media-min(md) {
+    width: 100% !important;
+  }
+
+  &.table-prizes {
+    border: 1px solid $_color-black;
+
+    & thead th {
+      border-bottom: 2px solid $_color-black;
+      padding: 8px;
+    }
+    & tbody tr:nth-child(even) {
+      background-color: $color-table-bg;
+    }
+    & tbody tr td {
+      padding: 5px;
+    }
+
+    & tbody tr {
+      & .icon {
+        display: block;
+      }
+    }
+    @include _media-min(lg) {
+      & tbody tr {
+        & .icon {
+          display: none;
+        }
+      }
+
+      & tbody tr:hover {
+        & .icon {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.table-fluid {
+  @extend .table;
+  width: 700px;
+
+  &.table-list-admin {
+    @extend .table-prizes;
+    & thead th {
+      background-color: $color-violet;
+      color: $_color-white;
+    }
+    & tbody tr:nth-child(even) {
+      background-color: _lightest($color-violet);
+    }
+  }
+  &.table-list-users {
+    @extend .table-prizes;
+    & thead th {
+      background-color: $color-yellow;
+      color: $_color-black;
+    }
+
+    & tbody tr:nth-child(even) {
+      background-color: $color-table-bg;
+      color: $_color-black;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+/*
+---
+name: .u-invisible
+category:
+  - object/utility
+  - object/utility/invisible
+  - object/utility/invisible/invisible
+---
+Invisible utility
+
+*/
+
+.#{$_prefix}u-invisible {
+  @include _invisible();
+}
+
+$sizes-keys: map-keys($_sizes);
+$min-key: nth($sizes-keys, 1);
+$max-key: nth($sizes-keys, -1);
+@each $size, $screen-min in $_sizes {
+  @if $size != $min-key and $size != $max-key {
+    .#{ $_prefix }u-invisible-#{ $size }-up {
+      @include _media-min($size) {
+        @include _invisible();
+      }
+    }
+
+    .#{ $_prefix }u-invisible-#{ $size }-down {
+      @include _media-max($size) {
+        @include _invisible();
+      }
+    }
+  }
+
+  .#{ $_prefix }u-invisible-#{ $size } {
+    @include _media-only($size) {
+      @include _invisible();
+    }
+  }
+}

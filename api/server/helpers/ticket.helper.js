@@ -1,4 +1,6 @@
 import WinningTicketModel from '../models/winningTicket.model';
+import TicketModel from '../models/ticket.model';
+
 
 class Ticket {
     /** Generate a number of 10 digits length */
@@ -70,16 +72,21 @@ class Ticket {
         return tickets;
     }
 
+    async deleteWinningTickets() {
+        const winningTickets = await WinningTicketModel.collection.drop();
+        return winningTickets;
+    }
+
     /**
      * The ticket will create and save with the key ticket_number, and type
      * from createTicket to WinningTicketModel
      */
-    addAndSaveTicketNumber(typeOfTicket, keyOfTicket) {
+    addAndSaveTicketNumber(typeOfTicket, valueTypeOfTicket) {
         let ticketModeled = [];
         for (let i = 0; i < typeOfTicket.length; i++) {
             ticketModeled.push({
                 ticket_number: typeOfTicket[i],
-                type: keyOfTicket,
+                type: valueTypeOfTicket,
                 validated: false,
                 date_created: new Date(),
             });
@@ -97,26 +104,84 @@ class Ticket {
     async getRandomTicket() {
         let randomTicket = await WinningTicketModel.aggregate([
             { $sample: { size: 1 } }
-        ]);
-
-        if (randomTicket[0].validated === true) {
-            randomTicket = await WinningTicketModel.aggregate([
-                { $sample: { size: 1 } },
-            ]);
-        }
+        ]).match({ validated: { $in: [false] } });
 
         return randomTicket;
     }
 
-    async findTicket(ticket) {
-        let ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket });
-        if (ticketFounded) {
-            ticketFounded.validated = true;
-            await ticketFounded.save();
-            return ticketFounded;
+    async findTicketValid(ticket) {
+        const ticketFounded = await WinningTicketModel.findOne({ ticket_number: ticket.ticket_number });
+        const dataTicketFounded = Object.assign({}, ticketFounded._doc);
+
+        dataTicketFounded.error = {
+            found: true,
+            validated: false
+        };
+
+        if (dataTicketFounded) {
+            if (dataTicketFounded.validated === false) {
+                dataTicketFounded.user_id = ticket.user_id;
+                return dataTicketFounded;
+            } else {
+                dataTicketFounded.error.validated = true;
+                return dataTicketFounded;
+            }
         } else {
-            return false;
+            dataTicketFounded.error.found = false;
+            return dataTicketFounded;
         }
+    }
+
+    async saveTicket(ticket) {
+        const ticketPlayed = new TicketModel({
+            user_id: ticket.user_id,
+            ticket_number: ticket.ticket_number,
+            type: ticket.type
+        });
+
+        await WinningTicketModel.updateOne({ticket_number: ticket.ticket_number}, {
+            validated: true
+        }).then((res) => {
+            if (res.ok) ticketPlayed.save();
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    async populateTicketsWithUsers() {
+        const ticketsWithUsers = await TicketModel.find().populate('user_id', ['username', 'email']).exec();
+        return ticketsWithUsers;
+    }
+
+    async updateTicketReceived(ticket) {
+        const fieldUpdated = await TicketModel.updateOne({ ticket_number: ticket.ticket_number }, { received: ticket.received});
+        return fieldUpdated;
+    }
+
+    async countTotalTickets() {
+        const totalTickets = await TicketModel.countDocuments();
+        return totalTickets;
+    }
+
+    async countTotalTicketsReceived() {
+        const totalTicketsReceived = await TicketModel.where({ received: true }).countDocuments();
+        return totalTicketsReceived;
+    }
+
+    async countTicketsByPrizes(prizes) {
+        let countPrizes = {};
+        countPrizes.starter = await TicketModel.where({ type: prizes.starter }).countDocuments();
+        countPrizes.dessert = await TicketModel.where({ type: prizes.dessert }).countDocuments();
+        countPrizes.burger = await TicketModel.where({ type: prizes.burger }).countDocuments();
+        countPrizes.menu_day = await TicketModel.where({ type: prizes.menu_day }).countDocuments();
+        countPrizes.menu_choice = await TicketModel.where({ type: prizes.menu_choice }).countDocuments();
+        countPrizes.discount = await TicketModel.where({ type: prizes.discount }).countDocuments();
+
+        return countPrizes;
+    }
+    async countNumberOfTickets() {
+        const numberOfTickets = await WinningTicketModel.countDocuments();
+        return numberOfTickets;
     }
 }
 

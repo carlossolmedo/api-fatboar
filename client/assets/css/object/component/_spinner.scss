@@ -1,0 +1,159 @@
+/*
+---
+name: .c-circle-spinner
+category:
+  - object/component
+  - object/component/spinner
+  - object/component/spinner/circle-spinner
+---
+Circle spinner component
+
+### html
+```html
+<div class="c-circle-spinner"></div>
+```
+*/
+
+.#{$_prefix}c-circle-spinner {
+  @include _circle-spinner();
+}
+
+// Custom
+.#{$_prefix}circle-spinner-white {
+  @include _circle-spinner((size: 20px,
+      color: $_color-white,
+      border-size: 3px,
+      delay: 0s,
+      duration: 2s,
+    ));
+}
+
+.spinner {
+  margin: auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+// Spinner white
+.spinner > div {
+  background-color: $_color-white;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+// Spinner black
+.spinner-black {
+  @extend .spinner;
+  & > div {
+    background-color: $_color-black;
+  }
+}
+
+
+@-webkit-keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(0.4)
+  }
+
+  20% {
+    -webkit-transform: scaleY(1.0)
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+/*
+---
+name: .c-dots-spinner
+category:
+  - object/component
+  - object/component/spinner
+  - object/component/spinner/dots-spinner
+---
+Dots spinner component
+
+### html
+```html
+<div class="c-dots-spinner">
+  <div class="c-dots-spinner__dot"></div>
+  <div class="c-dots-spinner__dot"></div>
+  <div class="c-dots-spinner__dot"></div>
+</div>
+```
+*/
+
+.#{$_prefix}c-dots-spinner {
+  @include _dots-spinner();
+
+  &__dot {
+    margin: 0 4px;
+  }
+}
+
+/*
+---
+name: .c-pulse-spinner
+category:
+  - object/component
+  - object/component/spinner
+  - object/component/spinner/pulse-spinner
+---
+Pulse spinner component
+
+### html
+```html
+<div class="c-pulse-spinner">
+  <div class="c-pulse-spinner__bar"></div>
+  <div class="c-pulse-spinner__bar"></div>
+  <div class="c-pulse-spinner__bar"></div>
+</div>
+```
+*/
+
+.#{$_prefix}c-pulse-spinner {
+  @include _pulse-spinner();
+
+  &__bar {
+    margin: 0 3px;
+  }
+}

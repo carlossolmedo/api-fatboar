@@ -1,0 +1,183 @@
+// Custom
+
+.modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+
+  &__backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &__dialog {
+    background-color: #ffffff;
+    position: relative;
+    width: 100%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    z-index: 2;
+
+    @include _media-min(md) {
+      width: 600px;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 1;
+      transition: all .5s ease-in-out;
+    }
+  }
+
+  &__header {
+    padding: 20px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  &__body {
+    padding: 10px 20px 10px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    color: $_color-black;
+    font-family: roboto;
+  }
+
+  &__footer {
+    padding: 10px 20px 20px;
+  }
+}
+
+// Content Modal
+
+.connection-title {
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  width: calc(100%/2);
+  padding: 1rem;
+  font-weight: bold;
+  letter-spacing: .15rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  @include _media-max(md) {
+    padding: .5rem;
+    font-size: .8rem;
+  }
+
+  &:hover {
+    background-color: $_color-black;
+    color: $_color-white;
+    transition: all .3s ease;
+  }
+
+  &.tab-link {
+    background-color: transparent;
+    color: $_color-black;
+    border: none;
+    border-bottom: 2px solid $_color-black;
+
+    &.active {
+      background-color: $_color-black;
+      color: $_color-white;
+    }
+  }
+}
+.tab-content {
+  display: none;
+  animation: fadeEffect 0.5s;
+}
+
+.error {
+  color: red;
+}
+
+.third {
+  &-connection-block {
+    width: 100%;
+    margin: 1rem 0 1.5rem 0;
+    text-align: center;
+  }
+
+  &-logo {
+    width: 50px;
+
+    @include _media-min(md) {
+      filter: grayscale(100%);
+
+      &:hover {
+        filter: grayscale(0%);
+        transition: all .5s ease;
+      }
+    }
+  }
+}
+
+.message--success {
+  margin: 1rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+// Modal admin update accounts
+.modal {
+  display: flex;
+  background-color: rgb(0, 0, 0, 0.3);
+
+  & .modal__content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 3rem;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+  }
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 28.3%;
+  top: 20%;
+
+  &:hover, &:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

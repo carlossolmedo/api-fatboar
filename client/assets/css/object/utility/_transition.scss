@@ -1,0 +1,14 @@
+/*
+---
+name: .u-transition
+category:
+  - object/utility
+  - object/utility/transition
+---
+Transition utility
+
+*/
+
+.#{$_prefix}u-transition {
+  @include _transition(all);
+}

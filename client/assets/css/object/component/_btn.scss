@@ -1,0 +1,123 @@
+/*
+---
+name: .c-btn
+category:
+  - object/component
+  - object/component/btn
+---
+Button component
+
+### html
+```html
+<a class="c-btn" role="button">btn</a>
+```
+```html
+<a class="c-btn c-btn--block" role="button">btn</a>
+```
+```html
+<a class="c-btn c-btn--ghost" role="button">btn</a>
+```
+*/
+
+.#{$_prefix}c-btn {
+  // @include _btn();
+
+  // Custom
+
+  @include _transition(background-color);
+  border: 2px solid $color-accent;
+  color: $color-accent;
+  font-weight: bold;
+  cursor: pointer;
+  @include _padding(.5, 1);
+
+  @include _hover() {
+    background-color: $color-main;
+  }
+
+  &[disabled], &[disabled]:hover {
+    background-color: _lighter($_color-gray); // For IE11
+    background-color: _var-lighter-color-gray();
+    cursor: not-allowed;
+    color: #ccc;
+    border: 2px solid #ccc;
+  }
+
+  &--primary {
+    border-color: $color-primary;
+    color: $color-primary;
+
+    @include _hover() {
+      background-color: $color-primary;
+      color: $_color-white;
+    }
+  }
+
+  &--success {
+    border-color: $color-success;
+    background-color: $color-success;
+    color: $_color-white;
+
+    @include _hover() {
+      background-color: $color-success;
+      color: $_color-white;
+    }
+  }
+
+  &--success-outline {
+    border-color: $color-success;
+    color: $color-success;
+
+    @include _hover() {
+      background-color: $color-success;
+      color: $_color-white;
+    }
+  }
+
+  &--info {
+    border-color: $color-info;
+    color: $color-info;
+
+    @include _hover() {
+      background-color: _light($color-info);
+    }
+  }
+
+  &--warning {
+    border-color: $color-warning;
+    color: $color-warning;
+
+    @include _hover() {
+      background-color: _lightest($color-warning);
+    }
+  }
+
+  &--danger {
+    border-color: $color-danger;
+    color: $color-danger;
+
+    @include _hover() {
+      background-color: $color-danger;
+      color: $_color-white;
+    }
+  }
+
+  &--cancel {
+    border-color: _lightest($color-cancel);
+    color: _lightest($color-cancel);
+
+    @include _hover() {
+      border-color: $color-cancel;
+      color: $color-cancel;
+    }
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--ghost {
+    @include _ghost();
+  }
+}

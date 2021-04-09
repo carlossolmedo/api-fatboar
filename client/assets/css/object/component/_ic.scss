@@ -1,0 +1,276 @@
+/*
+---
+name: .c-ic-angle-right
+category:
+  - object/component
+  - object/component/icon
+  - object/component/icon/ic-angle-right
+---
+Icon (Angle Right) component
+
+### html
+```html
+<span class="c-ic-angle-right" aria-hidden="true"></span>
+```
+*/
+
+.#{$_prefix}c-ic-angle-right {
+  display: inline-block;
+  padding: 0 .25em;
+  transform: translateY(-.15em);
+
+  &::before {
+    content: '';
+    display: block;
+    height: .4em;
+    width: .4em;
+    border-color: $_color-text;
+    border-color: _var-color-text();
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+    transform: rotate(45deg);
+  }
+}
+
+/*
+---
+name: .c-ic-check
+category:
+  - object/component
+  - object/component/icon
+  - object/component/icon/ic-check
+---
+Icon (Check) component
+
+### html
+```html
+<span class="c-ic-check" aria-hidden="true"></span>
+```
+*/
+
+.#{$_prefix}c-ic-check {
+  display: inline-block;
+  padding: 0 .25em;
+  transform: translateY(-.2em);
+
+  &::before {
+    content: '';
+    display: block;
+    height: .4em;
+    width: .25em;
+    border-color: $_color-text;
+    border-color: _var-color-text();
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+  }
+}
+
+/*
+---
+name: .c-ic-angle-down
+category:
+  - object/component
+  - object/component/icon
+  - object/component/icon/ic-angle-down
+---
+Icon (Angle Down) component
+
+### html
+```html
+<span class="c-ic-angle-down" aria-hidden="true"></span>
+```
+*/
+
+.#{$_prefix}c-ic-angle-down {
+  display: inline-block;
+  padding: 0 .25em;
+  transform: translateY(-.2em);
+
+  &::before {
+    content: '';
+    display: block;
+    height: .4em;
+    width: .4em;
+    border-color: $_color-text;
+    border-color: _var-color-text();
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+  }
+}
+
+// Custom switch
+.tgl {
+  display: none;
+
+  &,
+  &::after,
+  &::before,
+  & *,
+  & *::after,
+  & *::before,
+  &+.tgl-btn {
+    box-sizing: border-box;
+
+    &::selection {
+      background: none;
+    }
+  }
+
+  +.tgl-btn {
+    outline: 0;
+    display: block;
+    width: 3rem;
+    height: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    &::after,
+    &::before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 50%;
+      height: 100%;
+    }
+
+    &::after {
+      left: 0;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+
+  // &:checked+.tgl-btn::after {
+  //   left: 50%;
+  // }
+
+  &.is-checked {
+    &:checked+.tgl-btn::after {
+      left: 50%;
+    }
+  }
+}
+
+.tgl-success {
+  +.tgl-btn {
+    background: #f0f0f0;
+    border-radius: 2em;
+    padding: 2px;
+    transition: all 0.4s ease;
+
+    &::after {
+      border-radius: 50%;
+      background: #fff;
+      transition: all 0.2s ease;
+    }
+  }
+
+  // &:checked+.tgl-btn {
+  //   background: $color-success;
+  // }
+
+  &.is-checked {
+    &:checked+.tgl-btn {
+      background: $color-success;
+    }
+  }
+}
+
+// Icons
+
+.icon {
+  display: none;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid rgba(185, 190, 199, .5);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  &.icon-red:hover {
+    svg {
+      color: $color-danger;
+    }
+  }
+
+  // &:hover {
+  //   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //   fill: red;
+  //   transition: all .3s ease;
+  // }
+}
+
+// .icon-red {
+//   &:hover {
+//     color: $color-danger;
+//   }
+// }
+
+.icon-black {
+  fill: $_color-black;
+}
+
+// Arrows
+
+.filter {
+  color: #dbd8d8 !important;
+  cursor: pointer;
+
+  &.active {
+    color: $_color-white !important;
+
+    & .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.filter-black {
+  color: #626262 !important;
+  cursor: pointer;
+
+  &.active {
+    color: $_color-black !important;
+
+    & .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.5;
+
+  &.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+  }
+
+  &.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+  }
+}
+
+.arrow-black {
+  @extend .arrow;
+  &.asc {
+    border-bottom: 4px solid $_color-black;
+  }
+
+  &.dsc {
+    border-top: 4px solid $_color-black;
+  }
+}

@@ -6,14 +6,14 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, max: 255, min: 3 },
     password: { type: String, required: true, max: 1024, min: 8 },
     email: { type: String, required: true, max: 255, min: 6 },
-    birthdate: { type: Date, required: true },
     postal_code: { type: String, required: true },
     country: { type: String, required: true },
-    role: { type: String, required: true },
+    newsletter: { type: Boolean, default: false },
+    role: { type: String, required: true, default: 'customer' },
     active: { type: Boolean, required: true, default: true },
     last_connection: Date,
     date_updated: Date,
-    date_created: { type: Date, default: Date.now },
+    date_created: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'users');
