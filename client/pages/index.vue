@@ -17,16 +17,11 @@
               Testez votre chance avec votre ticket FatBoar<br />
               et gagnez des milliers de prix&nbsp;!
             </p>
-            <div class="c-btn-play">
-              <a @click="$refs.connectionModal.openModal()" rel="noopener noreferrer" class="btn-play">
-                Jouer
-              </a>
-            </div>
+            <ModalAuth />
           </div>
         </div>
       </div>
     </div>
-    <ModalAuth ref="connectionModal" />
   </main>
 </template>
 

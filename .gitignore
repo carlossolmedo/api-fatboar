@@ -78,6 +78,9 @@ client/lib-cov
 # Coverage directory used by tools like istanbul
 client/coverage
 
+# Fixture directory used by test
+client/test/fixture
+
 # nyc test coverage
 client/.nyc_output
 

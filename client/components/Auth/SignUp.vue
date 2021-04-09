@@ -1,6 +1,6 @@
 <template>
   <div class="c-row">
-    <form @submit.prevent="submit" class="connection">
+    <form @submit.prevent="submit" class="connection" id="formSignUp">
       <dl>
         <dt>
           <span>Genre</span>

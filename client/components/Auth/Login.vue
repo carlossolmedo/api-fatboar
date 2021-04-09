@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="submit" class="connection">
+    <form @submit.prevent="submit" class="connection" id="formLogin">
       <dl>
         <dt>
           <label for="emailLogin">Adresse mail</label>
